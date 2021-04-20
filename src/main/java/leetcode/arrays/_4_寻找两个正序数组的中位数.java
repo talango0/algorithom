@@ -80,13 +80,11 @@ public class _4_寻找两个正序数组的中位数 {
         public double findMedianSortedArrays(int[] nums1, int[] nums2) {
             int m = nums1.length, n = nums2.length, total = m+n;
             double media;
-
+            int midIndex = total >> 1;
             if(total % 2 == 1){
-                int midIndex = total >> 1;
                 media = getKthElement(nums1, nums2, midIndex+1);
             }else{
-                int midIndex1 = total >> 1;
-                media = (getKthElement(nums1, nums2, midIndex1) + getKthElement(nums1, nums2, midIndex1+1))/2.0;
+                media = (getKthElement(nums1, nums2, midIndex) + getKthElement(nums1, nums2, midIndex+1))/2.0;
             }
             return media;
         }
