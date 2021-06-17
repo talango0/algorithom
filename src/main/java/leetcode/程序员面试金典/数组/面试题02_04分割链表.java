@@ -19,18 +19,46 @@ package leetcode.程序员面试金典.数组;
 //leetcode submit region end(Prohibit modification and deletion)
 
 import common.ListNode;
+import common.ListNodeBuilder;
+import common.ListNodeFactory;
+import common.ListNodeVisitor;
 
 public class 面试题02_04分割链表 {
 
-    class Solution {
+    static class Solution {
         public ListNode partition(ListNode head, int x) {
-
-
-            return null;
+            ListNode p1 = new ListNode( Integer.MAX_VALUE );
+            ListNode p2 = new ListNode( Integer.MAX_VALUE );
+            ListNode c1 = p1, c2 = p2;
+            while (head != null){
+                ListNode cur = head;
+                head = head.next;
+                cur.next = null;
+                int val = cur.val;
+                if(val < x){
+                    c1.next = cur;
+                    c1 = c1.next;
+                }else {
+                    c2.next = cur;
+                    c2 = c2.next;
+                }
+            }
+            c1.next = p2.next;
+            c2.next = null;
+            return p1.next;
         }
     }
 
+
     public static void main(String[] args) {
+        ListNodeBuilder listNodeBuilder = ListNodeFactory.getListNodeBuilder();
+        ListNodeVisitor listNodeVisitor = ListNodeFactory.getListNodeVisitor();
+        ListNode node = listNodeBuilder.add( new int[]{ 1, 2, 2, 4, 3, 5 } ).build();
+        listNodeVisitor.visit( node );
+        Solution solution = new Solution();
+        ListNode partition = solution.partition( node, 3 );
+        listNodeVisitor.visit( partition );
+
 
     }
 }
