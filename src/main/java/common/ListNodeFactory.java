@@ -5,7 +5,6 @@ package common;
  * @date 2021-06-17.
  */
 public class ListNodeFactory{
-    private static ListNodeBuilder listNodeBuilder = ListNodeBuilder.builder();
     private static ListNodeVisitor listNodeVisitor = new ListNodeVisitor();
 
     private ListNodeFactory(){
@@ -13,7 +12,7 @@ public class ListNodeFactory{
     }
 
     public static ListNodeBuilder getListNodeBuilder(){
-        return listNodeBuilder;
+        return ListNodeBuilder.builder();
     }
 
     public static ListNodeVisitor getListNodeVisitor(){
