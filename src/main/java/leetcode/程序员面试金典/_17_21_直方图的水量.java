@@ -1,6 +1,6 @@
-package leetcode.程序员面试金典.数组;
+package leetcode.程序员面试金典;
 
-public class 面试题1721直方图的水量 {
+public class _17_21_直方图的水量{
 
  //给定一个直方图(也称柱状图)，假设有人从上面源源不断地倒水，最后直方图能存多少水量?直方图的宽度为 1。
 //

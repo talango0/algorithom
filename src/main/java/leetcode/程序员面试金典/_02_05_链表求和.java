@@ -1,4 +1,4 @@
-package leetcode.程序员面试金典.数组;
+package leetcode.程序员面试金典;
 
 import common.ListNode;
 import common.ListNodeFactory;

@@ -1,4 +1,4 @@
-package leetcode.程序员面试金典.数组;
+package leetcode.程序员面试金典;
 
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdOut;
@@ -9,7 +9,7 @@ import java.util.Arrays;
 /**
  * @author mayanwei
  */
-public class 面试题0508绘制直线 {
+public class _05_08_绘制直线{
 
 
     static class Solution {

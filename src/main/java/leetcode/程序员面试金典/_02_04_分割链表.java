@@ -1,4 +1,4 @@
-package leetcode.程序员面试金典.数组;
+package leetcode.程序员面试金典;
 
 
 //编写程序以 x 为基准分割链表，使得所有小于 x 的节点排在大于或等于 x 的节点之前。如果链表中包含 x，x 只需出现在小于 x 的元素之后(如下所示)。
@@ -23,7 +23,7 @@ import common.ListNodeBuilder;
 import common.ListNodeFactory;
 import common.ListNodeVisitor;
 
-public class 面试题02_04分割链表 {
+public class _02_04_分割链表{
 
     static class Solution {
         public ListNode partition(ListNode head, int x) {

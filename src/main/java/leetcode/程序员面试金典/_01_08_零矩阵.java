@@ -1,8 +1,8 @@
-package leetcode.程序员面试金典.数组;
+package leetcode.程序员面试金典;
 
 import java.util.Arrays;
 
-public class 面试题0108零矩阵 {
+public class _01_08_零矩阵{
     /**
      * 编写一种算法，若M × N矩阵中某个元素为0，则将其所在的行与列清零。
      *
