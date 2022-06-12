@@ -22,8 +22,9 @@ package leetcode.tree;
  * @date 2022-06-12.
  */
 public class _104_二叉树的最大深度{
-    class Solution {
+    class Solution{
         private Integer maxDepth = 0;
+
         public int maxDepth(TreeNode root) {
             if (root == null) {
                 return 0;
@@ -31,6 +32,7 @@ public class _104_二叉树的最大深度{
             traverse(root, 0);
             return maxDepth;
         }
+
         private void traverse(TreeNode root, int height) {
             if (root == null) {
                 maxDepth = Math.max(maxDepth, height);
