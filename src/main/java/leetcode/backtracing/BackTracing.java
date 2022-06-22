@@ -1,9 +1,37 @@
 package leetcode.backtracing;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class BackTracing {
+
+    static class Solution3 {
+        List<List<Integer>> res = new ArrayList<>();
+        public List<List<Integer>> permute(int[] nums) {
+            LinkedList<Integer> track = new LinkedList<Integer>();
+            backtrace(nums, track);
+            return res;
+        }
+        private void backtrace(int [] nums, LinkedList<Integer> track) {
+            if (nums.length == track.size()) {
+                 res.add(new LinkedList(track));
+            }
+            for (int num : nums) {
+                //排除不合法的选项
+                if (track.contains(num)) {
+                    continue;
+                }
+                //做出选择
+                track.add(num);
+                //进入下一层决策树
+                backtrace(nums, track);
+                //撤销选择
+                track.removeLast();
+            }
+        }
+
+    }
 
     /**
      * 全排列
