@@ -1,5 +1,5 @@
 package leetcode.backtracing;
-/找出所有相加之和为 n 的 k 个数的组合，且满足下列条件：
+//找出所有相加之和为 n 的 k 个数的组合，且满足下列条件：
 //
 //
 // 只使用数字1到9
@@ -48,6 +48,11 @@ package leetcode.backtracing;
 // 1 <= n <= 60
 //
 // Related Topics 数组 回溯 👍 490 👎 0
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.IntStream;
+
 /**
  * @author mayanwei
  * @date 2022-06-19.

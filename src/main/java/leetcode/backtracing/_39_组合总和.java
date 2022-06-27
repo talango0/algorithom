@@ -43,6 +43,11 @@ package leetcode.backtracing;
 //
 // Related Topics 数组 回溯 👍 2012 👎 0
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * @author mayanwei
  * @date 2022-06-19.

@@ -34,6 +34,11 @@ package leetcode.backtracing;
 // nums 中的所有整数 互不相同
 //
 // Related Topics 数组 回溯 👍 2076 👎 0
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * @author mayanwei
  * @date 2022-06-19.
