@@ -11,6 +11,19 @@ public class PriorityQueueTest {
 
 
     public static void main(String[] args) {
+
+        PriorityQueue<int[]> maxpq = new PriorityQueue<>((o1, o2) ->  o2[1] -o1[1]);
+        int [] nums = new int[]{1,3,2,5};
+        for (int i = 0; i < nums.length; i++) {
+            maxpq.offer(new int[]{i,  nums[i]});
+        }
+        while (!maxpq.isEmpty()){
+            int[] poll = maxpq.poll();
+            System.out.println(poll[0]+"\t"+poll[1]);
+        }
+    }
+
+    public static void testTemp(String[] args) {
         PriorityQueue<Tmp> queue = new PriorityQueue<>(Comparator.comparingInt((Tmp o) -> o.val));
         queue.add(new Tmp(1, 2));
         queue.add(new Tmp(2,4));
