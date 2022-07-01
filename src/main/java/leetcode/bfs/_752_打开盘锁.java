@@ -1,9 +1,5 @@
 package leetcode.bfs;
 
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Set;
 //你有一个带有四个圆形拨轮的转盘锁。每个拨轮都有10个数字： '0', '1', '2', '3', '4', '5', '6', '7', '8', '9
 //' 。每个拨轮可以自由旋转：例如把 '9' 变为 '0'，'0' 变为 '9' 。每次旋转都只能旋转一个拨轮的一位数字。
 //
@@ -57,7 +53,10 @@ import java.util.Set;
 // Related Topics 广度优先搜索 数组 哈希表 字符串 👍 498 👎 0
 
 
-
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Set;
 
 /**
  * @author mayanwei
@@ -67,21 +66,21 @@ public class _752_打开盘锁{
     /**
      * 思路
      * 从 "0000" 开始，转一次，可以穷举出 "1000", "9000", "0100", "0900"... 共 8 种密码。然后，再以这 8 种密码作为基础，对每个密码再转一下，穷举出所有可能…
-     *
+     * <p>
      * 仔细想想，这就可以抽象成一幅图，每个节点有 8 个相邻的节点，又让你求最短距离，这不就是典型的 BFS 嘛
-     *
+     * <p>
      * 双向BFS优化：从起点和终点同时开始遍历，当两边有交集的时候停止
-     *
+     * <p>
      * 双向 BFS 还是遵循 BFS 算法框架的，只是不再使用队列，而是使用 HashSet 方便快速判断两个集合是否有交集。
-     *
+     * <p>
      * 另外的一个技巧点就是 while 循环的最后交换 q1 和 q2 的内容，所以只要默认扩散 q1 就相当于轮流扩散 q1 和 q2。
      */
 
-    class Solution1 {
+    class Solution1{
         public int openLock(String[] deadends, String target) {
             //记住死亡跳
             Set<String> dset = new HashSet<String>();
-            for(String s: deadends){
+            for (String s : deadends) {
                 dset.add(s);
             }
             //记录已经群举过的，防止再举
@@ -90,9 +89,9 @@ public class _752_打开盘锁{
             int step = 0;
             q.offer("0000");
             visted.add("0000");
-            while(!q.isEmpty()){
+            while (!q.isEmpty()) {
                 int sz = q.size();
-                for (int i = 0; i< sz; i++) {
+                for (int i = 0; i < sz; i++) {
                     String cur = q.poll();
                     //判断是否到大终点
                     if (dset.contains(cur)) {
@@ -102,7 +101,7 @@ public class _752_打开盘锁{
                         return step;
                     }
 
-                    for (int j = 0; j< 4; j++) {
+                    for (int j = 0; j < 4; j++) {
                         String up = plusOne(cur, j);
                         if (!visted.contains(up)) {
                             q.offer(up);
@@ -125,7 +124,7 @@ public class _752_打开盘锁{
 
         //将 s[i] 向上拨动一次
         String plusOne(String s, int i) {
-            char [] ch = s.toCharArray();
+            char[] ch = s.toCharArray();
             if (ch[i] == '9') {
                 ch[i] = '0';
             }
@@ -134,13 +133,14 @@ public class _752_打开盘锁{
             }
             return new String(ch);
         }
+
         //将 s[i] 向下拨动一次
         String minusOne(String s, int i) {
-            char [] ch = s.toCharArray();
+            char[] ch = s.toCharArray();
             if (ch[i] == '0') {
                 ch[i] = '9';
             }
-            else{
+            else {
                 ch[i] -= 1;
             }
             return new String(ch);
@@ -174,13 +174,13 @@ public class _752_打开盘锁{
 
 
     //双向BHS
-    class Solution2 {
+    class Solution2{
         public int openLock(String[] deadends, String target) {
 
 
             //记录已经群举过的，防止再举
             Set<String> deads = new HashSet<>();
-            for(String s: deadends){
+            for (String s : deadends) {
                 deads.add(s);
             }
             //用集合不用队列，可以快速判断元素是否存在
@@ -191,24 +191,24 @@ public class _752_打开盘锁{
             q1.add("0000");
             q2.add(target);
 
-            while(!q1.isEmpty() && !q2.isEmpty()){
+            while (!q1.isEmpty() && !q2.isEmpty()) {
                 // 哈希表在遍历的过程中不能修改，用tmp 存储扩散的结果
                 Set<String> temp = new HashSet<>();
                 //将q1 中的所有节点向外扩散
-                for(String cur : q1){
-                    if(deads.contains(cur)) {
+                for (String cur : q1) {
+                    if (deads.contains(cur)) {
                         continue;
                     }
-                    if( q2.contains(cur)){
+                    if (q2.contains(cur)) {
                         return step;
                     }
                     visited.add(cur);
-                    for( int j = 0; j<4; j++){
+                    for (int j = 0; j < 4; j++) {
                         String up = plusOne(cur, j);
                         String down = minusOne(cur, j);
-                        if(!visited.contains(up))
+                        if (!visited.contains(up))
                             temp.add(up);
-                        if(!visited.contains(down))
+                        if (!visited.contains(down))
                             temp.add(down);
                     }
                 }
@@ -224,7 +224,7 @@ public class _752_打开盘锁{
 
         //将 s[i] 向上拨动一次
         String plusOne(String s, int i) {
-            char [] ch = s.toCharArray();
+            char[] ch = s.toCharArray();
             if (ch[i] == '9') {
                 ch[i] = '0';
             }
@@ -233,13 +233,14 @@ public class _752_打开盘锁{
             }
             return new String(ch);
         }
+
         //将 s[i] 向下拨动一次
         String minusOne(String s, int i) {
-            char [] ch = s.toCharArray();
+            char[] ch = s.toCharArray();
             if (ch[i] == '0') {
                 ch[i] = '9';
             }
-            else{
+            else {
                 ch[i] -= 1;
             }
             return new String(ch);
