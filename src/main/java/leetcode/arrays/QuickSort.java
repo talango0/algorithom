@@ -33,6 +33,11 @@ public class QuickSort {
 
         /**
          * 递归实现
+         * 快速排序本质上是一个二叉树的前序遍历。
+         * 若要对 nums[p,r] 进行排序，我们首先找到一个分界点 q， 然后通过交换元素使得 nums[p, q-1] 都小于等于 nums[q],
+         * 且 nums[q+1, r] 的元素都大于 nums[q], 然后递归地去 nums[p,q-1] 和 nums[q+1, r] 中去寻找新的分界点，最后
+         * 整个数组就排好序了。
+         *
          * @param args
          * @param p
          * @param r
