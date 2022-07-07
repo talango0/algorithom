@@ -44,11 +44,26 @@ public class _105_从前序遍历和中序遍历构造二叉树{
         return build(preorder, 0, preorder.length - 1, inorder, 0, inorder.length - 1);
     }
 
+    /**
+     * build 函数的定义：
+     * 若前序遍历数组为 preorder[preStart...preEnd]
+     *   中序遍历数组为 inorder[inStart...inEnd]
+     *   构造二叉树，返回该二叉树的根节点
+     * @param preorder
+     * @param preStart
+     * @param preEnd
+     * @param inorder
+     * @param inStart
+     * @param inEnd
+     * @return
+     */
     private TreeNode build(int[] preorder, int preStart, int preEnd, int[] inorder, int inStart, int inEnd) {
         if (preStart > preEnd) {
             return null;
         }
+        // root 节点对应的值就是前序遍历数组的第一个元素
         int rootVal = preorder[preStart];
+        // root 在中序遍历的索引
         int i = inStart;
         for (; i <= inEnd; i++) {
             if (inorder[i] == rootVal) {
@@ -57,6 +72,7 @@ public class _105_从前序遍历和中序遍历构造二叉树{
         }
         int leftSize = i - inStart;
         TreeNode root = new TreeNode(rootVal);
+        // 递归的构造左右子树
         root.left = build(preorder, preStart + 1, preStart + leftSize, inorder, inStart, i - 1);
         root.right = build(preorder, preStart + leftSize + 1, preEnd, inorder, i + 1, inEnd);
         return root;
