@@ -1,9 +1,18 @@
 package leetcode.arrays;
 
+import leetcode.tree._315_计算右侧小于当前元素的个数;
+import leetcode.tree._327_区间和的个数;
+import leetcode.tree._493_翻转对;
+import leetcode.tree._912_排序数组;
+
 import java.util.Arrays;
 
 /**
  * 分治法、二叉树的后序遍历
+ * @see _912_排序数组
+ * @see _315_计算右侧小于当前元素的个数
+ * @see _493_翻转对
+ * @see _327_区间和的个数
  */
 public class MergeSort {
     /**
@@ -51,6 +60,32 @@ public class MergeSort {
             }
         }
 
+    }
+
+    private void Merge2(int[] nums, int lo, int mid, int hi){
+        int [] tmp = new int[nums.length];
+        //先把 nums[lo..hi] 复制到tmp中以便合并后的结果能直接存入nums
+        for (int i = lo; i<=hi; i++) {
+            tmp[i] = nums[i];
+        }
+        //数组双指针技巧，合并两个有序数组
+        int i = lo, j = mid+1;
+        for (int p = lo; p<= hi; p++) {
+            if (i == mid+1) {
+                //左半边数已经合并完成
+                nums[p] = tmp[j++];
+            }
+            else if (j == hi+1) {
+                //右半边数已经合并完成
+                nums[p] = tmp[i++];
+            }
+            else if (tmp[i] > tmp[j]) {
+                nums[p] = tmp[j++];
+            }
+            else {
+                nums[p] = tmp[i++];
+            }
+        }
     }
 
     public static void main(String [] args) {

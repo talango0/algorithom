@@ -179,10 +179,10 @@ public class _297_二叉树的序列化和反序列化 {
                 TreeNode cur = q.poll();
                 //层序遍历代码位置
                 if (cur == null) {
-                    sb.append(String.valueOf(NULL)).append(SEP);
+                    sb.append(NULL).append(SEP);
                     continue;
                 }
-                sb.append(String.valueOf(cur.val)).append(SEP);
+                sb.append(cur.val).append(SEP);
 
                 q.offer(cur.left);
                 q.offer(cur.right);
