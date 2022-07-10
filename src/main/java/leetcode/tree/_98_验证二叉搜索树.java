@@ -43,6 +43,22 @@ package leetcode.tree;
  */
 public class _98_验证二叉搜索树{
     class Solution {
+        // 下面的错误在与只是检查了它的左右孩子节点是否符合左小右大的元素； 但是根据BST的定义，root的整个左子树都要小于 root.val,整个右子树都要大于 root.val
+        // public boolean isValidBST(TreeNode root) {
+        //     if (root == null) {
+        //         return true;
+        //     }
+        //     // root 的左边更小
+        //     if (root.left != null && root.left.val > root.val) {
+        //         return false;
+        //     }
+        //     // root 的右边更大
+        //     if (root.right != null && root.right.val < root.val) {
+        //         return false;
+        //     }
+        //     return isValidBST(root.left) && isValidBST(root.right);
+        // }
+
         public boolean isValidBST(TreeNode root) {
             if (root == null) {
                 return true;
@@ -51,6 +67,7 @@ public class _98_验证二叉搜索树{
         }
 
         //限定以root 为根的结点必须满足 l.val < root.val < g.val
+        //通过使用辅助函数，增减函数参数列表，在参数中携带额外信息，将这种约束传递给子树的所有节点，这也是二叉树算法的一个小技巧
         public boolean isValidBST(TreeNode root, TreeNode l, TreeNode g) {
             if (root == null) {
                 return true;
