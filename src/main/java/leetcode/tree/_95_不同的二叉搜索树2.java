@@ -61,7 +61,7 @@ public class _95_不同的二叉搜索树2{
                 //2. 递归构造左右子树的所有合法 BST
                 List<TreeNode> lTrees = build(l, i-1);
                 List<TreeNode> rTrees = build(i+1,r);
-                //3. 给 root 节点群居所有的左右子树
+                //3. 给 root 节点群举所有的左右子树
                 for (TreeNode lTree: lTrees) {
                     for (TreeNode rTree: rTrees){
                         TreeNode root = new TreeNode(i);
