@@ -49,6 +49,7 @@ package leetcode.graph;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class _210_课程表2 {
     class Solution {
@@ -125,5 +126,73 @@ public class _210_课程表2 {
             }
             return res;
         }
+    }
+
+
+    class Solution2 {
+
+        //依赖问题转化为有向图，用领接表表示该图
+        private List<Integer> [] graph;
+        /**构建一颗有向图 */
+        private List<Integer> [] buildGraph(int numCourses, int [][] prerequisites) {
+            //图中共有numsCourses门课程
+            List<Integer> [] graph = new LinkedList[numCourses];
+            for (int i = 0; i<numCourses; i++) {
+                graph[i] = new LinkedList<Integer>();
+            }
+
+            for (int [] edge: prerequisites) {
+                int from = edge[1], to = edge[0];
+                //添加一条从from指向to的有向边
+                //边的方向是【被依赖】的关系，即修完课程from，才能修课程to
+                graph[from].add(to);
+
+            }
+
+            return graph;
+        }
+
+        /** 拓扑排序算法那BFS版本 */
+        public int[] findOrder(int numCourses, int[][] prerequisites) {
+            //后序遍历的结果进行反转，就是拓扑排序的结果
+            List<Integer>[] graph = buildGraph(numCourses, prerequisites);
+            // 计算入度，和环检测算法相同
+            int [] indegree= new int[numCourses];
+            for (int [] edge : prerequisites) {
+                int from = edge[1], to = edge[0];
+                indegree[to]++;
+            }
+
+            // 根据入读初始化队列中的节点，和换检测算法相同
+            Queue<Integer> q = new LinkedList<Integer>();
+            for (int i = 0; i < numCourses; i++) {
+                if (indegree[i] == 0) {
+                    q.offer(i);
+                }
+            }
+
+            // 记录拓扑排序结果
+            int [] res = new int[numCourses];
+            // 记录遍历节点的顺序（索引）
+            int count = 0;
+            //开始执行BFS算法
+            while (!q.isEmpty()) {
+                int cur = q.poll();
+                //弹出的即为拓扑排序的结果
+                res[count] = cur;
+                count++;
+                for (int next : graph[cur]) {
+                    indegree[next]--;
+                    if (indegree[next] == 0) {
+                        q.offer(next);
+                    }
+                }
+            }
+            if (count != numCourses) {
+                return new int []{};
+            }
+            return res;
+        }
+
     }
 }
