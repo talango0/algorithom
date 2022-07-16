@@ -1,7 +1,18 @@
 package inductiontoalgorithm.union_find;
 
 
-import java.util.Arrays;
+import leetcode.graph._323_无向图中连通分量的数目;
+import leetcode.graph._990_等式方程的可满足性;
+
+/**
+ * 并查集问题背景。
+ * 基本思路，使用森林（若干棵树）来表示图的动态连通性，用数组来具体实现这个森林。
+ * 平衡性优化，使用树的重量来进行优化。
+ * 路径压缩，并不关系路径如何，只关心根节点。
+ *
+ * @see _990_等式方程的可满足性
+ * @see _323_无向图中连通分量的数目
+ */
 
 public class UF {
 
@@ -42,7 +53,8 @@ public class UF {
             return;
         }
 
-        //小树接到大叔下，较平衡
+        //通过比较树的重量就可以保证树的生长相对平衡，树的高度大概在 logN 这个数量级，极大提高执行效率
+        //小树接到大树下，较平衡
         if(size[rootP] > size[rootQ]){
             parent[rootQ] = rootP;
             size[rootP] += size[rootQ];
@@ -67,6 +79,35 @@ public class UF {
         return x;
     }
 
+    /**
+     * 第二种路径压缩方法，比 find 要压缩的彻底
+     * @param x
+     * @return
+     */
+    private int find0(int x){
+        //路径压缩
+        if (parent[x] != x) {
+            parent[x] = find0(parent[x]);
+        }
+        return parent[x];
+    }
+
+    // 这段迭代代码方便你理解递归代码所做的事情
+    public int find0_help(int x) {
+        // 先找到根节点
+        int root = x;
+        while (parent[root] != root) {
+            root = parent[root];
+        }
+        // 然后把 x 到根节点之间的所有节点直接接到根节点下面
+        int old_parent = parent[x];
+        while (x != root) {
+            parent[x] = root;
+            x = old_parent;
+            old_parent = parent[old_parent];
+        }
+        return root;
+    }
 
     /**
      * 测试q和q是否连通 ，通过优化时间复杂度可以降低为O(logN)
