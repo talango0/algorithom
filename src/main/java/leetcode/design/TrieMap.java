@@ -5,6 +5,11 @@ import leetcode.tree.TreeNode;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * @see _677_键值映射
+ * @see _1804_实现前缀树2
+ * @param <V>
+ */
 public class TrieMap<V> implements ITrieMap<V> {
     // ASCII 码的个数
     private  static final int R = 256;

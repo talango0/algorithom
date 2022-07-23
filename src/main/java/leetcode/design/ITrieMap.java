@@ -28,7 +28,7 @@ public interface ITrieMap <V>{
     String shortestPrefixOf(String query);
 
     /**
-     * 在 Map 的所有减重搜索 query 的最长前缀
+     * 在 Map 的所有键中搜索 query 的最长前缀
      * @param query
      * @return
      */
