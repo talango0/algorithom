@@ -1,12 +1,5 @@
-package leetcode.arrays;
-
-import java.util.Arrays;
-import java.util.Deque;
-import java.util.LinkedList;
-
-public class _739_每日温度 {
-
-    //请根据每日 气温 列表，重新生成一个列表。对应位置的输出为：要想观测到更高的气温，至少需要等待的天数。如果气温在这之后都不会升高，请在该位置用 0 来代替。
+package leetcode.design.monotonous.stack;
+//请根据每日 气温 列表，重新生成一个列表。对应位置的输出为：要想观测到更高的气温，至少需要等待的天数。如果气温在这之后都不会升高，请在该位置用 0 来代替。
 //
 //
 // 例如，给定一个列表 temperatures = [73, 74, 75, 71, 69, 72, 76, 73]，你的输出应该是 [1, 1, 4, 2
@@ -16,7 +9,14 @@ public class _739_每日温度 {
 // Related Topics 栈 哈希表
 // 👍 578 👎 0
 
+import org.junit.Assert;
+import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.Deque;
+import java.util.LinkedList;
+
+public class _739_每日温度 {
     /**
      * 方法1，暴力法1
      */    static class Solution1 {
@@ -91,6 +91,20 @@ public class _739_每日温度 {
             }
             return ans;
         }
+    }
+
+    @Test
+    void testSolution1(){
+        Solution1 solution1 = new Solution1();
+        int[] ans = solution1.dailyTemperatures(new int[]{73, 74, 75, 71, 69, 72, 76, 73});
+        Assert.assertArrayEquals(new int[]{1, 1, 4, 2, 1, 1, 0, 0}, ans);
+    }
+
+    @Test
+    void testSolution2(){
+        Solution2 solution2 = new Solution2();
+        int[] ans = solution2.dailyTemperatures(new int[]{73, 74, 75, 71, 69, 72, 76, 73});
+        Assert.assertArrayEquals(new int[]{1, 1, 4, 2, 1, 1, 0, 0}, ans);
     }
 
 

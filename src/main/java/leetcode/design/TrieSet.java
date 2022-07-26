@@ -2,6 +2,11 @@ package leetcode.design;
 
 import java.util.List;
 
+/**
+ * @see _208_实现Trie前缀树
+ * @see _648_单词替换
+ * @see _211_添加与搜索单词
+ */
 public class TrieSet {
     // 底层用一个 TrieMap，键就是 TrieSet，值仅仅起到占位的作用
     // 值的类型可以随便设置，我参考 Java 标准库设置成 Object
