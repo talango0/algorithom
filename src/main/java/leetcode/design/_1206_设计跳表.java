@@ -60,6 +60,8 @@ package leetcode.design;
 //
 // Related Topics 设计 链表 👍 198 👎 0
 
+import java.util.Random;
+
 /**
  * @author mayanwei
  * @date 2022-07-26.
