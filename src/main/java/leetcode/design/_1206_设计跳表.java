@@ -60,6 +60,7 @@ package leetcode.design;
 //
 // Related Topics 设计 链表 👍 198 👎 0
 
+import java.util.Arrays;
 import java.util.Random;
 
 /**
