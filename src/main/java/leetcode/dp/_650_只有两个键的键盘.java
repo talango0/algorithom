@@ -64,4 +64,17 @@ public class _650_只有两个键的键盘{
          }
     }
 
+    class Solution3 {
+        int minSteps(int n) {
+            int res = 0;
+            for (int i = 2; i <= n; ++i) {
+                while (n % i == 0) {
+                    res += i;
+                    n /= i;
+                }
+            }
+            return res;
+        }
+    }
+
 }
