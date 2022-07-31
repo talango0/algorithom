@@ -1,8 +1,13 @@
 package leetcode.string;
 
+import leetcode.dp._28_实现strStr;
+
 import java.math.BigInteger;
 import java.util.Random;
 
+/**
+ * @see _28_实现strStr
+ */
 public class SubStringSearch {
 
     /**
@@ -62,12 +67,16 @@ public class SubStringSearch {
         private String pat;
         private int [][] dfa;
         public  KMP(String pat){
+            //O(M)
             //有模式字符串构造dfa
             this.pat = pat;
             int M = pat.length();
             int R = 256;
+            // dp[字符][状态]
             dfa = new int[R][M];
+            // base case 只有遇到 pat[0] 这个字符才能使状态从 0 转移到 1，遇到其他字符的话还停留在状态 0 （java默认初始化数组全为0）
             dfa[pat.charAt(0)][0] = 1;
+            // X（影子状态）初始化为0，当前状态j 从1开始
             for(int X = 0 ,j = 1; j< M; j++){
                 // 计算dfa[][j]
                 for(int c = 0; c < R; c++){
@@ -82,6 +91,7 @@ public class SubStringSearch {
         }
 
         public int search(String txt){
+            //O(N)
             //在txt上模拟dfa的运行
             int i, j, N = txt.length(), M = pat.length();
             for( i = 0 ,j = 0; i < N && j < M; i++){

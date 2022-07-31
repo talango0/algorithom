@@ -2,3 +2,5 @@
 /target/
 /algorithm.iml
 /.vscode/
+/src/test/java/gradle/.gradle
+/src/test/java/gradle/

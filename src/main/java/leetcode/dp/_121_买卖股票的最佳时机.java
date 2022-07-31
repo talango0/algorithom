@@ -40,55 +40,65 @@ package leetcode.dp;
 // Related Topics 数组 动态规划 👍 2409 👎 0
 
 
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int maxProfit(int[] prices) {
-        if(prices == null){
-            return 0;
-        }
-
-        int [][] dp = new int[prices.length][2];
-        for (int i = 0; i< prices.length; i++) {
-            if(i - 1 == -1){
-                dp[i][0] = 0;
-                dp[i][1] = -prices[i];
-                continue;
-            }
-            //dp[i][k][0] = max(dp[i-1][k][0], dp[i-1][k-1][1] + prices[i])
-            //dp[i][k][1] = max(dp[i-1][k][1], dp[i-1][k-1][0] - prices[i])
-            //            = max(dp[i-1][1][1], -prices[i])
-            //解释：k = 0 的 base case，所以 dp[i-1][0][0] = 0。
-            //这里k = 1不变，因此k对状态转移没有影响，可以进行进一步优化简化掉k
-
-            dp[i][0] = Math.max(dp[i-1][0], dp[i-1][1] + prices[i]);
-            dp[i][1] = Math.max(dp[i-1][1], -prices[i]);
-        }
-        return dp[prices.length-1][0];
-    }
-}
-//leetcode submit region end(Prohibit modification and deletion)
+import org.junit.jupiter.api.Test;
 
 /**
- * 空间优化版
+ * @see _122_买卖股票的最佳时机II
+ * @see _123_买卖股票的最佳时期III
+ * @see _188_买卖股票的最佳时机IIII
+ * @see _309_最佳买卖股票股票时机含冷冻期
+ * @see _714_买卖股票的最佳时机含手续费
  */
-class Solution2 {
-    public int maxProfit(int[] prices) {
-        if(prices == null){
-            return 0;
-        }
-        int [][] dp = new int[prices.length][2];
-        int dp_i_0 = 0, dp_i_1 = Integer.MIN_VALUE;
-        for (int i = 0; i< prices.length; i++) {
-            dp_i_0 = Math.max(dp_i_0, dp_i_1 + prices[i]);
-            dp_i_1 = Math.max(dp_i_1, -prices[i]);
-        }
-        return dp_i_0;
-    }
-}
-
 public class _121_买卖股票的最佳时机{
-    public static void main(String[] args) {
+
+
+    class Solution{
+        public int maxProfit(int[] prices) {
+            if (prices == null) {
+                return 0;
+            }
+
+            int[][] dp = new int[prices.length][2];
+            for (int i = 0; i < prices.length; i++) {
+                if (i - 1 == -1) {
+                    dp[i][0] = 0;
+                    dp[i][1] = -prices[i];
+                    continue;
+                }
+                //dp[i][k][0] = max(dp[i-1][k][0], dp[i-1][k-1][1] + prices[i])
+                //dp[i][k][1] = max(dp[i-1][k][1], dp[i-1][k-1][0] - prices[i])
+                //            = max(dp[i-1][1][1], -prices[i])
+                //解释：k = 0 的 base case，所以 dp[i-1][0][0] = 0。
+                //这里k = 1不变，因此k对状态转移没有影响，可以进行进一步优化简化掉k
+
+                dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i]);
+                dp[i][1] = Math.max(dp[i - 1][1], -prices[i]);
+            }
+            return dp[prices.length - 1][0];
+        }
+    }
+
+    /**
+     * 空间优化版
+     */
+    class Solution2{
+        public int maxProfit(int[] prices) {
+            if (prices == null) {
+                return 0;
+            }
+            int[][] dp = new int[prices.length][2];
+            int dp_i_0 = 0, dp_i_1 = Integer.MIN_VALUE;
+            for (int i = 0; i < prices.length; i++) {
+                dp_i_0 = Math.max(dp_i_0, dp_i_1 + prices[i]);
+                dp_i_1 = Math.max(dp_i_1, -prices[i]);
+            }
+            return dp_i_0;
+        }
+    }
+
+    @Test
+    public void testSolution() {
         Solution solution = new Solution();
-        solution.maxProfit(new int[]{7,1,5,3,6,4});
+        solution.maxProfit(new int[]{7, 1, 5, 3, 6, 4});
     }
 }
