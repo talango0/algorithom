@@ -70,6 +70,7 @@ public class _1024_视频拼接{
             if (time == 0) {
                 return 0;
             }
+            // O(n*logn)
             // 按起点升序排列，起点相同的降序排列
             Arrays.sort(clips, (int [] a, int [] b)->{
                 if (a[0] == b[0]) {
@@ -86,6 +87,7 @@ public class _1024_视频拼接{
             int i = 0, n = clips.length;
             while (i < n && clips[i][0] <= curEnd) {
                 // 在第 res 个视频的区间内贪心选择下一个视频
+                // O(n)
                 while (i < n && clips[i][0] <= curEnd) {
                     nextEnd = Math.max(nextEnd, clips[i][1]);
                     i++;
