@@ -54,6 +54,7 @@ public class _354_俄罗斯套娃信封问题{
             int n = envelopes.length;
             // 按宽度升序排序，如果宽度相同，按照高度将序排序
             Arrays.sort(envelopes, new Comparator<int []>(){
+                @Override
                 public int compare(int [] a, int [] b){
                     return a[0] == b[0] ? b[1]-a[1] : a[0]-b[0];
                 }
