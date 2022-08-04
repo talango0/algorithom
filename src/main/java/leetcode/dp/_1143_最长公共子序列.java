@@ -49,6 +49,8 @@ package leetcode.dp;
 import java.util.Arrays;
 
 /**
+ * @see _712_两个字符串的最小ASCII删除和
+ * @see _583_两个字符串的删除操作
  * @author mayanwei
  * @date 2022-08-04.
  */
