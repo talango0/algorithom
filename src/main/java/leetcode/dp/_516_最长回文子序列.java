@@ -31,6 +31,12 @@ package leetcode.dp;
 //
 //
 // Related Topics 字符串 动态规划 👍 851 👎 0
+
+import leetcode.string._5_最长回文串;
+
+/**
+ * @see _5_最长回文串
+ */
 public class _516_最长回文子序列 {
     class Solution {
         // 在子串 s[i,...,j]中，最长回文子序列长度为 dp[i][j]
