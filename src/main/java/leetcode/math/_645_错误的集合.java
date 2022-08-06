@@ -33,7 +33,7 @@ package leetcode.math;
 //
 // Related Topics 位运算 数组 哈希表 排序 👍 277 👎 0
 
-import leetcode.bitop._268_丢失的数字;
+import leetcode.math.bitop._268_丢失的数字;
 
 /**
  * @see _268_丢失的数字

@@ -1,4 +1,4 @@
-package leetcode.bitop;
+package leetcode.math.bitop;
 
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
