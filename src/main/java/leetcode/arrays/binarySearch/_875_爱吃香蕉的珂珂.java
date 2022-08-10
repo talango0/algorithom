@@ -50,6 +50,7 @@ package leetcode.arrays.binarySearch;
  * @date 2022-07-01.
  *
  * @see _1011_在D天内送达包裹的能力
+ * @see _392_判断子序列
  */
 public class _875_爱吃香蕉的珂珂{
     class Solution {
