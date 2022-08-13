@@ -1,11 +1,6 @@
 package leetcode.list;
 
-import java.util.PriorityQueue;
-
-public class _23_合并K个升序链表 {
-
-
-    //给你一个链表数组，每个链表都已经按升序排列。
+//给你一个链表数组，每个链表都已经按升序排列。
 //
 // 请你将所有链表合并到一个升序链表中，返回合并后的链表。
 //
@@ -53,71 +48,45 @@ public class _23_合并K个升序链表 {
 // 👍 1045 👎 0
 
 
-//leetcode submit region begin(Prohibit modification and deletion)
+import java.util.PriorityQueue;
 
-
-    class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode() {
-        }
-
-        ListNode( int val ) {
-            this.val = val;
-        }
-
-        ListNode( int val, ListNode next ) {
-            this.val = val;
-            this.next = next;
-        }
-    }
-
+public class _23_合并K个升序链表 {
 
     /**
      * 思路，采用优先级队列｜堆
      * 时间复杂度 O(nlogk)
      * 空间复杂度 O(k)
      */
-
     class Solution {
-        class Node implements Comparable<Node>{
-            int val;
-            ListNode listNode;
-            @Override
-            public int compareTo(Node node){
-                return this.val - node.val;
-            }
-            Node(int val, ListNode listNode){
-                this.val = val;
-                this.listNode = listNode;
-            }
-        }
         public ListNode mergeKLists(ListNode[] lists) {
-            if(lists == null || lists.length == 0){
+            if (lists == null || lists.length == 0) {
                 return null;
             }
-            PriorityQueue<Node> queue = new PriorityQueue<Node>();
-            for(ListNode listNode : lists){
-                if(listNode != null){
-                    queue.offer(new Node(listNode.val, listNode));
+            // 虚拟头结点
+            ListNode dummy = new ListNode(Integer.MIN_VALUE), p = dummy;
+            // 优先级队列，最小堆
+            PriorityQueue<ListNode> pq = new PriorityQueue<ListNode>((o1,o2)->{
+                return o1.val - o2.val;
+            });
+            // 将 k 个链表的头结点加入最小堆
+            for (ListNode node: lists) {
+                if (node!=null) {
+                    pq.offer(node);
                 }
             }
-            ListNode res = new ListNode(Integer.MAX_VALUE);
-            ListNode tail = res;
-            while(!queue.isEmpty()){
-                Node node = queue.poll();
-                tail.next = node.listNode;
-                tail = tail.next;
-                if(node.listNode.next != null){
-                    queue.offer(new Node(node.listNode.next.val,node.listNode.next));
+            ListNode node = null;
+            while (!pq.isEmpty()) {
+                // 获取最小节点，接到结果链表中
+                node = pq.poll();
+                p.next = node;
+                // p 指针不断前进
+                p = p.next;
+                if (node.next != null){
+                    pq.offer(node.next);
                 }
             }
-            return res.next;
-
+            return dummy.next;
         }
-
     }
-//leetcode submit region end(Prohibit modification and deletion)
 
 }
