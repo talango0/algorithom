@@ -171,6 +171,7 @@ public class SubStringSearch{
      * 其实就是滑动哈希配合滑动窗口，滑动哈希就是处理数字的一个小技巧
      *
      * @see ModOp
+     * @see _187_重复的DNA序列
      */
     static class RabinKarp{
         /**
