@@ -44,4 +44,15 @@ public class ModOp{
     public void test1() {
         Assert.assertEquals((2 * 3) % 5, (2 % 5) * (3 % 5) % 5);
     }
+
+    /**
+     * X % Q == (X + Q) % Q
+     * <p>
+     * (X + Y) % Q == (X % Q + Y % Q) % Q
+     */
+    @Test
+    public void test2() {
+        Assert.assertEquals((2 + 3) % 5, (2 % 5  + 3 % 5) % 5);
+
+    }
 }

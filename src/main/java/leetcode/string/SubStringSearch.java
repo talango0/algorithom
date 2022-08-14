@@ -1,6 +1,7 @@
 package leetcode.string;
 
 import leetcode.dp._28_实现strStr;
+import leetcode.math.ModOp;
 
 import java.math.BigInteger;
 import java.util.Random;
@@ -8,21 +9,21 @@ import java.util.Random;
 /**
  * @see _28_实现strStr
  */
-public class SubStringSearch {
+public class SubStringSearch{
 
     /**
      * 暴力法
      */
-    public static int bruteForceSearch(String pat,String txt){
+    public static int bruteForceSearch(String pat, String txt) {
         int M = pat.length(), N = txt.length();
-        for(int i = 0; i <= N-M; i++){
+        for (int i = 0; i <= N - M; i++) {
             int j;
-            for(j = 0; j< M; j++){
-                if(txt.charAt(i+j) != pat.charAt(j)){
+            for (j = 0; j < M; j++) {
+                if (txt.charAt(i + j) != pat.charAt(j)) {
                     break;
                 }
             }
-            if(j == M ){
+            if (j == M) {
                 return i;
             }
         }
@@ -33,7 +34,7 @@ public class SubStringSearch {
     /**
      * 字符串匹配之Knuth-Morris-Pratt
      */
-    public static class KMP {
+    public static class KMP{
 
         //模拟指针的回退
         /*
@@ -65,8 +66,9 @@ public class SubStringSearch {
          */
 
         private String pat;
-        private int [][] dfa;
-        public  KMP(String pat){
+        private int[][] dfa;
+
+        public KMP(String pat) {
             //O(M)
             //有模式字符串构造dfa
             this.pat = pat;
@@ -77,29 +79,30 @@ public class SubStringSearch {
             // base case 只有遇到 pat[0] 这个字符才能使状态从 0 转移到 1，遇到其他字符的话还停留在状态 0 （java默认初始化数组全为0）
             dfa[pat.charAt(0)][0] = 1;
             // X（影子状态）初始化为0，当前状态j 从1开始
-            for(int X = 0 ,j = 1; j< M; j++){
+            for (int X = 0, j = 1; j < M; j++) {
                 // 计算dfa[][j]
-                for(int c = 0; c < R; c++){
+                for (int c = 0; c < R; c++) {
                     //匹配失败情况下的值
                     dfa[c][j] = dfa[c][X];
                 }
                 //设置匹配成功的值
-                dfa[pat.charAt(j)][j] = j+1;
+                dfa[pat.charAt(j)][j] = j + 1;
                 //更新重启状态
                 X = dfa[pat.charAt(j)][X];
             }
         }
 
-        public int search(String txt){
+        public int search(String txt) {
             //O(N)
             //在txt上模拟dfa的运行
             int i, j, N = txt.length(), M = pat.length();
-            for( i = 0 ,j = 0; i < N && j < M; i++){
+            for (i = 0, j = 0; i < N && j < M; i++) {
                 j = dfa[txt.charAt(i)][j];
             }
-            if(j == M) {
-                return i-M;
-            }else {
+            if (j == M) {
+                return i - M;
+            }
+            else {
                 return N;
             }
         }
@@ -114,39 +117,40 @@ public class SubStringSearch {
      */
 
     static class BoyerMoore{
-        private int [] right;
+        private int[] right;
         private String pat;
-        BoyerMoore(String pat){
+
+        BoyerMoore(String pat) {
             //计算跳跃表
             this.pat = pat;
             int R = 256, M = pat.length();
             right = new int[R];
-            for(int c = 0; c < R; c++){
+            for (int c = 0; c < R; c++) {
                 right[c] = -1;
             }
-            for(int j = 0; j< M; j++){
+            for (int j = 0; j < M; j++) {
                 right[pat.charAt(j)] = j;
             }
         }
 
-        public int search(String txt){
+        public int search(String txt) {
             //在txt中查找模式字符串
             int N = txt.length();
             int M = pat.length();
             int skip;
-            for(int i = 0; i <= N-M; i += skip){
+            for (int i = 0; i <= N - M; i += skip) {
                 //does the pattern match the text at position i?
                 skip = 0;
-                for(int j = M-1; j >= 0; j--){
-                    if(pat.charAt(j) != txt.charAt(i+j)){
-                        skip = j - right[txt.charAt( i+j )];
-                        if(skip < 1){
+                for (int j = M - 1; j >= 0; j--) {
+                    if (pat.charAt(j) != txt.charAt(i + j)) {
+                        skip = j - right[txt.charAt(i + j)];
+                        if (skip < 1) {
                             skip = 1;
                         }
                         break;
                     }
                 }
-                if(skip == 0){
+                if (skip == 0) {
                     //找到匹配
                     return i;
                 }
@@ -157,11 +161,16 @@ public class SubStringSearch {
     }
 
 
-
     /**
      * 基于散列
      * 思路： 在构造函数总计算模式pat的散列值，并在文本txt中查找该散列值的匹配。
      * 指纹字符串查找算法。
+     * <p>
+     * 我们不要每次都去一个字符一个字符地比较子串和模式串，而是维护一个滑动窗口，运用滑动哈希算法一边滑动一边计算窗口中字符串的哈希值，拿这个哈希值去和模式串的哈希值比较，这样就可以避免截取子串，从而把匹配算法降低为 O(N)，这就是 Rabin-Karp 指纹字符串查找算法的核心逻辑。
+     * <p>
+     * 其实就是滑动哈希配合滑动窗口，滑动哈希就是处理数字的一个小技巧
+     *
+     * @see ModOp
      */
     static class RabinKarp{
         /**
@@ -188,12 +197,13 @@ public class SubStringSearch {
          * R^(M-1)%Q
          */
         private long RM;
-        public RabinKarp(String pat){
+
+        public RabinKarp(String pat) {
             this.pat = pat;
             this.M = pat.length();
             Q = longRandomPrime();
             RM = 1;
-            for(int i = 1; i <= M-1; i++){
+            for (int i = 1; i <= M - 1; i++) {
                 RM = (R * RM) % Q;
             }
             patHash = hash(pat, M);
@@ -201,6 +211,7 @@ public class SubStringSearch {
 
         /**
          * 用除留余数法计算散列值。
+         *
          * @param pat
          * @param m
          * @return
@@ -208,7 +219,7 @@ public class SubStringSearch {
         private long hash(String pat, int m) {
             //计算key[0..M-1]的散列值
             long h = 0;
-            for(int j = 0; j < M; j++){
+            for (int j = 0; j < M; j++) {
                 h = (R * h + pat.charAt(j)) % Q;
             }
             return h;
@@ -221,33 +232,35 @@ public class SubStringSearch {
 
         /**
          * Monte Carlo
+         *
          * @param txt
          * @param i
          * @return
          */
-        private boolean check(String txt, int i){
+        private boolean check(String txt, int i) {
             // 对于 monte Carlo 检查模式与txt(i..i-M+1)的匹配
 //            return true;
-            for(int j = 0; j<M; j++){
-                if(txt.charAt(i + j) != pat.charAt(j)){
+            for (int j = 0; j < M; j++) {
+                if (txt.charAt(i + j) != pat.charAt(j)) {
                     return false;
                 }
             }
             return true;
         }
 
-        public int search(String txt){
+        public int search(String txt) {
             int N = txt.length();
             long txtHash = hash(txt, M);
-            if(patHash == txtHash && check(txt, 0)) {
+            if (patHash == txtHash && check(txt, 0)) {
                 return 0;
             }
-            for(int i = M; i < N; i++){
+            for (int i = M; i < N; i++) {
                 //减去第一个数，加入最后一个数字，再次检查
-                txtHash = (txtHash + Q - RM * txt.charAt(i-M) % Q) % Q;
+                txtHash = (txtHash + Q - RM * txt.charAt(i - M) % Q) % Q;
                 txtHash = (txtHash * R + txt.charAt(i)) % Q;
-                if(txtHash == patHash){
-                    if(check(txt,i - M + 1)){
+                if (txtHash == patHash) {
+                    // 可能重复，需要检查一下，但因为是大素数所以冲突的概率很小
+                    if (check(txt, i - M + 1)) {
                         return i - M + 1;
                     }
                 }
