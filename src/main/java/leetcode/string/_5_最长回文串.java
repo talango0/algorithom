@@ -28,6 +28,13 @@ package leetcode.string;
 //
 // Related Topics 字符串 动态规划 👍 5389 👎 0
 
+import leetcode.dp._1312_让字符串成为回文串的最少插入次数;
+import leetcode.dp._516_最长回文子序列;
+
+/**
+ * @see _1312_让字符串成为回文串的最少插入次数
+ * @see _516_最长回文子序列
+ */
 public class _5_最长回文串 {
     class Solution {
         public String longestPalindrome(String s) {
