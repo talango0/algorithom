@@ -21,7 +21,7 @@ package leetcode.arrays.binarySearch;
 //target
 // = 2
 //输出: -1
-//解释: 2 不存在 
+//解释: 2 不存在
 //nums
 // 中因此返回 -1
 //提示：
