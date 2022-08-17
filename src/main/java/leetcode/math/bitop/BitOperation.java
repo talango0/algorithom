@@ -3,6 +3,8 @@ package leetcode.math.bitop;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 /**
  * http://graphics.stanford.edu/~seander/bithacks.html#ReverseParallel
  *
@@ -102,5 +104,15 @@ public class BitOperation{
         // 此时 number = 264
         Assert.assertEquals(number, 264);
 
+    }
+
+    @Test
+    public void test5(){
+        int [] nums = new int[]{1,2,3};
+        int max = Arrays.stream(nums).max().getAsInt();
+        Assert.assertEquals(3, max);
+
+        int sum = Arrays.stream(nums).sum();
+        Assert.assertEquals(6, sum);
     }
 }

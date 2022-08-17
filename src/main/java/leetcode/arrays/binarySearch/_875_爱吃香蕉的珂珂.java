@@ -45,6 +45,8 @@ package leetcode.arrays.binarySearch;
 //
 // Related Topics 数组 二分查找 👍 406 👎 0
 
+import leetcode.math._1201_丑数III;
+
 /**
  * @author mayanwei
  * @date 2022-07-01.
@@ -52,6 +54,8 @@ package leetcode.arrays.binarySearch;
  * @see _1011_在D天内送达包裹的能力
  * @see _392_判断子序列
  * @see _33_搜索旋转排序数组
+ * @see _410_分割数组的最大值
+ * @see _1201_丑数III
  */
 public class _875_爱吃香蕉的珂珂{
     class Solution {
