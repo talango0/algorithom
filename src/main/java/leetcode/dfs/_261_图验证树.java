@@ -178,10 +178,73 @@ public class _261_图验证树{
         }
     }
 
+
+    class Solution5{
+        public class UnionFind{
+            int[] parents;
+            int[] ranks;
+
+            public UnionFind(int n) {
+                parents = new int[n];
+                ranks = new int[n];
+                for (int i = 0; i < n; i++) {
+                    parents[i] = i;
+                    ranks[i] = 1;
+                }
+            }
+
+            public boolean union(int x, int y) {
+                int xParent = find(x);
+                int yParent = find(y);
+                // Same Parent
+                if (xParent == yParent) {
+                    return false;
+                }
+                // different parent
+                if (ranks[xParent] > ranks[yParent]) {
+                    parents[yParent] = xParent;
+                }
+                else if (ranks[xParent] < ranks[yParent]) {
+                    parents[xParent] = yParent;
+                }
+                else {
+                    parents[yParent] = xParent;
+                    ranks[xParent]++;
+                }
+                return true;
+            }
+
+            public int find(int node) {
+                int parentNode = parents[node];
+                while (parentNode != node) {
+                    parentNode = parents[parentNode];
+                    parents[node] = parentNode;
+                    node = parentNode;
+                }
+                return node;
+            }
+        }
+
+        UnionFind node;
+
+        public boolean validTree(int n, int[][] edges) {
+            if (edges.length + 1 < n) {
+                return false;
+            }
+            node = new UnionFind(n);
+            for (int[] edge : edges) {
+                if (!node.union(edge[0], edge[1])) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
     @Test
     public void test() {
-        //int[][] edges = {{0, 1}, {1, 2}, {2, 3}, {1, 3}, {1, 4}};
-        int[][] edges = {{0, 1}, {0, 2}, {0, 3}, {1, 4}};
+        int[][] edges = {{0, 1}, {1, 2}, {2, 3}, {1, 3}, {1, 4}};
+        //int[][] edges = {{0, 1}, {0, 2}, {0, 3}, {1, 4}};
         Solution solution = new Solution();
         boolean res = solution.validTree(5, edges);
         System.out.println(res);
@@ -197,5 +260,9 @@ public class _261_图验证树{
         Solution4 solution4 = new Solution4();
         boolean res4 = solution4.validTree(5, edges);
         System.out.println(res4);
+
+        Solution5 solution5 = new Solution5();
+        boolean res5 = solution5.validTree(5, edges);
+        System.out.println(res5);
     }
 }
