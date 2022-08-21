@@ -36,7 +36,6 @@ public class HeapSort {
          * @param i
          */
         public void maxHeapify(int [] args, int i, int heapSize){
-//            System.out.println(i);
             int l = left(i);
             int r = right(i);
             int largest;
