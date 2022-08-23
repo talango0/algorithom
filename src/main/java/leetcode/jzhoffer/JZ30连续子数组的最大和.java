@@ -2,6 +2,7 @@ package leetcode.jzhoffer;
 
 
 /**
+ * 剑指 Offer 42. 连续子数组的最大和
  * @author mayanwei
  */
 public class JZ30连续子数组的最大和 {

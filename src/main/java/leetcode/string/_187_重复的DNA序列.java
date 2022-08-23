@@ -58,7 +58,8 @@ public class _187_重复的DNA序列{
 
 
     class Solution2 {
-        // O(N),而窗口滑动的过程中的操作耗时都是 O(1)（给 res 添加子串的过程不算），所以整体的时间复杂度是 O(N)
+        // O(N),而窗口滑动的过程中的操作耗时都是 O(1)（给 res 添加子串的过程不算），
+        // 所以整体的时间复杂度是 O(N)
         public List<String> findRepeatedDnaSequences(String s) {
             // 先把字符串转变成四进制的数字组合
             int [] nums = new int[s.length()];
