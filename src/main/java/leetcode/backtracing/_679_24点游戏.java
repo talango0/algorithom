@@ -1,5 +1,8 @@
 package leetcode.backtracing;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -117,5 +120,13 @@ public class _679_24点游戏{
             }
             return false;
         }
+    }
+
+    @Test
+    public void test(){
+        int[] data = {4, 1, 2, 3};
+        boolean res = true;
+        Solution solution = new Solution();
+        Assert.assertEquals(solution.judgePoint24(data), res);
     }
 }
