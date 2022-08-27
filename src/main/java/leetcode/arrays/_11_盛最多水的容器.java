@@ -43,7 +43,7 @@ package leetcode.arrays;
  */
 public class _11_盛最多水的容器{
     class Solution{
-        // 本题中竖线没有宽度，所以 left 和 rightright 之间能够盛的水就是 min(height[left], height[right]) * (right-left)
+        // 本题中竖线没有宽度，所以 left 和 right之间能够盛的水就是 min(height[left], height[right]) * (right-left)
         // 用 left 和 right 两个指针从两端向中心收缩，一边收缩一边计算 [left, right] 之间的矩形面积，取最大的面积值即是答案
         public int maxArea(int[] height) {
             int left = 0, right = height.length - 1;
