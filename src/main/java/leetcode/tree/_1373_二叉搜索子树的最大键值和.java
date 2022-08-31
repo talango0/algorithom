@@ -43,7 +43,8 @@ package leetcode.tree;
 //👍 105, 👎 0
 
 /**
- * 思路了
+ * 字节
+ * 思路：
  * 我们定义一个 traverse 函数，traverse(root) 返回一个大小为 4 的 int 数组，我们暂且称它为 res，其中：
  * <p>
  * res[0] 记录以 root 为根的二叉树是否是 BST，若为 1 则说明是 BST，若为 0 则说明不是 BST；

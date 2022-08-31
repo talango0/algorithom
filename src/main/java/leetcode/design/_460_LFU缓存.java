@@ -65,6 +65,9 @@ package leetcode.design;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 
+/**
+ * 字节
+ */
 public class _460_LFU缓存 {
     class LFUCache {
         // key 到 val 的映射，称为KV

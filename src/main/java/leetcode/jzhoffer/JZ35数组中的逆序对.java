@@ -1,5 +1,9 @@
 package leetcode.jzhoffer;
 
+/**
+ * 字节
+ * leetcode 剑指 Offer 51. 数组中的逆序对
+ */
 public class   JZ35数组中的逆序对 {
     /*
 题目描述

@@ -35,10 +35,11 @@ package leetcode.dp;
 // Related Topics 数组 动态规划 👍 753 👎 0
 
 /**
+ * 字节
  * @author mayanwei
  * @date 2022-06-25.
  */
-public class _188_买卖股票的最佳时机IIII{
+public class _188_买卖股票的最佳时机IV{
     class Solution {
         public int maxProfit(int k, int[] prices) {
             int n = prices.length;

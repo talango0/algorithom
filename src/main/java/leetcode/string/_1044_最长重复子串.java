@@ -24,6 +24,7 @@ import java.util.Random;
 import java.util.Set;
 
 /**
+ * 字节
  * @author mayanwei
  * @date 2022-08-23.
  * @see _187_重复的DNA序列

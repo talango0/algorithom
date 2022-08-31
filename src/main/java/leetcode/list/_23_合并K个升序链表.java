@@ -50,6 +50,9 @@ package leetcode.list;
 
 import java.util.PriorityQueue;
 
+/**
+ * 字节
+ */
 public class _23_合并K个升序链表 {
 
     /**

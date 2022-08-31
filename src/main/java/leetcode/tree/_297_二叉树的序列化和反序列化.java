@@ -53,6 +53,10 @@ import java.util.Queue;
 
 
 //leetcode submit region begin(Prohibit modification and deletion)
+
+/**
+ * 字节
+ */
 public class _297_二叉树的序列化和反序列化 {
 
     /**
