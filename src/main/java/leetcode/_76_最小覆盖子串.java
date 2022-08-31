@@ -30,16 +30,22 @@ public class _76_最小覆盖子串 {
 
     /**
      * 分析，
+     * <p>
      * S = ADDBECODEBANC
+     * <p>
      * T = ABC
+     * <p>
      * 朴素解法：从T中找出所有的字串，所有包含ABC的字串中长度最小的即为所要返回的字串，如果不存在，返回""
+     * <p>
      * 滑动窗口：设置两个指针，一个用于延伸现有窗口的r指针，和一个用于收缩的l指针。在任意时刻，只有一个指针运动，而另一个保持静止。
+     * <p>
      * 在s上滑动窗口，通过移动r指针不断扩张窗口。当窗口包含l全部所需字符后，如果能收缩，就收缩窗口直到最小窗口。
+     * <p>
      * 如何判断当前窗口是否包含t中所有的字符。用一个hash表表示所有的字符及它们的个数，用一个hash表动态维护窗口中所有字符以及它们的个数，
      * 如果这个动态表中包含t的hash表中的所有字符，并且对应的个数都不小于t的hash表中各个字符的个数，那么当前窗口是可行的。
      */
 
-    static class Solution {
+    static class Solution{
         Map<Character, Integer> ori = new HashMap<>();
         Map<Character, Integer> cnt = new HashMap<>();
 
@@ -71,7 +77,7 @@ public class _76_最小覆盖子串 {
                     ++l;
                 }
             }
-            return ansL == -1 ? "" : s.substring(ansL, ansR);
+            return ansL == -1 ? "" :s.substring(ansL, ansR);
         }
 
         private boolean check() {
