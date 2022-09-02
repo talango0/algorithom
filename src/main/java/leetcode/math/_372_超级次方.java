@@ -50,6 +50,7 @@ import java.util.List;
 /**
  * @author mayanwei
  * @date 2022-08-06.
+ * @see _50_Pow_x_n
  */
 public class _372_超级次方{
     class Solution{
