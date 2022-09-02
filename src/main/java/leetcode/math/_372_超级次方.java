@@ -78,7 +78,7 @@ public class _372_超级次方{
             int part1 = mypow(a, last);
             int part2 = mypow(superPow(a, b), 10);
             // 合并结果
-            // 每次惩罚都要求求模
+            // 每次乘法都要求求模
             return (part1 * part2) % base;
 
         }
