@@ -73,6 +73,28 @@ package leetcode.arrays.binarySearch;
  * @see _1095_山脉数组中查找目标值
  */
 public class _852_山脉数组的峰顶索引{
+    /**
+     * 对于区间 [i,j]
+     *
+     *                                               *
+     *            *                                *   *
+     *          *   *                            *     ▲  *
+     *        * ▲      *                        *      │  ▲
+     *       *▲ │                                      │  │  *
+     *        │ │         *                  *         │  │
+     *    *   │ │                            ▲        mid │     *
+     *    ▲   │ │            *               │         │ mid+1  ▲
+     *    │  mid│ mid+1      ▲               i            │     j
+     *    i   │ │            j               │            │     │
+     *    │     │            │
+     *
+     *
+     *         [mid+1,j]                          [i,mid]
+     *
+     *
+     *
+     * 结束的条件 left == right
+     */
     class Solution{
         public int peakIndexInMountainArray(int[] arr) {
             int l = 0, r = arr.length - 1;
