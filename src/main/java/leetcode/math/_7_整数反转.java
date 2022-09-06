@@ -28,6 +28,10 @@ package leetcode.math;
 //
 //-2^31 <= x <= 2^31 - 1
 
+/**
+ * @see _8_字符串转换整数_atoi_
+ * @see _9_回文数
+ */
 public class _7_整数反转 {
     class Solution {
         public int reverse(int x) {
