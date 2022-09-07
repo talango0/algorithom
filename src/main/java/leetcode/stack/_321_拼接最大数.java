@@ -48,6 +48,8 @@ public class _321_拼接最大数{
         public int[] maxNumber(int[] nums1, int[] nums2, int k) {
             int m = nums1.length, n = nums2.length;
             int[] maxSubsequence = new int[k];
+            // i 表示nums1 中最后需要合并最大字符串的长度，此事num2中需要合并的最大字符串的长度为 k - i，其中 start <= k <= end;
+            // start 表示长度最小为 k-nums2.length, end 表示 k 和 nums1.length 的最小值
             int start = Math.max(0, k - n), end = Math.min(k, m);
             for (int i = start; i <= end; i++) {
                 int[] subsequence1 = maxSubsequence(nums1, i);
