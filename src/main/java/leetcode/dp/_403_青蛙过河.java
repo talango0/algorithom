@@ -38,6 +38,8 @@ package leetcode.dp;
 // Related Topics 数组 动态规划 👍 446 👎 0
 
 
+import java.util.Arrays;
+
 /**
  * @author mayanwei
  * @date 2022-09-08.
@@ -70,6 +72,44 @@ public class _403_青蛙过河{
                 }
             }
             return false;
+        }
+    }
+
+
+    /**
+     * 时间复杂度 O(n^2logn)
+     * 空间复杂度 O(n^2)
+     */
+    class Solution1 {
+        private Boolean[][] rec;
+
+        public boolean canCross(int[] stones) {
+            int n = stones.length;
+            rec = new Boolean[n][n];
+            // 初始状态： 现在所处的石子编号为 0（石子的编号从0开始），上次跳跃的距离为 0（这样可以保证第一次跳跃的距离为1）
+            return dfs(stones, 0, 0);
+        }
+
+        // 青蛙位于第i个石子，上一次的跳跃距离为 lastDis
+        private boolean dfs(int[] stones, int i, int lastDis) {
+            if (i == stones.length - 1) {
+                return true;
+            }
+            if (rec[i][lastDis] != null) {
+                return rec[i][lastDis];
+            }
+            // 它当前能够跳跃到的距离范围是 [lastDis-1, lastDis+1]
+            for (int curDis = lastDis - 1; curDis <= lastDis + 1; curDis++) {
+                if (curDis > 0) {
+                    // 利用二分查找判断查找对应的三个位置是否存在石子
+                    int j = Arrays.binarySearch(stones, i + 1, stones.length, curDis + stones[i]);
+                    // 如果存在石子，则尝试进行递归搜索
+                    if (j >= 0 && dfs(stones, j, curDis)) {
+                        return rec[i][lastDis] = true;
+                    }
+                }
+            }
+            return rec[i][lastDis] = false;
         }
     }
 }
