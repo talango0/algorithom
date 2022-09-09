@@ -1,5 +1,6 @@
 package leetcode.arrays;
 
+import leetcode.list._148_排序链表;
 import leetcode.tree._315_计算右侧小于当前元素的个数;
 import leetcode.tree._327_区间和的个数;
 import leetcode.tree._493_翻转对;
@@ -13,6 +14,7 @@ import java.util.Arrays;
  * @see _315_计算右侧小于当前元素的个数
  * @see _493_翻转对
  * @see _327_区间和的个数
+ * @see _148_排序链表
  */
 public class MergeSort {
     /**
