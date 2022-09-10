@@ -1,6 +1,7 @@
 package inductiontoalgorithm.union_find;
 
 
+import leetcode.arrays._765_情侣牵手;
 import leetcode.graph._1135_最低成本联通所有城市;
 import leetcode.graph._1584_连接所有点的最小费用;
 import leetcode.graph._323_无向图中连通分量的数目;
@@ -16,6 +17,7 @@ import leetcode.graph._990_等式方程的可满足性;
  * @see _323_无向图中连通分量的数目
  * @see _1135_最低成本联通所有城市
  * @see _1584_连接所有点的最小费用
+ * @see _765_情侣牵手
  */
 
 public class UF {
