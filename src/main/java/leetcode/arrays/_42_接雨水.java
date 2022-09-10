@@ -39,8 +39,18 @@ package leetcode.arrays;
  * @date 2022-08-09.
  */
 public class _42_接雨水{
-    //暴力法
 
+    /**
+     * 暴力法
+     * ▲         ┌─┐
+     * │         │ │
+     * ├─┐       │ │
+     * │ │   ┌─┐ │ │
+     * │ ├─┐ │ ├─┤ │
+     * │4│2│0│3│2│5│
+     * └─┴─┴─┴─┴─┴─┴─▶
+     *  0 1 2 3 4 5
+     */
     class Solution{
         public int trap(int[] height) {
             int n = height.length;
