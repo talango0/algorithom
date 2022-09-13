@@ -23,7 +23,11 @@ public class _214_最短回文串{
      */
     class Solution{
         public String shortestPalindrome(String s) {
+            if(null == s || s.length() == 0){
+                return "";
+            }
             int n = s.length();
+            //投机取巧
             int base = 131, mod = 1000000007;
             int left = 0, right = 0, mul = 1;
             int best = -1;
