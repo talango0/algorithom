@@ -74,6 +74,9 @@ public class _1420_生成数组{
      * i 表述数组长度为i
      * s 表示搜索代价为s
      * j 表示数组中最大数为j
+     *
+     * 时间复杂度 O(N*M^2*K)
+     * 空间复杂度 O(N*M*K)
      */
     class Solution{
         int[][][] f = new int[51][51][101];
@@ -98,6 +101,50 @@ public class _1420_生成数组{
                             f[i][s][j] += f[i - 1][s - 1][j0];
                             f[i][s][j] %= MOD;
                         }
+                    }
+                }
+            }
+
+            // 最终的答案是所有 f[n][k][..] 的和
+            // 即数组长度为 n，搜索代价为 k，最大值任意
+            int ans = 0;
+            for (int j = 1; j <= m; ++j) {
+                ans += f[n][k][j];
+                ans %= MOD;
+            }
+            return ans;
+        }
+    }
+
+
+    /**
+     * 前缀和优化
+     * 时间复杂度 O(N*M^2*K)
+     * 空间复杂度 O(N*M*K)
+     */
+    class Solution0{
+        int[][][] f = new int[51][51][101];
+        final int MOD = 1000000007;
+
+        public int numOfArrays(int n, int m, int k) {
+            // 不存在搜索代价为 0 的数组
+            if (k == 0) {
+                return 0;
+            }
+
+            // 边界条件，所有长度为 1 的数组的搜索代价都为 1
+            for (int j = 1; j <= m; j++) {
+                f[1][1][j] = 1;
+            }
+            for (int i = 2; i <= n; ++i) {
+                // 搜索代价不会超过数组长度
+                for (int s = 1; s <= k && s <= i; ++s) {
+                    // 利用前缀和优化
+                    int preSum_j = 0;
+                    for (int j = 1; j <= m; j++) {
+                        f[i][s][j] = (int) ((long) f[i - 1][s][j] * j % MOD);
+                        f[i][s][j] = (f[i][s][j] + preSum_j) % MOD;
+                        preSum_j = (preSum_j + f[i-1][s-1][j]) % MOD;
                     }
                 }
             }
