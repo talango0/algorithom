@@ -1,6 +1,7 @@
 package leetcode.segment_tree;
 
 import inductiontoalgorithm.segment_tree.SegmentTree;
+import org.junit.jupiter.api.Test;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -158,4 +159,11 @@ public class _1505_最多K次交换相邻数位后得到的最小整数{
         }
     }
 
+    @Test
+    public void test(){
+        String num = "4321";
+        int k = 4;
+        Solution solution = new Solution();
+        solution.minInteger(num, 5);
+    }
 }
