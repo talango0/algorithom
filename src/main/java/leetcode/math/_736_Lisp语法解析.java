@@ -63,6 +63,9 @@ package leetcode.math;
 // Related Topics 栈 递归 哈希表 字符串 👍 172 👎 0
 
 
+import org.junit.Assert;
+import org.junit.jupiter.api.Test;
+
 import java.util.*;
 
 /**
@@ -176,5 +179,11 @@ public class _736_Lisp语法解析{
             }
             return sign * ret;
         }
+    }
+
+    @Test
+    public void test(){
+        Solution solution = new Solution();
+        Assert.assertEquals(solution.evaluate("(let x 1 y 2 x (add x y) (add x y))"), 5);
     }
 }
