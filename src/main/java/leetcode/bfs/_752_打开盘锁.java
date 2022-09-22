@@ -93,7 +93,7 @@ public class _752_打开盘锁{
                 int sz = q.size();
                 for (int i = 0; i < sz; i++) {
                     String cur = q.poll();
-                    //判断是否到大终点
+                    //判断是否到达终点
                     if (dset.contains(cur)) {
                         continue;
                     }
