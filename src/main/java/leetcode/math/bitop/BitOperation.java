@@ -115,4 +115,17 @@ public class BitOperation{
         int sum = Arrays.stream(nums).sum();
         Assert.assertEquals(6, sum);
     }
+
+    @Test
+    public void test6(){
+        System.out.println( 5 & (-5));
+        System.out.println(Integer.toBinaryString(5));
+        System.out.println(Integer.toBinaryString(-5));
+        System.out.println(Integer.toBinaryString(5 & (-5)));
+
+        int [] a  = new int[5];
+        Arrays.fill(a, 1);
+        Assert.assertArrayEquals(new int[]{1,1,1,1,1}, a);
+
+    }
 }
