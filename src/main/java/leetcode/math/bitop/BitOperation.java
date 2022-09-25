@@ -48,6 +48,24 @@ public class BitOperation{
 
         // 7. 减1
         Assert.assertEquals(~-n, 0);
+
+        // 8, a+b
+        Assert.assertEquals(getSum(2,3), 5);
+    }
+
+    /**
+     * 不用加减符号的的加法
+     * @param a
+     * @param b
+     * @return
+     */
+    public static int getSum(int a, int b) {
+        while (b != 0) {
+            int carry = (a & b) << 1;
+            a = a ^ b;
+            b = carry;
+        }
+        return a;
     }
 
     /**
