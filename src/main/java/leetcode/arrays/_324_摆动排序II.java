@@ -45,6 +45,7 @@ import java.util.Collections;
 /**
  * @author mayanwei
  * @date 2022-09-24.
+ * @see _280_WiggleSort摆动排序
  */
 public class _324_摆动排序II{
     class Solution{
