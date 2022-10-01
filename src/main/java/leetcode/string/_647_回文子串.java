@@ -36,6 +36,7 @@ package leetcode.string;
 // Related Topics 字符串 动态规划 👍 983 👎 0
 
 import leetcode.dp._1312_让字符串成为回文串的最少插入次数;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author mayanwei
@@ -100,5 +101,13 @@ public class _647_回文子串{
 
             return ans;
         }
+    }
+
+    @Test
+    public void test(){
+        String s = "abba";
+        Solution2 solution2 = new Solution2();
+        int i = solution2.countSubstrings(s);
+        System.out.println(i);
     }
 }
