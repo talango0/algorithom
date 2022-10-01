@@ -12,6 +12,8 @@ import org.junit.jupiter.api.Test;
  */
 public class Manacher{
     /**
+     * <pre>
+     *
      * ┌─────────────┐
      * │  Manacher   │
      * └─────────────┘
@@ -60,6 +62,7 @@ public class Manacher{
      * │                 │In this case, Radius is initialized to the radius of the   │
      * │                 │palindrome at MirrorCenter and the search starts from here.│
      * └─────────────────┴───────────────────────────────────────────────────────────┘
+     * </pre>
      * @param text
      * @return
      */

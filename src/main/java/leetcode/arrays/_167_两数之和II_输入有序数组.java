@@ -45,7 +45,7 @@ package leetcode.arrays;
 //
 // Related Topics 数组 双指针 二分查找 👍 833 👎 0
 
-public class _167_两数之和2_输入有序数组 {
+public class _167_两数之和II_输入有序数组 {
     class Solution {
         public int[] twoSum(int[] numbers, int target) {
             //一左一右相向而行
