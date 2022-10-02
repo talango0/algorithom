@@ -1,29 +1,18 @@
 package leetcode.多线程;
-
-import java.util.concurrent.*;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-
-/**
- * @author mayanwei
- * @date 2022-03-12.
- */
-public class _1115_交替打印FooBar{
-    //给你一个类：
+//给你一个类：
 //
 //
 //class FooBar {
 //  public void foo() {
-//    for (int i = 0; i < n; i++) {
-//      print("foo");
-//    }
+//  for (int i = 0; i < n; i++) {
+//   print("foo");
+//   }
 //  }
 //
 //  public void bar() {
-//    for (int i = 0; i < n; i++) {
-//      print("bar");
-//    }
+//  for (int i = 0; i < n; i++) {
+//   print("bar");
+//  }
 //  }
 //}
 //
@@ -65,42 +54,29 @@ public class _1115_交替打印FooBar{
 // Related Topics 多线程 👍 146 👎 0
 
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-    class FooBar {
-        private int n;
+import org.junit.jupiter.api.Test;
 
-        public FooBar(int n) {
-            this.n = n;
-        }
+import java.util.concurrent.*;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
-        public void foo(Runnable printFoo) throws InterruptedException {
-
-            for (int i = 0; i < n; i++) {
-
-                // printFoo.run() outputs "foo". Do not change or remove this line.
-                printFoo.run();
-            }
-        }
-
-        public void bar(Runnable printBar) throws InterruptedException {
-
-            for (int i = 0; i < n; i++) {
-
-                // printBar.run() outputs "bar". Do not change or remove this line.
-                printBar.run();
-            }
-        }
-    }
-//leetcode submit region end(Prohibit modification and deletion)
+/**
+ * @author mayanwei
+ * @date 2022-03-12.
+ */
+public class _1115_交替打印FooBar{
 
     //BLOCKING Queue
-     class FooBar0 {
+    class FooBar0{
         private int n;
         private BlockingQueue<Integer> bar = new LinkedBlockingQueue<>(1);
         private BlockingQueue<Integer> foo = new LinkedBlockingQueue<>(1);
+
         public FooBar0(int n) {
             this.n = n;
         }
+
         public void foo(Runnable printFoo) throws InterruptedException {
             for (int i = 0; i < n; i++) {
                 foo.put(i);
@@ -118,8 +94,42 @@ public class _1115_交替打印FooBar{
         }
     }
 
+    @Test
+    public void testforbar0() throws InterruptedException {
+        FooBar0 fooBar0 = new FooBar0(2);
+        Runnable foo = new Runnable(){
+            @Override
+            public void run() {
+                System.out.print("foo");
+            }
+        };
+        new Thread(()->{
+            try {
+                fooBar0.foo(foo);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+        Runnable bar = new Runnable(){
+            @Override
+            public void run() {
+                System.out.print("bar");
+            }
+        };
+        fooBar0.bar(bar);
+        new Thread(()->{
+            try {
+                fooBar0.bar(bar);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+
+
+    }
+
     //CyclicBarrier 控制先后
-    class FooBar6 {
+    class FooBar6{
         private int n;
 
         public FooBar6(int n) {
@@ -131,12 +141,13 @@ public class _1115_交替打印FooBar{
 
         public void foo(Runnable printFoo) throws InterruptedException {
             for (int i = 0; i < n; i++) {
-                while(!fin);
+                while (!fin) ;
                 printFoo.run();
                 fin = false;
                 try {
                     cb.await();
-                } catch (BrokenBarrierException e) {}
+                } catch (BrokenBarrierException e) {
+                }
             }
         }
 
@@ -144,7 +155,8 @@ public class _1115_交替打印FooBar{
             for (int i = 0; i < n; i++) {
                 try {
                     cb.await();
-                } catch (BrokenBarrierException e) {}
+                } catch (BrokenBarrierException e) {
+                }
                 printBar.run();
                 fin = true;
             }
@@ -152,7 +164,7 @@ public class _1115_交替打印FooBar{
     }
 
     // 自旋 + 让出CPU
-    class FooBar5 {
+    class FooBar5{
         private int n;
 
         public FooBar5(int n) {
@@ -163,11 +175,12 @@ public class _1115_交替打印FooBar{
 
         public void foo(Runnable printFoo) throws InterruptedException {
             for (int i = 0; i < n; ) {
-                if(permitFoo) {
+                if (permitFoo) {
                     printFoo.run();
                     i++;
                     permitFoo = false;
-                }else{
+                }
+                else {
                     Thread.yield();
                 }
             }
@@ -175,11 +188,12 @@ public class _1115_交替打印FooBar{
 
         public void bar(Runnable printBar) throws InterruptedException {
             for (int i = 0; i < n; ) {
-                if(!permitFoo) {
+                if (!permitFoo) {
                     printBar.run();
                     i++;
                     permitFoo = true;
-                }else{
+                }
+                else {
                     Thread.yield();
                 }
             }
@@ -187,44 +201,45 @@ public class _1115_交替打印FooBar{
     }
 
 
-
     // 可重入锁 + Condition
-    class FooBar4 {
+    class FooBar4{
         private int n;
 
         public FooBar4(int n) {
             this.n = n;
         }
+
         Lock lock = new ReentrantLock(true);
         private final Condition foo = lock.newCondition();
         volatile boolean flag = true;
+
         public void foo(Runnable printFoo) throws InterruptedException {
             for (int i = 0; i < n; i++) {
                 lock.lock();
                 try {
-                    while(!flag) {
+                    while (!flag) {
                         foo.await();
                     }
                     printFoo.run();
                     flag = false;
                     foo.signal();
-                }finally {
+                } finally {
                     lock.unlock();
                 }
             }
         }
 
         public void bar(Runnable printBar) throws InterruptedException {
-            for (int i = 0; i < n;i++) {
+            for (int i = 0; i < n; i++) {
                 lock.lock();
                 try {
-                    while(flag) {
+                    while (flag) {
                         foo.await();
                     }
                     printBar.run();
                     flag = true;
                     foo.signal();
-                }finally {
+                } finally {
                     lock.unlock();
                 }
             }
@@ -232,19 +247,20 @@ public class _1115_交替打印FooBar{
     }
 
     //synchronized + 标志位 + 唤醒
-    class FooBar3 {
+    class FooBar3{
         private int n;
         // 标志位，控制执行顺序，true执行printFoo，false执行printBar
         private volatile boolean type = true;
-        private final Object foo=  new Object(); // 锁标志
+        private final Object foo = new Object(); // 锁标志
 
         public FooBar3(int n) {
             this.n = n;
         }
+
         public void foo(Runnable printFoo) throws InterruptedException {
             for (int i = 0; i < n; i++) {
                 synchronized (foo) {
-                    while(!type){
+                    while (!type) {
                         foo.wait();
                     }
                     printFoo.run();
@@ -257,7 +273,7 @@ public class _1115_交替打印FooBar{
         public void bar(Runnable printBar) throws InterruptedException {
             for (int i = 0; i < n; i++) {
                 synchronized (foo) {
-                    while(type){
+                    while (type) {
                         foo.wait();
                     }
                     printBar.run();
@@ -270,10 +286,11 @@ public class _1115_交替打印FooBar{
 
 
     //信号量 适合控制顺序
-    class FooBar2 {
+    class FooBar2{
         private int n;
         private Semaphore foo = new Semaphore(1);
         private Semaphore bar = new Semaphore(0);
+
         public FooBar2(int n) {
             this.n = n;
         }
@@ -285,6 +302,7 @@ public class _1115_交替打印FooBar{
                 bar.release();
             }
         }
+
         public void bar(Runnable printBar) throws InterruptedException {
             for (int i = 0; i < n; i++) {
                 bar.acquire();
