@@ -409,8 +409,8 @@ public class _1195_交替打印字符串{
                     if (i % 3 == 0 && i % 5 == 0) {
                         continue;
                     }
+                    lock.lock();
                     try {
-                        lock.lock();
                         while (state != 3) {
                             condition.await();
                         }
@@ -429,8 +429,8 @@ public class _1195_交替打印字符串{
                     if (i % 3 == 0 && i % 5 == 0) {
                         continue;
                     }
+                    lock.lock();
                     try {
-                        lock.lock();
                         while (state != 5) {
                             condition.await();
                         }
@@ -446,8 +446,8 @@ public class _1195_交替打印字符串{
             // printFizzBuzz.run() outputs "fizzbuzz".
             public void fizzbuzz(Runnable printFizzBuzz) throws InterruptedException {
                 for (int i = 15; i <= n; i += 15) {
+                    lock.lock();
                     try {
-                        lock.lock();
                         while (state != 15) {
                             condition.await();
                         }
@@ -463,8 +463,8 @@ public class _1195_交替打印字符串{
             // printNumber.accept(x) outputs "x", where x is an integer.
             public void number(IntConsumer printNumber) throws InterruptedException {
                 for (int i = 1; i <= n; i++) {
+                    lock.lock();
                     try {
-                        lock.lock();
                         while (state != 0) {
                             condition.await();
                         }
@@ -472,9 +472,15 @@ public class _1195_交替打印字符串{
                             printNumber.accept(i);
                         }
                         else {
-                            if (i % 3 == 0 && i % 5 == 0) state = 15;
-                            else if (i % 3 == 0) state = 3;
-                            else if (i % 5 == 0) state = 5;
+                            if (i % 3 == 0 && i % 5 == 0) {
+                                state = 15;
+                            }
+                            else if (i % 3 == 0) {
+                                state = 3;
+                            }
+                            else if (i % 5 == 0) {
+                                state = 5;
+                            }
                             condition.signalAll();
                         }
                     } finally {
