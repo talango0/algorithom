@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -22,7 +23,7 @@ public class _1242_多线程网页爬虫{
 
     class Solution{
         private String host;
-        private  HtmlParser htmlParser;
+        private HtmlParser htmlParser;
         private AtomicInteger cnt = new AtomicInteger();
         // 1.因为部分测试数据会构造有环图，导致爬虫死循环，所以必须采用哈希集合去重
         private Set<String> set = new HashSet<>();
@@ -33,13 +34,13 @@ public class _1242_多线程网页爬虫{
             host = getHost(startUrl);
             this.htmlParser = htmlParser;
             set.add(startUrl);
-            es.execute(()->helper(startUrl));
+            es.execute(() -> helper(startUrl));
             while (cnt.get() > 0) {
                 // 2. 如果调用 yield 方法是这放弃使用cpu，测试结果会在 800 ms以上，所以此处该用 sleep
                 // Thread.yield()
-                try{
+                try {
                     Thread.sleep(1);
-                }catch (InterruptedException e) {
+                } catch (InterruptedException e) {
 
                 }
             }
@@ -54,23 +55,23 @@ public class _1242_多线程网页爬虫{
                     continue;
                 }
                 synchronized (set) {
-                    if (!set.contains(getHost(url)))  {
+                    if (!set.contains(getHost(url))) {
                         continue;
                     }
                 }
                 cnt.incrementAndGet();
-                es.execute(()->helper(url));
+                es.execute(() -> helper(url));
             }
             cnt.decrementAndGet();
         }
 
         public String getHost(String url) {
-            return url.split("/",4)[2];
+            return url.split("/", 4)[2];
         }
 
     }
 
-    class Solution2 {
+    class Solution2{
 
         ConcurrentHashMap<String, Integer> set = new ConcurrentHashMap<>();
 
@@ -96,10 +97,57 @@ public class _1242_多线程网页爬虫{
                 for (Thread thread : list) {
                     thread.join();
                 }
-            }catch (InterruptedException e){
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    class Solution3{
+
+        class Solution{
+
+            private final ConcurrentHashMap<String, Integer> urls = new ConcurrentHashMap<>();
+            private String host;
+            ConcurrentLinkedDeque<Thread> threadList = new ConcurrentLinkedDeque<Thread>();
+
+
+            private String getHost(String url) {
+                if (url.length() < 7) return null;
+                String host = url.substring(7);
+                int index = host.indexOf('/');
+                if (index == -1) return host;
+                host = host.substring(0, index);
+                return host;
+            }
+
+            public List<String> crawl(String startUrl, HtmlParser htmlParser) {
+                host = getHost(startUrl);
+                urls.put(startUrl, 0);
+                helper(startUrl, htmlParser);
+                while (!threadList.isEmpty()) {
+                    try {
+                        threadList.remove().join();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                return new ArrayList<>(urls.keySet());
+            }
+
+            private void helper(String startUrl, HtmlParser htmlParser) {
+                List<String> list = htmlParser.getUrls(startUrl);
+                for (String url : list) {
+                    if (host.equals(getHost(url)) && !urls.containsKey(url)) {
+                        urls.put(url, 0);
+                        Thread thread = new Thread(() -> helper(url, htmlParser));
+                        thread.start();
+                        threadList.add(thread);
+                    }
+                }
+            }
+        }
+
     }
 
 }
