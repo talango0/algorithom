@@ -1,6 +1,7 @@
 package leetcode.jzhoffer;
 
 import common.TreeNode;
+import leetcode.tree._113_路径总和II;
 
 import java.util.ArrayList;
 
@@ -18,6 +19,9 @@ import java.util.ArrayList;
  * {10,5,12,4,7},15
  * 返回值
  * []
+ *
+ * 剑指 Offer 34. 二叉树中和为某一值的路径
+ * @see _113_路径总和II
  */
 public class JZ24二叉树中和为某一值的路径 {
 
