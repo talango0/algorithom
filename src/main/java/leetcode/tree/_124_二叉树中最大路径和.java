@@ -36,8 +36,11 @@ package leetcode.tree;
 
 // 二叉树中最大路径和
 
+import leetcode.jzhoffer.剑指_Offer_II_051_节点之和最大的路径;
+
 /**
  * 字节
+ * @see 剑指_Offer_II_051_节点之和最大的路径
  */
 public class _124_二叉树中最大路径和{
     //后序遍历，选择分支中的最大值与根节点相加
