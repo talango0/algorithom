@@ -49,6 +49,7 @@ package leetcode.string;
 //
 //👍 842, 👎 0
 
+import leetcode.jzhoffer.剑指_Offer_II_097_子序列的数目;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -58,6 +59,7 @@ import java.util.HashSet;
  * 字节
  * @author mayanwei
  * @date 2022-08-14.
+ * @see 剑指_Offer_II_097_子序列的数目
  */
 public class _115_不同的子序列{
     /**
