@@ -52,18 +52,18 @@ import java.util.Map;
 /**
  * 字节
  */
-public class _76_最小覆盖子串 {
+public class _76_最小覆盖子串{
 
-    class Solution {
+    class Solution{
         public String minWindow(String s, String t) {
             // window 是活动窗口，need 是目标串对应字母字典
-            char [] schars = s.toCharArray();
-            char [] tchars = t.toCharArray();
-            Map<Character,Integer> window = new HashMap<>(schars.length);
-            Map<Character,Integer> need = new HashMap<>(tchars.length);
+            char[] schars = s.toCharArray();
+            char[] tchars = t.toCharArray();
+            Map<Character, Integer> window = new HashMap<>(schars.length);
+            Map<Character, Integer> need = new HashMap<>(tchars.length);
 
-            for (char c : tchars ) {
-                need.put(c, need.getOrDefault(c, 0)+1);
+            for (char c : tchars) {
+                need.put(c, need.getOrDefault(c, 0) + 1);
             }
             int left = 0, right = 0, start = 0, len = Integer.MAX_VALUE, valid = 0;
             while (right < schars.length) {
@@ -72,18 +72,18 @@ public class _76_最小覆盖子串 {
                 right++;
                 //下面处理滑动窗口内数据的一系列更新
                 if (need.keySet().contains(c)) {
-                    window.put(c, window.getOrDefault(c, 0)+1);
+                    window.put(c, window.getOrDefault(c, 0) + 1);
                     if (window.get(c).equals(need.get(c))) {
-                        valid ++;
+                        valid++;
                     }
                 }
 
                 //判断左侧是否需要收缩
                 while (valid == need.size()) {
                     // 在这里更新最小子串
-                    if (right-left < len) {
+                    if (right - left < len) {
                         start = left;
-                        len = right-left;
+                        len = right - left;
                     }
                     //需要收缩的字符
                     char d = schars[left];
@@ -93,12 +93,59 @@ public class _76_最小覆盖子串 {
                         if (window.get(d).equals(need.get(d))) {
                             valid--;
                         }
-                        window.put(d, window.getOrDefault(d, 0)-1);
+                        window.put(d, window.getOrDefault(d, 0) - 1);
 
                     }
                 }
             }
-            return len == Integer.MAX_VALUE ? "":s.substring(start, start+len);
+            return len == Integer.MAX_VALUE ? "" :s.substring(start, start + len);
+        }
+    }
+
+
+    class Solution2{
+        public String minWindow(String s, String t) {
+            int ns = s.length(), nt = t.length();
+            if (ns < nt) {
+                return "";
+            }
+            int[] hash = new int[58]; // A~Z: 65~90, a~z: 97~122
+            int diff = 0;
+            for (int i = 0; i < nt; i++) {
+                hash[t.charAt(i) - 'A']++;
+                hash[s.charAt(i) - 'A']--;
+            }
+            for (int val : hash) { // 只关心未抵消的字符
+                if (val > 0) {
+                    diff++;
+                }
+            }
+            if (diff == 0) {
+                return s.substring(0, nt); // 第一个窗为最小覆盖子串时
+            }
+            int l = 0, r = nt, lmin = 0, rmin = ns;
+            for (; r < ns; r++) { // 只要当前窗还未覆盖，向右侧扩窗
+                int in = s.charAt(r) - 'A';
+                hash[in]--;
+                if (hash[in] == 0) {
+                    diff--; // in入窗后使得窗内该字符个数与t中相同
+                }
+                if (diff != 0) {
+                    continue; // diff不为0则继续扩窗
+                }
+                for (; diff == 0; l++) { // 从左侧缩窗
+                    int out = s.charAt(l) - 'A';
+                    hash[out]++;
+                    if (hash[out] == 1) {
+                        diff++;
+                    }
+                }
+                if (r - l + 1 < rmin - lmin) { // 缩窗后得到一个合格窗，若窗宽更小，更新窗界
+                    lmin = l - 1;
+                    rmin = r;
+                }
+            }
+            return rmin == ns ? "" :s.substring(lmin, rmin + 1); // 根据窗界是否有过更新来返回相应的结果
         }
     }
 }
