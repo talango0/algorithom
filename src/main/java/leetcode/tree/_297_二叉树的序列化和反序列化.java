@@ -1,5 +1,7 @@
 package leetcode.tree;
 
+import leetcode.jzhoffer.JZ61序列化二叉树;
+
 import java.util.LinkedList;
 import java.util.Queue;
 //序列化是将一个数据结构或者对象转换为连续的比特位的操作，进而可以将转换后的数据存储在一个文件或者内存中，同时也可以通过网络传输到另一个计算机环境，采取相反方
@@ -56,6 +58,7 @@ import java.util.Queue;
 
 /**
  * 字节
+ * @see JZ61序列化二叉树
  */
 public class _297_二叉树的序列化和反序列化 {
 
