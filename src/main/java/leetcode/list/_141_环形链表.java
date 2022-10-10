@@ -56,9 +56,27 @@ package leetcode.list;
 
 
 //leetcode submit region begin(Prohibit modification and deletion)
+
+import leetcode.arrays._373_查找和最小的K对数字;
+import leetcode.arrays._378_有序矩阵中第K小的元素;
+import leetcode.design._355_设计推特;
+import leetcode.math._313_超级丑数;
+
 /**
  * @author mayanwei
  * @date 2022-08-12.
+ * @see _141_环形链表
+ * @see _142_环形链表II
+ * @see _160_相交链表
+ * @see _19_删除链表的倒数第N个结点
+ * @see _21_合并两个有序链表
+ * @see _313_超级丑数
+ * @see _355_设计推特
+ * @see _378_有序矩阵中第K小的元素
+ * @see _86_分隔链表
+ * @see _876_链表的中间结点
+ * @see _23_合并K个升序链表
+ * @see _373_查找和最小的K对数字
  */
 public class _141_环形链表{
     public class Solution {
