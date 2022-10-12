@@ -24,6 +24,8 @@ package leetcode.stack;
 //
 //👍 2128, 👎 0
 
+import org.junit.jupiter.api.Test;
+
 import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Deque;
@@ -47,7 +49,6 @@ public class _84_柱状图中最大的矩形{
                 while (i < n && heights[i] >= heights[k]) {
                     i++;
                 }
-                ;
                 while (j >= 0 && heights[j] >= heights[k]) {
                     j--;
                 }
@@ -116,5 +117,11 @@ public class _84_柱状图中最大的矩形{
             }
             return ans;
         }
+    }
+
+    @Test
+    public void test(){
+        Solution2 solution2 = new Solution2();
+        System.out.println(solution2.largestRectangleArea(new int[]{2,1,5,6,2,3}));
     }
 }
