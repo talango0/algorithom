@@ -24,6 +24,7 @@ package leetcode.stack;
 //
 //👍 2128, 👎 0
 
+import leetcode.jzhoffer.剑指_Offer_II_040_矩阵中最大的矩形;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayDeque;
@@ -35,6 +36,8 @@ import java.util.LinkedList;
  * 字节
  * @author mayanwei
  * @date 2022-08-27.
+ * @see 剑指_Offer_II_040_矩阵中最大的矩形
+ * @see _85_最大矩形
  */
 public class _84_柱状图中最大的矩形{
 

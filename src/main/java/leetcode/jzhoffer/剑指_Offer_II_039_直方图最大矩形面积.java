@@ -1,6 +1,7 @@
 package leetcode.jzhoffer;
 
 import leetcode.stack._84_柱状图中最大的矩形;
+import leetcode.stack._85_最大矩形;
 
 import java.util.Arrays;
 import java.util.Deque;
@@ -10,6 +11,7 @@ import java.util.LinkedList;
  * @author mayanwei
  * @date 2022-10-12.
  * @see _84_柱状图中最大的矩形
+ * @see _85_最大矩形
  */
 public class 剑指_Offer_II_039_直方图最大矩形面积 {
     class Solution{
