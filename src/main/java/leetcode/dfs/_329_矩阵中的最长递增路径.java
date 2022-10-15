@@ -10,14 +10,14 @@ package leetcode.dfs;
 //
 //输入：matrix = [[9,9,4],[6,6,8],[2,1,1]]
 //输出：4
-//解释：最长递增路径为 [1, 2, 6, 9]。
+//解释：最长递增路径为[1, 2, 6, 9]。
 //
 // 示例 2：
 //
 //
 //输入：matrix = [[3,4,5],[3,2,6],[2,2,1]]
 //输出：4
-//解释：最长递增路径是 [3, 4, 5, 6]。注意不允许在对角线方向上移动。
+//解释：最长递增路径是[3, 4, 5, 6]。注意不允许在对角线方向上移动。
 //
 //
 // 示例 3：
@@ -75,7 +75,8 @@ public class _329_矩阵中的最长递增路径{
             ++memo[row][column];
             for (int[] dir : dirs) {
                 int newRow = row + dir[0], newColumn = column + dir[1];
-                if (newRow >= 0 && newRow < rows && newColumn >= 0 && newColumn < columns && matrix[newRow][newColumn] > matrix[row][column]) {
+                if (newRow >= 0 && newRow < rows && newColumn >= 0 && newColumn < columns
+                        && matrix[newRow][newColumn] > matrix[row][column]) {
                     memo[row][column] = Math.max(memo[row][column], dfs(matrix, newRow, newColumn, memo) + 1);
                 }
             }
