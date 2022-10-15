@@ -19,8 +19,7 @@ package leetcode.bfs;
 // 示例 1：
 //
 //
-//输入：beginWord = "hit", endWord = "cog", wordList = ["hot","dot","dog","lot",
-//"log","cog"]
+//输入：beginWord = "hit", endWord = "cog", wordList = ["hot","dot","dog","lot","log","cog"]
 //输出：5
 //解释：一个最短转换序列是 "hit" -> "hot" -> "dot" -> "dog" -> "cog", 返回它的长度 5。
 //
@@ -28,8 +27,7 @@ package leetcode.bfs;
 // 示例 2：
 //
 //
-//输入：beginWord = "hit", endWord = "cog", wordList = ["hot","dot","dog","lot",
-//"log"]
+//输入：beginWord = "hit", endWord = "cog", wordList = ["hot","dot","dog","lot","log"]
 //输出：0
 //解释：endWord "cog" 不在字典中，所以无法进行转换。
 //
