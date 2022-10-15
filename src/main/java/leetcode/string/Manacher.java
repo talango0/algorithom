@@ -63,6 +63,7 @@ public class Manacher{
      * │                 │palindrome at MirrorCenter and the search starts from here.│
      * └─────────────────┴───────────────────────────────────────────────────────────┘
      * </pre>
+     *
      * @param text
      * @return
      */
@@ -101,62 +102,47 @@ public class Manacher{
         // Uncomment it to print LPS Length array
         // printf("%d %d ", L[0], L[1]);
         for (i = 2; i < N; i++) {
-            // Get currentLeftPosition iMirror
-            // for currentRightPosition i
+            // Get currentLeftPosition iMirror for currentRightPosition i
             iMirror = 2 * C - i;
-
-            // Reset expand - means no
-            // expansion required
+            // Reset expand - means no expansion required
             expand = 0;
             diff = R - i;
 
-            // If currentRightPosition i is
-            // within centerRightPosition R
+            // If currentRightPosition i is within centerRightPosition R
             if (diff >= 0) {
-
                 // Case 1
                 if (L[iMirror] < diff) {
                     L[i] = L[iMirror];
                 }
-
                 // Case 2
                 else if (L[iMirror] == diff && R == N - 1) {
                     L[i] = L[iMirror];
                 }
-
                 // Case 3
                 else if (L[iMirror] == diff && R < N - 1) {
                     L[i] = L[iMirror];
-
                     // Expansion required
                     expand = 1;
                 }
-
                 // Case 4
                 else if (L[iMirror] > diff) {
                     L[i] = diff;
-
                     // Expansion required
                     expand = 1;
                 }
             }
             else {
                 L[i] = 0;
-
                 // Expansion required
                 expand = 1;
             }
-
             if (expand == 1) {
-
-                // Attempt to expand palindrome centered
-                // at currentRightPosition i. Here for odd
-                // positions, we compare characters and
+                // Attempt to expand palindrome centered at currentRightPosition i.
+                // Here for odd positions, we compare characters and
                 // if match then increment LPS Length by ONE
-                // If even position, we just increment LPS
-                // by ONE without any character comparison
+                // If even position, we just increment LPS by ONE without any character comparison
                 try {
-                    while (((i + L[i]) < N && (i - L[i]) > 0)  && (((i + L[i] + 1) % 2 == 0)
+                    while (((i + L[i]) < N && (i - L[i]) > 0) && (((i + L[i] + 1) % 2 == 0)
                             || (text.charAt((i + L[i] + 1) / 2) == text.charAt((i - L[i] - 1) / 2)))) {
                         L[i]++;
                     }
