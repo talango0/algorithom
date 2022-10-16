@@ -32,11 +32,15 @@ package leetcode.string;
 //
 // Related Topics 广度优先搜索 字符串 👍 127 👎 0
 
+import leetcode.bfs._752_打开盘锁;
+import org.junit.jupiter.api.Test;
+
 import java.util.*;
 
 /**
  * @author mayanwei
  * @date 2022-09-10.
+ * @see _752_打开盘锁
  */
 public class _854_相似度为K的字符串{
 
@@ -179,7 +183,9 @@ public class _854_相似度为K的字符串{
 
             while (!queue.isEmpty()) {
                 String S = queue.poll();
-                if (S.equals(B)) return dist.get(S);
+                if (S.equals(B)) {
+                    return dist.get(S);
+                }
                 for (String T : neighbors(S, B)) {
                     if (!dist.containsKey(T)) {
                         dist.put(T, dist.get(S) + 1);
@@ -217,5 +223,11 @@ public class _854_相似度为K的字符串{
             T[i] = T[j];
             T[j] = tmp;
         }
+    }
+
+    @Test
+    public void test() {
+        Solution0 solution = new Solution0();
+        System.out.println(solution.kSimilarity("abc", "bca"));
     }
 }
