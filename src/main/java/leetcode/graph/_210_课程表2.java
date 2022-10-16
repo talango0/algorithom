@@ -43,55 +43,56 @@ import java.util.List;
 import java.util.Queue;
 
 public class _210_课程表2 {
-    class Solution {
+    class Solution{
 
         //依赖问题转化为有向图，用领接表表示该图
-        private List<Integer> [] graph;
-        /**构建一颗有向图 */
-        private List<Integer> [] buildGraph(int numCourses, int [][] prerequisites) {
+        private List<Integer>[] graph;
+
+        /**
+         * 构建一颗有向图
+         */
+        private List<Integer>[] buildGraph(int numCourses, int[][] prerequisites) {
             //图中共有numsCourses门课程
-            List<Integer> [] graph = new LinkedList[numCourses];
-            for (int i = 0; i<numCourses; i++) {
+            List<Integer>[] graph = new LinkedList[numCourses];
+            for (int i = 0; i < numCourses; i++) {
                 graph[i] = new LinkedList<Integer>();
             }
-
-            for (int [] edge: prerequisites) {
+            for (int[] edge : prerequisites) {
                 int from = edge[0], to = edge[1];
                 //添加一条从from指向to的有向边
                 //边的方向是【被依赖】的关系，即修完课程from，才能修课程to
                 graph[from].add(to);
-
             }
-
             return graph;
         }
 
         //只要会遍历图，就可以判断是否存在环
         //用visited 防止重复遍历一个节点
-        boolean [] visited;
+        boolean[] visited;
 
         //把traverse看作在图中节点上游走的指针，只需要再添加一个布尔数组 onPath 记录当前 traverse 经过的路径
-        boolean [] onPath;
+        boolean[] onPath;
         boolean hasCycle;
         List<Integer> postorder = new ArrayList<>();
-        void traverse(List<Integer> [] graph, int s) {
+
+        void traverse(List<Integer>[] graph, int s) {
             if (onPath[s]) {
                 hasCycle = true;
             }
             if (visited[s]) {
                 return;
             }
-
             // 前序遍历代码位置
             // 将当前节点标记为已遍历
             visited[s] = true;
             // 开始遍历节点s
             onPath[s] = true;
-            for (int to: graph[s]) {
+            for (int to : graph[s]) {
                 traverse(graph, to);
             }
             //后序遍历的位置
-            //这里有点儿回溯遍历的味道，在进入节点s的时候将 onPath[s] 标记为 true,离开时标记为false，如果发现 onPath[s] 已经被标记过，则说明出现了环。
+            //这里有点儿回溯遍历的味道，在进入节点s的时候将 onPath[s] 标记为 true,离开时标记为false，
+            // 如果发现 onPath[s] 已经被标记过，则说明出现了环。
             postorder.add(s);
             onPath[s] = false;
         }
@@ -120,40 +121,41 @@ public class _210_课程表2 {
     }
 
 
-    class Solution2 {
+    class Solution2{
 
         //依赖问题转化为有向图，用领接表表示该图
-        private List<Integer> [] graph;
-        /**构建一颗有向图 */
-        private List<Integer> [] buildGraph(int numCourses, int [][] prerequisites) {
+        private List<Integer>[] graph;
+        /**
+         * 构建一颗有向图
+         */
+        private List<Integer>[] buildGraph(int numCourses, int[][] prerequisites) {
             //图中共有numsCourses门课程
-            List<Integer> [] graph = new LinkedList[numCourses];
-            for (int i = 0; i<numCourses; i++) {
+            List<Integer>[] graph = new LinkedList[numCourses];
+            for (int i = 0; i < numCourses; i++) {
                 graph[i] = new LinkedList<Integer>();
             }
-
-            for (int [] edge: prerequisites) {
+            for (int[] edge : prerequisites) {
                 int from = edge[1], to = edge[0];
                 //添加一条从from指向to的有向边
                 //边的方向是【被依赖】的关系，即修完课程from，才能修课程to
                 graph[from].add(to);
 
             }
-
             return graph;
         }
 
-        /** 拓扑排序算法的BFS版本 */
+        /**
+         * 拓扑排序算法的BFS版本
+         */
         public int[] findOrder(int numCourses, int[][] prerequisites) {
             //后序遍历的结果进行反转，就是拓扑排序的结果
             List<Integer>[] graph = buildGraph(numCourses, prerequisites);
             // 计算入度，和环检测算法相同
-            int [] indegree= new int[numCourses];
-            for (int [] edge : prerequisites) {
+            int[] indegree = new int[numCourses];
+            for (int[] edge : prerequisites) {
                 int from = edge[1], to = edge[0];
                 indegree[to]++;
             }
-
             // 根据入读初始化队列中的节点，和换检测算法相同
             Queue<Integer> q = new LinkedList<Integer>();
             for (int i = 0; i < numCourses; i++) {
@@ -161,9 +163,8 @@ public class _210_课程表2 {
                     q.offer(i);
                 }
             }
-
             // 记录拓扑排序结果
-            int [] res = new int[numCourses];
+            int[] res = new int[numCourses];
             // 记录遍历节点的顺序（索引）
             int count = 0;
             //开始执行BFS算法
@@ -180,10 +181,9 @@ public class _210_课程表2 {
                 }
             }
             if (count != numCourses) {
-                return new int []{};
+                return new int[]{};
             }
             return res;
         }
-
     }
 }
