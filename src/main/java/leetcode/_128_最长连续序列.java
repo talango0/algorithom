@@ -1,10 +1,5 @@
 package leetcode;
-
-import java.util.HashMap;
-import java.util.Set;
-
-public class _128_最长连续序列 {
-    //给定一个未排序的整数数组 nums ，找出数字连续的最长序列（不要求序列元素在原数组中连续）的长度。
+//给定一个未排序的整数数组 nums ，找出数字连续的最长序列（不要求序列元素在原数组中连续）的长度。
 //
 //
 //
@@ -41,24 +36,27 @@ public class _128_最长连续序列 {
 // Related Topics 并查集 数组
 // 👍 586 👎 0
 
+import java.util.HashMap;
+import java.util.Set;
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-    static class  Solution {
+public class _128_最长连续序列{
+
+    static class Solution{
         public static int longestConsecutive(int[] nums) {
-            if(nums == null || nums.length ==0){
+            if (nums == null || nums.length == 0) {
                 return 0;
             }
             HashMap<Long, Long> map = new HashMap<>(nums.length);
 
             Long len = 0L;
-            for(int i = 0; i< nums.length; i++){
-                if(!map.containsKey(Long.valueOf(nums[i]))){
+            for (int i = 0; i < nums.length; i++) {
+                if (!map.containsKey(Long.valueOf(nums[i]))) {
                     // num[i] 组成一个长度为1的序列
                     // 判断 map.keySet里面有没有 num[i] + 1 以及 num[i] - 1
                     // 如果存在，比较 num[i] + 1 对应的值和 num[i] - 1对应的值的大小
                     map.put(Long.valueOf(nums[i]), 1L);
-                    Long preLen = map.containsKey(Long.valueOf(nums[i])-1L)?map.get(Long.valueOf(nums[i])-1L):0L;
-                    Long posLen = map.containsKey(Long.valueOf(nums[i])+1L)?map.get(Long.valueOf(nums[i])+1L):0L;
+                    Long preLen = map.containsKey(Long.valueOf(nums[i]) - 1L) ? map.get(Long.valueOf(nums[i]) - 1L) :0L;
+                    Long posLen = map.containsKey(Long.valueOf(nums[i]) + 1L) ? map.get(Long.valueOf(nums[i]) + 1L) :0L;
                     Long all = posLen + preLen + 1;
                     map.put(Long.valueOf(nums[i]) - preLen, all);
                     map.put(Long.valueOf(nums[i]) + posLen, all);
@@ -69,11 +67,10 @@ public class _128_最长连续序列 {
         }
 
     }
-//leetcode submit region end(Prohibit modification and deletion)
 
 
     public static void main(String[] args) {
-        int [] nums = {100,4,200,1,3,2};
+        int[] nums = {100, 4, 200, 1, 3, 2};
 //        int [] nums = {Integer.MAX_VALUE, Integer.MIN_VALUE};
         final long i = Solution.longestConsecutive(nums);
 
