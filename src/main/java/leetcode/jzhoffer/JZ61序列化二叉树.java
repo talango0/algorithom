@@ -2,9 +2,15 @@ package leetcode.jzhoffer;
 
 import leetcode.tree.BinarySearchTree;
 import common.TreeNode;
+import leetcode.tree._297_二叉树的序列化和反序列化;
 
 import java.util.*;
 
+/**
+ * 剑指 Offer 37. 序列化二叉树
+ * @see _297_二叉树的序列化和反序列化
+ * @see JZ61序列化二叉树
+ */
 public class JZ61序列化二叉树 {
     /**
      * 请实现两个函数，分别用来序列化和反序列化二叉树
