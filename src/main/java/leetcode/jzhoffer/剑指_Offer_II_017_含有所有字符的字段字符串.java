@@ -58,7 +58,7 @@ import java.util.Map;
  * @author mayanwei
  * @date 2022-10-09.
  */
-public class 剑指OfferII017_含有所有字符的字段字符串{
+public class 剑指_Offer_II_017_含有所有字符的字段字符串{
     class Solution{
         public String minWindow(String s, String t) {
             char[] schar = s.toCharArray();

@@ -36,6 +36,7 @@ package leetcode.dp;
 // Related Topics 字符串 动态规划 👍 470 👎 0
 /**
  * @see _1143_最长公共子序列
+ * @see _712_两个字符串的最小ASCII删除和
  * @author mayanwei
  * @date 2022-08-04.
  */

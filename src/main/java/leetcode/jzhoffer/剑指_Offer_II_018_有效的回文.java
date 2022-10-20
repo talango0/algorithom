@@ -39,7 +39,7 @@ package leetcode.jzhoffer;
  * @author mayanwei
  * @date 2022-10-19.
  */
-public class 剑指Offer_II_018_有效的回文{
+public class 剑指_Offer_II_018_有效的回文{
     class Solution{
         public boolean isPalindrome(String s) {
             if (s == null || s.length() == 0) {
