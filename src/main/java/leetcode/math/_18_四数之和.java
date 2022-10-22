@@ -39,6 +39,8 @@ package leetcode.math;
 // Related Topics 数组 双指针 排序 👍 1386 👎 0
 
 
+import leetcode.arrays._15_三数之和;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -46,6 +48,7 @@ import java.util.List;
 /**
  * @author mayanwei
  * @date 2022-09-25.
+ * @see _15_三数之和
  */
 public class _18_四数之和{
     /**
