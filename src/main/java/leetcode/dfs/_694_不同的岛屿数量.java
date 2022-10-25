@@ -27,21 +27,6 @@ public class _694_不同的岛屿数量{
     //比方说「下，右，撤销右，撤销下」和「下，撤销下，右，撤销右」显然是两个不同的遍历顺序，但如果不记录撤销操作，那么它俩都是「下，右」，成了相同的遍历顺序，显然是不对的。
 
     class  Solution {
-        void dfs(int [][] grid, int i, int j, StringBuilder sb, int dir) {
-            int m = grid.length, n = grid[0].length;
-            if (i < 0 || j < 0 || i >= m || j >= n || grid[i][j] == 0) {
-                return;
-            }
-            // 前序遍历位置： 进入 (i,j)
-            grid[i][j] = 0;
-            sb.append(dir).append(',');
-            dfs(grid, i - 1, j, sb, 1); // 上
-            dfs(grid, i + 1, j, sb, 2); // 下
-            dfs(grid, i, j - 1, sb, 3); // 左
-            dfs(grid, i, j + 1, sb, 4); // 右
-            // 后序遍历位置，离开(i,j)
-            sb.append(-dir).append(',');
-        }
 
         public int numDistinctIslands(int [][] grid) {
             int m = grid.length, n = grid[0].length;
@@ -60,6 +45,22 @@ public class _694_不同的岛屿数量{
             }
             // 不同岛屿的个数
             return isLands.size();
+        }
+
+        void dfs(int [][] grid, int i, int j, StringBuilder sb, int dir) {
+            int m = grid.length, n = grid[0].length;
+            if (i < 0 || j < 0 || i >= m || j >= n || grid[i][j] == 0) {
+                return;
+            }
+            // 前序遍历位置： 进入 (i,j)
+            grid[i][j] = 0;
+            sb.append(dir).append(',');
+            dfs(grid, i - 1, j, sb, 1); // 上
+            dfs(grid, i + 1, j, sb, 2); // 下
+            dfs(grid, i, j - 1, sb, 3); // 左
+            dfs(grid, i, j + 1, sb, 4); // 右
+            // 后序遍历位置，离开(i,j)
+            sb.append(-dir).append(',');
         }
     }
 }
