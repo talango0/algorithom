@@ -48,6 +48,7 @@ public class _567_字符串的排列 {
                 right++;
                 if (need.keySet().contains(c)) {
                     window.put(c, window.getOrDefault(c, 0)+1);
+                    // 得用equals
                     if (window.get(c).equals(need.get(c))) {
                         valid++;
                     }
@@ -59,6 +60,7 @@ public class _567_字符串的排列 {
                     char d = s2Chars[left++];
 
                     if (need.keySet().contains(d)){
+                        // 得用equals
                         if (window.get(d).equals(need.get(d))) {
                             valid--;
                         }
