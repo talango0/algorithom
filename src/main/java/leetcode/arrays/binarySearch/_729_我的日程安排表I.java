@@ -46,6 +46,7 @@ package leetcode.arrays.binarySearch;
 
 import inductiontoalgorithm.segment_tree.SegmentTree;
 import leetcode.jzhoffer.剑指_Offer_II_058_日程表;
+import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
@@ -59,7 +60,7 @@ public class _729_我的日程安排表I{
     class Solution1{
         class MyCalendar{
             /**
-             * 时间复杂度 O(n^2), 空间发负载度 O(n)
+             * 时间复杂度 O(n^2), 空间复杂度 O(n)
              */
             List<int[]> booked;
 
@@ -84,7 +85,7 @@ public class _729_我的日程安排表I{
     class Solution2{
         class MyCalendar{
             /**
-             * 时间复杂度 O(nlogn), 空间发负载度 O(n)
+             * 时间复杂度 O(nlogn), 空间复杂度 O(n)
              */
             // 通过二分查找日程安排的情况检查日程安排是否可以预定。
             // 需要一个数据结构能保持元素排序的支持快速插入，可以用 TreeSet 来构建。
@@ -115,8 +116,8 @@ public class _729_我的日程安排表I{
         }
     }
 
-    class Solution3{
-        class MyCalendar{
+    static class Solution3{
+        public static class MyCalendar{
             /**
              * 时间复杂度 O(nlogC), 空间发负载度 O(nlogC)，线段树的最大深度为logC，在此 C 取固定值 10^9
              */
@@ -183,6 +184,16 @@ public class _729_我的日程安排表I{
                     tree.add(idx);
                 }
             }
+        }
+    }
+
+    @Test
+    public void test(){
+        Solution3.MyCalendar solution3 = new Solution3.MyCalendar();
+        //[null, true, false, true]
+        int [][] data = {{10, 20}, {15, 25}, {20, 30}};
+        for (int [] arr : data) {
+                System.out.println(solution3.book(arr[0], arr[1]));
         }
     }
 

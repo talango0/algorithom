@@ -63,7 +63,7 @@ import java.util.TreeSet;
 public class 剑指_Offer_II_058_日程表{
     class MyCalendar{
         /**
-         * 时间复杂度 O(nlogn), 空间发负载度 O(n)
+         * 时间复杂度 O(nlogn), 空间发复杂度 O(n)
          */
         // 通过二分查找日程安排的情况检查日程安排是否可以预定。
         // 需要一个数据结构能保持元素排序的支持快速插入，可以用 TreeSet 来构建。
