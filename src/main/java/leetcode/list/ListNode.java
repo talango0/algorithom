@@ -5,8 +5,8 @@ package leetcode.list;
  * @date 2022-08-12.
  */
 public class ListNode{
-    int val;
-    ListNode next;
+    public int val;
+    public ListNode next;
 
     ListNode() {
     }
