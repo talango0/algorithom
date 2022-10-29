@@ -34,14 +34,54 @@ package leetcode.list;
 
 
 //leetcode submit region begin(Prohibit modification and deletion)
+
 /**
  * @author mayanwei
  * @date 2022-08-12.
  */
 public class _234_回文链表{
+
     class Solution {
+        public boolean isPalindrome(ListNode head) {
+            ListNode slow, fast;
+            slow = fast = head;
+            while (fast != null && fast.next != null) {
+                slow = slow.next;
+                fast = fast.next.next;
+            }
+
+            if (fast != null)
+                slow = slow.next;
+
+            ListNode left = head;
+            ListNode right = reverse(slow);
+            while (right != null) {
+                if (left.val != right.val)
+                    return false;
+                left = left.next;
+                right = right.next;
+            }
+
+            return true;
+        }
+
+        ListNode reverse(ListNode head) {
+            ListNode pre = null, cur = head;
+            while (cur != null) {
+                ListNode next = cur.next;
+                cur.next = pre;
+                pre = cur;
+                cur = next;
+            }
+            return pre;
+        }
+    }
+
+
+    class Solution2{
         // 左侧指针
         ListNode left;
+
         public boolean isPalindrome(ListNode head) {
             left = head;
             return traverse(head);
@@ -52,11 +92,47 @@ public class _234_回文链表{
                 return true;
             }
             // 前序遍历代码
-            boolean res =traverse(right.next);
+            boolean res = traverse(right.next);
             // 后序遍历代码
             res = res && (right.val == left.val);
             left = left.next;
             return res;
+        }
+    }
+
+    class Solution3{
+        public boolean isPalindrome(ListNode head) {
+            ListNode slow, fast;
+            slow = fast = head;
+            while (fast != null && fast.next != null) {
+                slow = slow.next;
+                fast = fast.next.next;
+            }
+
+            if (fast != null)
+                slow = slow.next;
+
+            ListNode left = head;
+            ListNode right = reverse(slow);
+            while (right != null) {
+                if (left.val != right.val)
+                    return false;
+                left = left.next;
+                right = right.next;
+            }
+
+            return true;
+        }
+
+        ListNode reverse(ListNode head) {
+            ListNode pre = null, cur = head;
+            while (cur != null) {
+                ListNode next = cur.next;
+                cur.next = pre;
+                pre = cur;
+                cur = next;
+            }
+            return pre;
         }
     }
 }
