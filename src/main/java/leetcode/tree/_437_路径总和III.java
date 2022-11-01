@@ -54,7 +54,7 @@ public class _437_路径总和III {
             }
             this.pathSum = 0;
             this.targetSum = targetSum;
-            this.preSumCount.put(0l, 1);
+            this.preSumCount.put(0L, 1);
             traverse(root);
             return res;
         }
