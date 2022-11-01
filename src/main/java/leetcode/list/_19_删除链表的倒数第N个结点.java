@@ -51,7 +51,8 @@ package leetcode.list;
 public class _19_删除链表的倒数第N个结点{
     class Solution{
         public ListNode removeNthFromEnd(ListNode head, int n) {
-            // 在链表头部接一个虚拟节点 dummy 是为了避免删除倒数第一个元素时出现空指针异常， 在头部加入dummy 节点并不影响倒数第 k 个元素是什么
+            // 在链表头部接一个虚拟节点 dummy 是为了避免删除倒数第一个元素时出现空指针异常，
+            // 在头部加入dummy 节点并不影响倒数第 k 个元素是什么
             ListNode dummy = new ListNode(-1);
             dummy.next = head;
             // 删除到出第 n 个，要找到倒数第 n+1 个节点
