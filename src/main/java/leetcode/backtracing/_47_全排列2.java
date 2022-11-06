@@ -38,6 +38,7 @@ import java.util.List;
 /**
  * @author mayanwei
  * @date 2022-06-19.
+ * @see _46_全排列
  */
 public class _47_全排列2{
     class Solution {

@@ -87,7 +87,7 @@ public class _528_按权重随机选择{
 
         }
         // 搜索左侧边界的二分搜索
-        public int left_bount(int [] nums, int target) {
+        public int left_bound(int [] nums, int target) {
             if (nums.length == 0) {
                 return -1;
             }
@@ -108,9 +108,9 @@ public class _528_按权重随机选择{
             int n = preSum.length;
             // 在闭区间 [1, preSum[n-1]] 中随机选择一个数字
             int target = rand.nextInt(preSum[n-1]) + 1;
-            // 获取 target 在前缀和数组 preSumpreSum 中的索引
-            // 前缀和数组 preSumpreSum 和原始数组 w 有一位索引偏移
-            return left_bount(preSum, target) - 1;
+            // 获取 target 在前缀和数组 preSum 中的索引
+            // 前缀和数组 preSum 和原始数组 w 有一位索引偏移
+            return left_bound(preSum, target) - 1;
         }
     }
 

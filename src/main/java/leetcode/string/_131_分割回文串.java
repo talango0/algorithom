@@ -41,7 +41,8 @@ public class _131_分割回文串{
             for (int right = 0; right < len; right++) {
                 // 注意：left <= right 取等号表示 1 个字符的时候也需要判断
                 for (int left = 0; left <= right; left++) {
-                    if (s.charAt(left) == s.charAt(right) && (right - left <= 2 || dp[left + 1][right - 1])) {
+                    if (s.charAt(left) == s.charAt(right) && (right - left <= 2
+                            || dp[left + 1][right - 1])) {
                         dp[left][right] = true;
                     }
                 }

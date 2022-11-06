@@ -34,8 +34,10 @@ package leetcode.dp;
  */
 public class _416_分割等和子集{
     class Solution {
-        // 给一个可以装载重量为 sum/2 的背包和 N 个物品，每个物品的重量为 num[i]。现在让你装物品，是否存在一种装法，能够恰好将背包装满
-        //dp[i][j] = x 表示，对于前 i 个物品（i 从 1 开始计数），当前背包的容量为 j 时，若 x 为 true，则说明可以恰好将背包装满，若 x 为 false，则说明不能恰好将背包装满。
+        // 给一个可以装载重量为 sum/2 的背包和 N 个物品，每个物品的重量为 num[i]。
+        // 现在让你装物品，是否存在一种装法，能够恰好将背包装满
+        // dp[i][j] = x 表示，对于前 i 个物品（i 从 1 开始计数），当前背包的容量为 j 时，若 x 为 true，
+        // 则说明可以恰好将背包装满，若 x 为 false，则说明不能恰好将背包装满。
         public boolean canPartition(int[] nums) {
             int sum = 0;
             int n = nums.length;

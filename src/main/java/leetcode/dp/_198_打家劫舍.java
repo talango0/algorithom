@@ -82,7 +82,9 @@ public class _198_打家劫舍{
                 return 0;
             }
             //存在重叠子问题，可以采用备忘录优化
-            if (mem[index] != -1) return mem[index];
+            if (mem[index] != -1) {
+                return mem[index];
+            }
             int res = Math.max(
                     //不抢，抢下家
                     rob(nums, index+1),
@@ -91,7 +93,6 @@ public class _198_打家劫舍{
             );
             mem[index] = res;
             return res;
-
         }
     }
 

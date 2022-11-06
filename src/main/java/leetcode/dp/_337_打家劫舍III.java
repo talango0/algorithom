@@ -15,7 +15,7 @@ package leetcode.dp;
 //
 //输入: root = [3,2,3,null,3,null,1]
 //输出: 7
-//解释: 小偷一晚能够盗取的最高金额 3 + 3 + 1 = 7
+//解释:小偷一晚能够盗取的最高金额 3 + 3 + 1 = 7
 //
 // 示例 2:
 //
@@ -24,7 +24,7 @@ package leetcode.dp;
 //
 //输入: root = [3,4,5,1,3,null,1]
 //输出: 9
-//解释: 小偷一晚能够盗取的最高金额 4 + 5 = 9
+//解释:小偷一晚能够盗取的最高金额 4 + 5 = 9
 //
 //
 //
@@ -55,9 +55,13 @@ public class _337_打家劫舍III{
     class Solution0 {
         Map<TreeNode, Integer> mem = new HashMap<>();
         public int rob(TreeNode root) {
-            if (root == null) return 0;
+            if (root == null) {
+                return 0;
+            }
             //利用备忘录消除重叠子问题
-            if(mem.containsKey(root))return mem.get(root);
+            if(mem.containsKey(root)) {
+                return mem.get(root);
+            }
 
             //抢，然后去下下家
             int do_it = root.val
