@@ -41,30 +41,79 @@ package leetcode.dp;
 // Related Topics 数组 动态规划 👍 1074 👎 0
 
 
+import java.util.Arrays;
+
 /**
  * https://leetcode.cn/problems/house-robber-ii/
+ *
  * @author mayanwei
  * @date 2022-06-26.
  */
 public class _213_打家劫舍II{
-    class Solution {
+    class Solution{
         public int rob(int[] nums) {
             int n = nums.length;
-            if (n == 1) return nums[0];
-            return Math.max(robRange(nums, 0, n-2),
-                    robRange(nums, 1, n-1));
+            if (n == 1) {
+                return nums[0];
+            }
+            return Math.max(robRange(nums, 0, n - 2),
+                    robRange(nums, 1, n - 1));
 
         }
+
         //仅计算区间 [start, end] 的最优结果
-        private int robRange (int [] nums, int start, int end) {
+        private int robRange(int[] nums, int start, int end) {
             int n = nums.length;
             int dp_i = 0, dp_i1 = 0, dp_i2 = 0;
-            for (int i = end; i>= start; i--) {
+            for (int i = end; i >= start; i--) {
                 dp_i = Math.max(dp_i1, nums[i] + dp_i2);
                 dp_i2 = dp_i1;
                 dp_i1 = dp_i;
             }
             return dp_i;
+        }
+    }
+
+    class Solution2{
+        /**
+         * 首先，首尾房间不能同事被抢，那么只有3中不同的情况，要么都不被抢，要么第一间
+         * 房子抢最后一间不抢；要么最后一间房子被抢第一间不抢。
+         * <p>
+         * 这三种情况哪个结果最大，就是最终答案。其实，情况一的结果肯定最小，
+         * 我们只要比较情况二和情况三就行了，因为这两种情况对于房子的选择余地比情况一大，
+         * 房子里的钱数都是非负数，所以选择余地大，最优决策结果肯定不会小。
+         */
+        public int rob(int[] nums) {
+            int n = nums.length;
+            if (n == 1) {
+                return nums[0];
+            }
+            int[] memo1 = new int[n];
+            int[] memo2 = new int[n];
+            Arrays.fill(memo1, -1);
+            Arrays.fill(memo2, -1);
+            // 两次调用使用两个不同的备忘录
+            return Math.max(
+                    dp(nums, 0, n - 2, memo1),
+                    dp(nums, 1, n - 1, memo2)
+            );
+        }
+
+        // 定义： 计算闭区间 [start, end] 最优结果
+        int dp(int[] nums, int start, int end, int[] memo) {
+            if (start > end) {
+                return 0;
+            }
+            if (memo[start] != -1) {
+                return memo[start];
+            }
+            // 状态转移方程
+            int res = Math.max(
+                    dp(nums, start + 2, end, memo) + nums[start],
+                    dp(nums, start + 1, end, memo)
+            );
+            memo[start] = res;
+            return res;
         }
     }
 }

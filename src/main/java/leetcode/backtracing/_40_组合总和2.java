@@ -48,7 +48,7 @@ import java.util.List;
  * @author mayanwei
  * @date 2022-06-19.
  */
-public class _40_组合总和2{
+public class _40_组合总和2 {
     class Solution {
         List<List<Integer>> res = new LinkedList<>();
         LinkedList<Integer> trace = new LinkedList<>();
@@ -64,7 +64,9 @@ public class _40_组合总和2{
                 res.add(new LinkedList(trace));
                 return;
             }
-            if (traceSum > target) return;
+            if (traceSum > target) {
+                return;
+            }
             for(int i = start; i< nums.length; i++) {
                 if(i > start && nums[i] == nums[i-1] ) {
                     continue;
@@ -76,6 +78,5 @@ public class _40_组合总和2{
                 traceSum -= nums[i];
             }
         }
-
     }
 }

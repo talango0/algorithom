@@ -7,7 +7,7 @@ package leetcode.math;
 //
 //注意：输入总是有效的。你可以假设除法运算中不会出现除数为 0 的情况，且不存在任何矛盾的结果。
 //
-// 
+//
 //
 //示例 1：
 //
@@ -25,7 +25,7 @@ package leetcode.math;
 //
 //输入：equations = [["a","b"]], values = [0.5], queries = [["a","b"],["b","a"],["a","c"],["x","y"]]
 //输出：[0.50000,2.00000,-1.00000,-1.00000]
-// 
+//
 //
 //提示：
 //
@@ -51,7 +51,8 @@ import java.util.Map;
  */
 public class _399_除法求值 {
     class Solution {
-        public double[] calcEquation(List<List<String>> equations, double[] values, List<List<String>> queries) {
+        public double[] calcEquation(List<List<String>> equations, double[] values,
+                                     List<List<String>> queries) {
             int equationsSize = equations.size();
             UnionFind unionFind = new UnionFind(2 * equationsSize);
             // 第 1 步：预处理，将变量的值与 id 进行映射，使得并查集的底层使用数组实现，方便编码
