@@ -53,6 +53,37 @@ public class _121_买卖股票的最佳时机{
 
 
     class Solution{
+        /**
+         * <pre>
+         * 股票系列问题状态定义：
+         *
+         * dp[i][k][0 or 1]
+         * 0 <= i <= n - 1, 1 <= k <= K
+         * n 为天数，大 K 为交易数的上限，0 和 1 代表是否持有股票。
+         * 股票系列问题通用状态转移方程：
+         *
+         * dp[i][k][0] = max(dp[i-1][k][0], dp[i-1][k][1] + prices[i])
+         *               max( 今天选择 rest,        今天选择 sell       )
+         *
+         * dp[i][k][1] = max(dp[i-1][k][1], dp[i-1][k-1][0] - prices[i])
+         *               max( 今天选择 rest,         今天选择 buy         )
+         * 通用 base case：
+         *
+         * dp[-1][...][0] = dp[...][0][0] = 0
+         * dp[-1][...][1] = dp[...][0][1] = -infinity
+         * 特化到 k = 1 的情况，状态转移方程和 base case 如下：
+         *
+         * 状态转移方程：
+         * dp[i][0] = max(dp[i-1][0], dp[i-1][1] + prices[i])
+         * dp[i][1] = max(dp[i-1][1], -prices[i])
+         *
+         * base case：
+         * dp[i][0] = 0;
+         * dp[i][1] = -prices[i];
+         * </pre>
+         * @param prices
+         * @return
+         */
         public int maxProfit(int[] prices) {
             if (prices == null) {
                 return 0;

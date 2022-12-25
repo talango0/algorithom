@@ -41,7 +41,7 @@ public class SubStringSearch{
         文本字符用 txt 表示
         模式用 pat 表示
 
-        dfa[][] 记录匹配失败是模式指针 j 应该回退多远。
+        dfa[][] 记录匹配失败时模式指针 j 应该回退多远。
         对于每个 c ，比较了 c 和 pat.charAt(j) 之后，
             dfa[c][j] 表示的是和下个文本字符比较的 ** 模式字符的位置 ** 。
         在查找中， dfa[txt.charAt(i)][j] 是在比较了 txt.charAt(i) 和 pat.charAt(j) 之后 应该和 txt.charAt(i+1) 比较的模式字符位置。
@@ -74,7 +74,7 @@ public class SubStringSearch{
             this.pat = pat;
             int M = pat.length();
             int R = 256;
-            // dp[字符][状态]
+            // dp[字符][状态] ,记录模式指针 j 应该回退多远
             dfa = new int[R][M];
             // base case 只有遇到 pat[0] 这个字符才能使状态从 0 转移到 1，遇到其他字符的话还停留在状态 0 （java默认初始化数组全为0）
             dfa[pat.charAt(0)][0] = 1;
@@ -225,6 +225,22 @@ public class SubStringSearch{
             }
             return h;
         }
+        /**
+         123
+         0*10 + 1 -> 1
+         1*10 + 2 ->  12
+         12*10 + 3 -> 123
+
+         ABCC
+
+         256*0 +  'A'-> 65
+         65 * 256 + 'B' ->
+
+         (x + y)%Q = (x % Q + y %Q) % Q
+
+         */
+
+
 
         private long longRandomPrime() {
             BigInteger prime = BigInteger.probablePrime(31, new Random());
@@ -268,5 +284,13 @@ public class SubStringSearch{
             }
             return N;
         }
+    }
+
+    public static void main(String[] args) {
+        System.out.println((int)'A');
+        BigInteger bigInteger = BigInteger.probablePrime(31, new Random());
+        long l = bigInteger.longValue();
+        System.out.println(l);
+
     }
 }

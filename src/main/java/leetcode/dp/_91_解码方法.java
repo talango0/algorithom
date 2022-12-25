@@ -49,11 +49,13 @@ package leetcode.dp;
 public class _91_解码方法 {
     class Solution {
         /**
-         状态转移关系
-         1. s[i] 本身可能表示一个字母，这种情况下解码数量为 numDecodings(s[0,..., i-1])
-         2. s[i] 可能和 s[i-1]结合起来表示一个字母，这种情况下解码数量为 numDecodeings(s[0,...,i-2])
-         状态转移方程为
-         numDecodeing(s) = numDecoding(s[0,...,n-1]) + numDecoding(s[0,..., n-2])
+         * <pre>
+         * 状态转移关系
+         * 1. s[i] 本身可能表示一个字母，这种情况下解码数量为 numDecodings(s[0,..., i-1])
+         * 2. s[i] 可能和 s[i-1]结合起来表示一个字母，这种情况下解码数量为 numDecodeings(s[0,...,i-2])
+         * 状态转移方程为
+         * numDecodeing(s) = numDecoding(s[0,...,n-1]) + numDecoding(s[0,..., n-2])
+         * </pre>
          */
         public int numDecodings(String s) {
             int n = s.length();
@@ -61,20 +63,20 @@ public class _91_解码方法 {
                 return 0;
             }
             //定义 dp[i] 表示 s[0..i-1]的解码数量,及长度为i的前缀最多解码个数
-            int [] dp = new int[n+1];
+            int[] dp = new int[n + 1];
             // base case
             dp[0] = 1;
-            dp[1] = s.charAt(0) == '0' ? 0:1;
+            dp[1] = s.charAt(0) == '0' ? 0 : 1;
             // 注意dp数组和s之间的索引偏移一位
             for (int i = 2; i <= n; i++) {
-                char c = s.charAt(i-1), d =s.charAt(i-2);
+                char c = s.charAt(i - 1), d = s.charAt(i - 2);
                 if ('1' <= c && c <= '9') {
                     // 1. s[i] 本身 可以作为一个字母
-                    dp[i] += dp[i-1];
+                    dp[i] += dp[i - 1];
                 }
-                if (d == '1' || (d == '2' && c <='6')) {
+                if (d == '1' || (d == '2' && c <= '6')) {
                     // 2. s[i] 和 s[i-1]结合起来表示一个字母
-                    dp[i] += dp[i-2];
+                    dp[i] += dp[i - 2];
                 }
             }
             return dp[n];

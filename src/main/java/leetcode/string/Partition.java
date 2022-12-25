@@ -1,9 +1,6 @@
 package leetcode.string;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.List;
+import java.util.*;
 
 public class Partition {
     //在未排序的数组中找到第 k 个最大的元素。请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。
@@ -24,7 +21,7 @@ public class Partition {
 // 你可以假设 k 总是有效的，且 1 ≤ k ≤ 数组的长度。
 // Related Topics 堆 分治算法
 // 👍 739 👎 0
-
+    
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {

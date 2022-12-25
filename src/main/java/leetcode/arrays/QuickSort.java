@@ -10,7 +10,7 @@ import java.util.Deque;
 public class QuickSort {
 
     static class Solution{
-        public int partion(int[] args, int p, int r){
+        public int partition(int[] args, int p, int r){
             int x = args[r];
             int i = p-1;
             for(int j=p; j<=r-1; j++){
@@ -44,7 +44,7 @@ public class QuickSort {
          */
         public void quickSort(int[] args, int p, int r) {
             if( p < r){
-                int q =partion(args, p, r);
+                int q =partition(args, p, r);
                 quickSort(args, p, q-1);
                 quickSort(args, q+1, r);
             }
@@ -60,7 +60,7 @@ public class QuickSort {
         private void quickSort2(int [] args, int p, int r){
             Deque<Integer> s = new ArrayDeque<>(2);
             if(p < r){
-                int q = partion(args, p, r);
+                int q = partition(args, p, r);
                 if (p < q-1) {
                     s.addFirst(p);
                     s.addFirst(q-1);
@@ -72,7 +72,7 @@ public class QuickSort {
                 while (!s.isEmpty()){
                     r = s.pop().intValue();
                     p = s.pop().intValue();
-                    q = partion(args, p, r);
+                    q = partition(args, p, r);
                     if(p < q-1){
                         s.addFirst(p);
                         s.addFirst(q-1);

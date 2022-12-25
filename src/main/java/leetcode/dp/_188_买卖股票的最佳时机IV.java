@@ -41,14 +41,47 @@ package leetcode.dp;
  */
 public class _188_买卖股票的最佳时机IV{
     class Solution {
+        /**
+         * <pre>
+         * 股票系列问题状态定义：
+         *
+         * dp[i][k][0 or 1]
+         * 0 <= i <= n - 1, 1 <= k <= K
+         * n 为天数，大 K 为交易数的上限，0 和 1 代表是否持有股票。
+         * 股票系列问题通用状态转移方程：
+         *
+         * dp[i][k][0] = max(dp[i-1][k][0], dp[i-1][k][1] + prices[i])
+         *               max( 今天选择 rest,        今天选择 sell       )
+         *
+         * dp[i][k][1] = max(dp[i-1][k][1], dp[i-1][k-1][0] - prices[i])
+         *               max( 今天选择 rest,         今天选择 buy         )
+         * 通用 base case：
+         *
+         * dp[-1][...][0] = dp[...][0][0] = 0
+         * dp[-1][...][1] = dp[...][0][1] = -infinity
+         * 特化到 k = 1 的情况，状态转移方程和 base case 如下：
+         *
+         * 状态转移方程：
+         * dp[i][0] = max(dp[i-1][0], dp[i-1][1] + prices[i])
+         * dp[i][1] = max(dp[i-1][1], -prices[i])
+         *
+         * base case：
+         * dp[i][0] = 0;
+         * dp[i][1] = -prices[i];
+         * </pre>
+         * @param k
+         * @param prices
+         * @return
+         */
         public int maxProfit(int k, int[] prices) {
             int n = prices.length;
             if (k > n/2){
-                //该题的k不受限制，一次交有买入和卖出构成，至少需要两天。所以说有效限制 k 应该是 n/2, 如果超过，就没有约束作用了，相当于k没有限制的情况。
+                // 该题的k不受限制，一次交有买入和卖出构成，至少需要两天。
+                // 所以说有效限制 k 应该是 n/2, 如果超过，就没有约束作用了，相当于k没有限制的情况。
                 return maxProfit(prices);
             }
             int [][][] dp = new int[n][k+1][2];
-            //k等于0是的basecasecase
+            //k等于0是的 base case
             for (int i=0; i< n; i++) {
                 dp[i][0][1] = Integer.MIN_VALUE;
                 dp[i][0][0] = 0;
@@ -66,6 +99,7 @@ public class _188_买卖股票的最佳时机IV{
             }
             return dp[n-1][k][0];
         }
+
         public int  maxProfit(int [] prices){
             int n = prices.length;
             int dp_i_0 = 0;
@@ -81,7 +115,8 @@ public class _188_买卖股票的最佳时机IV{
     }
 
     /**
-     * 输入股票价格数组 prices，你最多进行 max_k 次交易，每次交易需要额外消耗 fee 的手续费，而且每次交易之后需要经过 cooldown 天的冷冻期才能进行下一次交易，请你计算并返回可以获得的最大利润。
+     * 输入股票价格数组 prices，你最多进行 max_k 次交易，每次交易需要额外消耗 fee 的手续费，
+     * 而且每次交易之后需要经过 cooldown 天的冷冻期才能进行下一次交易，请你计算并返回可以获得的最大利润。
      */
     class ALLInOneSolution{
         // 同时考虑交易次数的限制、冷冻期和手续费

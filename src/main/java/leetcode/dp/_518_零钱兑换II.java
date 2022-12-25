@@ -55,7 +55,10 @@ package leetcode.dp;
 import java.util.HashSet;
 import java.util.Set;
 
-public class _518_零钱兑换2{
+/**
+ * @see _322_零钱兑换
+ */
+public class _518_零钱兑换II{
 
 
     // 完全背包问题，跟0-1背包的问题最大的区别是每个物品的数量是有限的

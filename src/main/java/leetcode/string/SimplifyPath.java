@@ -33,8 +33,7 @@ public class SimplifyPath {
             int n =  path.length();
             Stack stack = new Stack(n);
             String[] split = path.split("/");
-            for (String s:
-            split) {
+            for (String s: split) {
                 if(s.equals(".")){
                     continue;
                 }else if(s.equals("..")){

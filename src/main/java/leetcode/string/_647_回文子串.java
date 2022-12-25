@@ -43,8 +43,8 @@ import org.junit.jupiter.api.Test;
  * @date 2022-09-30.
  * @see _1312_让字符串成为回文串的最少插入次数
  */
-public class _647_回文子串{
-    class Solution{
+public class _647_回文子串 {
+    class Solution {
         /**
          * 思路
          * 计算有多少个回文子串大的最朴素方法就是枚举所有的回文子串，枚举思路有两种
@@ -54,6 +54,7 @@ public class _647_回文子串{
          */
         public int countSubstrings(String s) {
             int n = s.length(), ans = 0;
+            //   a b c 有可能的回文中心2n个
             for (int i = 0; i < 2 * n - 1; i++) {
                 int l = i / 2, r = i / 2 + i % 2;
                 while (l >= 0 && r < n && s.charAt(l) == s.charAt(r)) {
@@ -86,20 +87,24 @@ public class _647_回文子串{
      * └───┴──────────────────────────────────────────┘
      * </pre>
      * Manacher如何通过已经计算出的状态来更新 f[i] 呢？
+     * <p>
      * 维护【当前最大回文串右端点 r_m】以及【这个回文串右端点对应的回文中心为 i_m】。
      * 顺序遍历s，假设当前遍历的下标为i。我们知道求解 f[i] 之前已经得到了 [1, i-1] 所有的 f，
      * 并且当前已经有了一个最大回文右端点 r_m 以及它对应的回文中心 i_m;
      * <p>
      * 1.初始化 f[i]
+     * <p>
      * 若 i < r_m，说明i被包含在当前最大回文子串内，假设 j 是 i 关于这个最大回文的回文中心 i_m 的对称位置 (即 i+j = 2 * i_m),
      * f[i] 至少等于 min{f[j], r_m-i+1}。这里将 f[j] 和 r_m -j +1 取小，是先要保证这个回文串在当前最大回文串内。
      * 若 i >= r_m，先初始化为 f[i] = 1
+     * <p>
      * 2. 中心拓展
+     * <p>
      * 做完初始化之后，可以保证此时 s[i + f[i] -1] = s[i-f[i] + 1],要继续拓展这个区间，就需要继续判断
      * s[i+f[i]] 于 s[i-f[i]]是否相等，如果相等将 f[i] 自增。这样循环直到 s[i+f[i]] != s[i-f[i]]。
      * 这样我们可以得到 s 所有点为中心的最大回文半径，也就能够得到 S 中所有可能的回文中心的的最大回文半径，把它们累加就可以得到答案。
      */
-    class Solution2{
+    class Solution2 {
         /**
          * Manacher
          * 算法是时间复杂度 O(n),空间复杂度 O(n)
@@ -118,7 +123,7 @@ public class _647_回文子串{
             int iMax = 0, rMax = 0, ans = 0;
             for (int i = 1; i < n; i++) {
                 // 初始化 f[i]
-                f[i] = i < rMax ? Math.min(rMax - i + 1, f[2 * iMax - i]) :1;
+                f[i] = i < rMax ? Math.min(rMax - i + 1, f[2 * iMax - i]) : 1;
                 // 中心拓展
                 while (t.charAt(i + f[i]) == t.charAt(i - f[i])) {
                     f[i]++;

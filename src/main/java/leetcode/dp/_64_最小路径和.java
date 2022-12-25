@@ -41,7 +41,7 @@ package leetcode.dp;
 public class _64_最小路径和{
     class Solution {
         // dp[i][j] 表示从 grid[0][0] 到 grid[i][j] 的距离之和, 设置初始值均为0
-        // dp[i][j] = min{dp[i][j-1], dp[i-1][j]}+ grid[i][j] 其中 0 <= i <= m-1, 0<=j<n-1
+        // dp[i][j] = min{dp[i][j-1], dp[i-1][j]} + grid[i][j] 其中 0 <= i <= m-1, 0 <= j < n-1
         // base case dp[0][0] = grid[0][0];
         public int minPathSum(int[][] grid) {
             if (grid == null) {

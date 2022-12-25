@@ -64,14 +64,14 @@ public class _123_买卖股票的最佳时期III{
              for (int i = 0; i < n; i++) {
                  //当k = 2时，由于没有消掉 k 的影响，所以必须要对 k 进行穷举
                  for(int k = max_k; k>=1; k--){
-                     //basecase
+                     //base case
                      if (i-1==-1) {
                          dp[i][k][0] = 0;
                          dp[i][k][1] = -prices[i];
                          continue;
                      }
-                     dp[i][k][0] = Math.max(dp[i-1][k][0], dp[i-1][k][1]+prices[i]);
-                     dp[i][k][1] = Math.max(dp[i-1][k][1], dp[i-1][k-1][0]-prices[i]);
+                     dp[i][k][0] = Math.max(dp[i-1][k][0], dp[i-1][k][1] + prices[i]);
+                     dp[i][k][1] = Math.max(dp[i-1][k][1], dp[i-1][k-1][0] - prices[i]);
                  }
              }
 

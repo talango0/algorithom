@@ -1,4 +1,4 @@
-package leetcode.dp;
+package leetcode.jzhoffer;
 //给定一个非空的正整数数组 nums ，请判断能否将这些数字分成元素和相等的两部分。
 //
 //
@@ -37,6 +37,8 @@ package leetcode.dp;
 //sum/
 //
 // Related Topics 数学 字符串 模拟 👍 66 👎 0
+
+import leetcode.dp._416_分割等和子集;
 
 /**
  * @author mayanwei
