@@ -42,6 +42,7 @@ public class _42_接雨水{
 
     /**
      * 暴力法
+     * <pre>
      * ▲         ┌─┐
      * │         │ │
      * ├─┐       │ │
@@ -50,6 +51,7 @@ public class _42_接雨水{
      * │4│2│0│3│2│5│
      * └─┴─┴─┴─┴─┴─┴─▶
      *  0 1 2 3 4 5
+     *  </pre>
      */
     class Solution{
         public int trap(int[] height) {

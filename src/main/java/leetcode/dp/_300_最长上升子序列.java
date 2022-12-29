@@ -1,7 +1,17 @@
 package leetcode.dp;
 
+import leetcode.dfs._329_矩阵中的最长递增路径;
+import leetcode.greedy._334_递增的三元子序列;
+
 import java.util.Arrays;
 
+/**
+ * @see _334_递增的三元子序列
+ * @see _329_矩阵中的最长递增路径
+ * @see _354_俄罗斯套娃信封问题
+ *
+ * @see _53_最大子数组和
+ */
 public class _300_最长上升子序列{
 //给定一个无序的整数数组，找到其中最长上升子序列的长度。
 //
@@ -81,7 +91,6 @@ public class _300_最长上升子序列{
                         right = mid;
                     }
                 }
-                /****/
                 // 没有找到合适的，新建一堆
                 if (left == piles) {
                     piles++;
@@ -94,4 +103,69 @@ public class _300_最长上升子序列{
         }
     }
 
+
+    /**
+     * 给定一个未排序的整数数组 nums ， 以数组形式返回最长递增子序列，如果有多个最长递增子序列，返回一个即可 。
+     * 注意 这个数列必须是 严格 递增的
+     *
+     * 输入: [1,3,5,4,7]
+     * 解释: 有两个最长递增子序列，分别是 [1, 3, 4, 7] 和[1, 3, 5, 7]。
+     */
+    class Solution_2{
+        public int[] generateLIS(int[] arr, int[] dp) {
+            int len = 0; // 最长递增子序列的长度
+            int index = 0; // 最长递增子序列的下标
+            for (int i = 0; i < dp.length; i++) {
+                if (dp[i] > len) {
+                    len = dp[i];
+                    index = i;
+                }
+            }
+            int[] lis = new int[len]; // 准备长度为len的递增子序列
+            lis[--len] = arr[index];
+            for (int i = index; i >= 0; i--) { // 从后往前推
+                if (arr[i] < arr[index] && dp[i] == dp[index] - 1) {
+                    lis[--len] = arr[i];
+                    index = i;
+                }
+            }
+            return lis;
+        }
+
+        public int[] lis2(int[] arr) {
+            if (arr == null || arr.length == 0) {
+                return null;
+            }
+            int[] dp = getdp2(arr); // 生成最长递增子序列数组dp，每个位置代表当前位置的最长递增子序列长度
+            return generateLIS(arr, dp); // 生成最长递增子序列
+        }
+
+        public int[] getdp2(int[] arr) {
+            int[] dp = new int[arr.length];
+            int[] ends = new int[arr.length];
+            ends[0] = arr[0];
+            dp[0] = 1;
+            int right = 0; // 有效区  0....right  right往右无效
+            int L = 0;
+            int R = 0;
+            int M = 0;
+            for (int i = 1; i < arr.length; i++) {
+                L = 0;
+                R = right;
+                while (L <= R) { // 二分查找的过程
+                    M = (L + R) / 2;
+                    if (arr[i] > ends[M]) {
+                        L = M + 1;
+                    } else {
+                        R = M - 1;
+                    }
+                }
+                // L -> right+1
+                right = Math.max(right, L);
+                ends[L] = arr[i];
+                dp[i] = L + 1;
+            }
+            return dp;
+        }
+    }
 }

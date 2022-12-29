@@ -57,14 +57,22 @@ import java.util.Set;
 
 /**
  * @see _322_零钱兑换
+ * @see _416_分割等和子集
  */
-public class _518_零钱兑换II{
-
-
+public class _518_零钱兑换II {
+    // 我们可以把这个问题转化为背包问题
+    // 有一个背包，最大容量为 amount,有一系列物品coins，每个物品的重量为 coins[i]，每个物品的数量无限，请问用多少种办法，能够把背包恰好装满？
     // 完全背包问题，跟0-1背包的问题最大的区别是每个物品的数量是有限的
-    class Solution0{
+    // 解题思路：
+    // 第一步: 明确两点，【状态】【选择】
+    // 第二步：明确dp数组的含义：dp[i][j] 若只是用前i个物品（可以重复使用），当背包的容量为j是，有dp[i][j]种方法可以装满背包。
+    // 第三步：根据【选择】，思考状态转移的逻辑。
+
+    class Solution0 {
         int change(int amount, int[] coins) {
             int n = coins.length;
+            // dp[i][j - coins[i - 1]] 表示若只是用前i个物品（可以重复使用），当背包容量为 j - coins[i - 1] 时，
+            // 有dp[i][j - coins[i - 1]] 种方法可以装满背包。
             int[][] dp = new int[n + 1][amount + 1];
             // base case
             for (int i = 0; i <= n; i++) {
@@ -75,9 +83,8 @@ public class _518_零钱兑换II{
                 for (int j = 1; j <= amount; j++) {
                     if (j - coins[i - 1] >= 0) {
                         dp[i][j] = dp[i - 1][j]
-                                + dp[i][j - coins[i - 1]];
-                    }
-                    else {
+                                 + dp[i][j - coins[i - 1]];
+                    } else {
                         dp[i][j] = dp[i - 1][j];
                     }
                 }
@@ -87,13 +94,15 @@ public class _518_零钱兑换II{
     }
 
     // 时间复杂度 O(N*amount)，空间复杂度 O(amount)。
-    class Solution{
+    class Solution {
         public int change(int amount, int[] coins) {
             int[] dp = new int[amount + 1];
             dp[0] = 1;
             for (int coin : coins) {
                 for (int i = coin; i <= amount; i++) {
-                    dp[i] += dp[i - coin];
+                    if (i-coin >= 0) {
+                        dp[i] += dp[i - coin];
+                    }
                 }
             }
             return dp[amount];
@@ -101,7 +110,7 @@ public class _518_零钱兑换II{
     }
 
     @Deprecated
-    class Solution1{
+    class Solution1 {
         private int res = 0;
         Set<Integer> numCoinSet = new HashSet<>();
 
@@ -114,14 +123,12 @@ public class _518_零钱兑换II{
         private void fun(int amount, int[] coins, int coinCount) {
             if (amount < 0) {
                 return;
-            }
-            else if (amount == 0) {
+            } else if (amount == 0) {
                 if (!numCoinSet.contains(coinCount)) {
                     numCoinSet.add(coinCount);
                     res++;
                 }
-            }
-            else {
+            } else {
                 coinCount = coinCount + 1;
                 for (int coin : coins) {
                     if (amount < coin) {
