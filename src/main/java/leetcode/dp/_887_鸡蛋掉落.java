@@ -1,16 +1,14 @@
 package leetcode.dp;
 //给你 k 枚相同的鸡蛋，并可以使用一栋从第 1 层到第 n 层共有 n 层楼的建筑。
+// 已知存在楼层 f ，满足 0 <= f <= n ，任何从 高于 f 的楼层落下的鸡蛋都会碎，
+// 从 f 楼层或比它低的楼层落下的鸡蛋都不会破。
+// 每次操作，你可以取一枚没有碎的鸡蛋并把它从任一楼层 x 扔下（满足 1 <= x <= n）。
+// 如果鸡蛋碎了，你就不能再次使用它。如果某枚鸡蛋扔下后没有摔碎，则可以在之后的操作中
+// 重复使用 这枚鸡蛋。
 //
-// 已知存在楼层 f ，满足 0 <= f <= n ，任何从 高于 f 的楼层落下的鸡蛋都会碎，从 f 楼层或比它低的楼层落下的鸡蛋都不会破。
-//
-// 每次操作，你可以取一枚没有碎的鸡蛋并把它从任一楼层 x 扔下（满足 1 <= x <= n）。如果鸡蛋碎了，你就不能再次使用它。如果某枚鸡蛋扔下后没有摔碎
-//，则可以在之后的操作中 重复使用 这枚鸡蛋。
-//
-// 请你计算并返回要确定 f 确切的值 的 最小操作次数 是多少？
+// 请你计算并返回要确定 f 确切的值的 最小操作次数 是多少？
 //
 // 示例 1：
-//
-//
 //输入：k = 1, n = 2
 //输出：2
 //解释：
@@ -21,20 +19,13 @@ package leetcode.dp;
 //
 //
 // 示例 2：
-//
-//
 //输入：k = 2, n = 6
 //输出：3
 //
 //
 // 示例 3：
-//
-//
 //输入：k = 3, n = 14
 //输出：4
-//
-//
-//
 //
 // 提示：
 //
@@ -80,6 +71,12 @@ public class _887_鸡蛋掉落{
             return dp(k, n);
         }
 
+        /**
+         * 最坏的情况下需要是多少次就一定能够找出来哪个楼层
+         * @param k 鸡蛋个数
+         * @param n 楼层高度
+         * @return
+         */
         private int dp(int k, int n) {
             if (dp[k][n] != Integer.MAX_VALUE) {
                 return dp[k][n];
@@ -165,14 +162,20 @@ public class _887_鸡蛋掉落{
             return remainTestCount;
         }
 
-        //在remainTestCount个测试机会（扔鸡蛋的机会 或者移动的次数），eggsCount个鸡蛋可以确定的楼层数量
+        //在remainTestCount个测试机会（扔鸡蛋的机会 或者移动的次数），
+        // eggsCount个鸡蛋可以确定的楼层数量
         public int getConfirmFloors(int remainTestCount, int eggsCount){
             if (remainTestCount == 1 || eggsCount == 1){
-                //如果remainTestCount == 1你只能移动一次，则你只能确定第一楼是否，也就是说鸡蛋只能放在第一楼，如果碎了，则F == 0，如果鸡蛋没碎，则F == 1
-                //如果eggsCount == 1鸡蛋数为1，它碎了你就没有鸡蛋了，为了保险，你只能从第一楼开始逐渐往上测试，如果第一楼碎了（同上），第一楼没碎继续测第i楼，蛋式你不可能无限制的测试，因为你只能测试remainTestCount次
+                //如果remainTestCount == 1你只能移动一次，则你只能确定第一楼是否，
+                // 也就是说鸡蛋只能放在第一楼，如果碎了，则F == 0，如果鸡蛋没碎，则F == 1
+                //如果eggsCount == 1鸡蛋数为1，它碎了你就没有鸡蛋了，为了保险，
+                // 你只能从第一楼开始逐渐往上测试，如果第一楼碎了（同上），
+                // 第一楼没碎继续测第i楼，蛋式你不可能无限制的测试，因为你只能测试remainTestCount次
                 return remainTestCount;
             }
-            return getConfirmFloors(remainTestCount - 1, eggsCount - 1) + 1 + getConfirmFloors(remainTestCount - 1, eggsCount);
+            return getConfirmFloors(remainTestCount - 1, eggsCount - 1)
+                    + 1
+                    + getConfirmFloors(remainTestCount - 1, eggsCount);
         }
     }
 }

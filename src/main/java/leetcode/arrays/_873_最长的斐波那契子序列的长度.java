@@ -53,12 +53,13 @@ import java.util.Map;
 public class _873_最长的斐波那契子序列的长度{
     class Solution{
         /**
+         * <pre>
          * dp[j][i] 表示以 arr[j] 和 arr[i] 作为最后两个数字的斐波那契子序列的最大长度。
          * dp[j][i] = max (dp[k][j] + 1, 3),  0<= k < j
          * dp[j][i] = 0 ,  k < 0 or k >= j
-         * <p>
          * 时间复杂度 O(n^2)
          * 空间复杂度 O(n^2)
+         * </pre>
          */
         public int lenLongestFibSubseq(int[] arr) {
             Map<Integer, Integer> indices = new HashMap<>();

@@ -36,11 +36,35 @@ package leetcode.dp;
 //
 //
 // Related Topics 双指针 字符串 字符串匹配 👍 1522 👎 0
+
+import org.junit.Assert;
+import org.junit.Test;
+
 /**
  * @author mayanwei
  * @date 2022-07-31.
  */
 public class _28_实现strStr{
+    class Solution_BruteForce{
+        public int strStr(String haystack, String needle) {
+            if (haystack == null || needle == null) {
+                return -1;
+            }
+            int m = haystack.length(), n = needle.length();
+            int i = 0, j = 0;
+            for (;i < m && j < n; i++) {
+                if (haystack.charAt(i) == needle.charAt(j)) {
+                    j++;
+                }
+                else {
+                    i -= j;
+                    j = 0;
+                }
+            }
+            return j == n ? i - n : m;
+        }
+
+    }
     class Solution {
         public int strStr(String haystack, String needle) {
             KMP kmp = new KMP(needle);
@@ -86,5 +110,16 @@ public class _28_实现strStr{
                 }
             }
         }
+    }
+
+    @Test
+    public void testStrStr(){
+        Solution solution = new Solution();
+        Assert.assertEquals(2, solution.strStr("hello", "ll"));
+        Solution_BruteForce solutionBruteForce = new Solution_BruteForce();
+        Assert.assertEquals(2, solutionBruteForce.strStr("hello", "ll"));
+
+        Assert.assertEquals(2, "hello".indexOf("ll"));
+
     }
 }

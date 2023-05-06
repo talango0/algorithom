@@ -57,14 +57,14 @@ public class _1122_数组的相对排序{
             // 定义数组索引 index并设置为 0 ，用于重置数组arr1中的元素值
             int index = 0;
             // 遍历数组arr2，只要arr2中的元素在数组 hash 中存在，则将其
-            // 赋值给 arr1， 则对改元素在hash中出现的频次减一
+            // 赋值给 arr1， 则对该元素在hash中出现的频次减一
             for (int n : arr2) {
                 while (hash[n]-- > 0) {
                     arr1[index++] = n;
                 }
             }
-            // 针对不是 arr2中的元素，遍历整个数组 hash，只要起元素出现次数在一次
-            // 及以上，将其赋值给 arr1，并将改元素在 hash 中出现的频次减一
+            // 针对不是 arr2中的元素，遍历整个数组 hash，只要其元素出现次数在一次
+            // 及以上，将其赋值给 arr1，并将该元素在 hash 中出现的频次减一
             for (int n = 0; n < hash.length; ++n) {
                 while (hash[n]-- > 0) {
                     arr1[index++] = n;

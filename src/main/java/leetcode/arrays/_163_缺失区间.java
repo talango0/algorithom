@@ -45,6 +45,7 @@ public class _163_缺失区间{
     public void test(){
         int[] arr = {0, 1, 3, 50, 75};
         Solution solution = new Solution();
-        Assert.assertArrayEquals(new String[]{"2", "4->49", "51->74", "76->99"}, solution.findMissingRanges(arr, 0, 99).toArray(new String[4]));
+        Assert.assertArrayEquals(new String[]{"2", "4->49", "51->74", "76->99"},
+                solution.findMissingRanges(arr, 0, 99).toArray(new String[4]));
     }
 }

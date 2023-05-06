@@ -1,7 +1,6 @@
 package inductiontoalgorithm.trie;
 
 
-import com.sun.istack.internal.NotNull;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -178,7 +177,7 @@ public class TrieST<Value> {
      * @param s
      * @return
      */
-    public String longestPrefix(@NotNull String s){
+    public String longestPrefix( String s){
         int length = search(root, s, 0, 0);
         return s.substring(0, length);
     }

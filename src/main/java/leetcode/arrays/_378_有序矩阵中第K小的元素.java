@@ -7,12 +7,11 @@ package leetcode.arrays;
 //
 //
 //示例 1：
-//
 //输入：matrix = [[1,5,9],[10,11,13],[12,13,15]], k = 8
 //输出：13
 //解释：矩阵中的元素为 [1,5,9,10,11,12,13,13,15]，第 8 小元素是 13
+
 //示例 2：
-//
 //输入：matrix = [[-5]], k = 1
 //输出：-5
 //
@@ -60,6 +59,7 @@ public class _378_有序矩阵中第K小的元素 {
 
     /**
      * 利用最小优先级队列（最小堆）,实际上是归并
+     * 合并多个有序数组
      */
     class Solution {
         public int kthSmallest(int[][] matrix, int k) {
@@ -109,6 +109,7 @@ public class _378_有序矩阵中第K小的元素 {
             return left;
         }
 
+        /** matrix 中小于等于 mid 的数有多少个，是否大于等k */
         public boolean check(int[][] matrix, int mid, int k, int n) {
             int i = n - 1;
             int j = 0;

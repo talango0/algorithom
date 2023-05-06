@@ -1,5 +1,6 @@
 package leetcode.arrays;
-//给你一个整数数组 cost ，其中 cost[i] 是从楼梯第 i 个台阶向上爬需要支付的费用。一旦你支付此费用，即可选择向上爬一个或者两个台阶。
+//给你一个整数数组 cost ，其中 cost[i] 是从楼梯第 i 个台阶向上爬需要支付的费用。
+// 一旦你支付此费用，即可选择向上爬一个或者两个台阶。
 //
 // 你可以选择从下标为 0 或下标为 1 的台阶开始爬楼梯。
 //
@@ -50,6 +51,23 @@ package leetcode.arrays;
 public class _746_使用最小花费爬楼梯{
 
     class Solution {
+        /**
+         * <pre>
+         * ┌───────────────────────────────────┐
+         * │index: 0  1  2 3 4  5  6 7  8  9 10│
+         * │cost: [1,100,1,1,1,100,1,1,100,1]  │
+         * │                                   │
+         * │dp[i]: 0  0  1 2 2  3  3 4  4  5 6 │
+         * └───────────────────────────────────┘
+         *
+         * dp[i] 表示爬到楼梯第i层所需花费的最小费用。
+         * dp[0] = 0， dp[1] = 0
+         * dp[i] = Math.min(dp[i-1]+cost[i-1], dp[i-2]+cost[i-2]}
+         * dp[n] 表示楼梯顶部
+         * </pre>
+         * @param cost
+         * @return
+         */
         // 动态规划
         public int minCostClimbingStairs(int[] cost) {
             int n = cost.length;

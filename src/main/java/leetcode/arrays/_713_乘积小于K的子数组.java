@@ -8,7 +8,7 @@ package leetcode.arrays;
 //
 //输入：nums = [10,5,2,6], k = 100
 //输出：8
-//解释：8 个乘积小于 100 的子数组分别为：[10]、[5]、[2],、[6]、[10,5]、[5,2]、[2,6]、[5,2,6]。
+//解释：8 个乘积小于 100 的子数组分别为：[10]、[5]、[2]、[6]、[10,5]、[5,2]、[2,6]、[5,2,6]。
 //需要注意的是 [10,5,2] 并不是乘积小于 100 的子数组。
 //示例 2：
 //
@@ -25,6 +25,7 @@ package leetcode.arrays;
 public class _713_乘积小于K的子数组 {
     class Solution {
         /**
+         * <pre>
          * 二分查找
          * nums[i...j]的元素乘积小于k
          * k = 0, 由于元素均为正数，所有子数组乘积均大于0，因此乘积小于0的子数组的数目为0
@@ -33,6 +34,7 @@ public class _713_乘积小于K的子数组 {
          * 非递减的。
          * 枚举子数组的右端点j，在logPrifix的区间 [0,j] 内二分查找满足 logPrefix[j+1] - logPrefix[l] < logk,
          * 即logPrefix[l] > logPrefix[j+1] - logk 的最小下标 l，那么以 j 为右端点且元素乘积小于 k 的子数组数目为 j + 1 -l,返回所有数目之和。
+         * </pre>
          */
         public int numSubarrayProductLessThanK(int[] nums, int k) {
             if (k == 0) {
@@ -68,11 +70,13 @@ public class _713_乘积小于K的子数组 {
 
     class Solution2 {
         /**
+         * <pre>
          * 滑动窗口
          * 固定子数组 [i,j] 的右端点 j 时，显然左端点i越大，子数组元素乘积越小。
          * 对于子数组 [i,j], 当左端点 i >= l1 时，所有子数组的元素乘积都小于 k，当左端点 i < l1 时，所有子数组的元素乘积都大于等于k。
          * 那么对于右端点为 i + 1 的所有子数组，它的左端点就不需要从 0 开始枚举，因为对于所有 i < l1 的子数组，它们的元素乘积都大于等于k。
          * 所以我们只要 i = l1 处开始枚举，知道子数组 i = l2时子数组 [l2, j+1] 的元素乘积小于 k， 那么左端点 i >= l2 所有子数组的元素乘积都小于k。
+         * </pre>
          */
         public int numSubarrayProductLessThanK(int[] nums, int k) {
             int n = nums.length, ret = 0;

@@ -41,6 +41,7 @@ package leetcode.list;
 /**
  * @author mayanwei
  * @date 2022-08-12.
+ * @see _206_反转链表
  */
 public class _92_反转链表II{
 
@@ -51,7 +52,11 @@ public class _92_反转链表II{
             if (m == 1) {
                 return reverse(head, n);
             }
-            // 如果 m != 1 怎么办？如果我们把 head 的索引视为 1，那么我们是想从第 m 个元素开始反转对吧；如果把 head.next 的索引视为 1 呢？那么相对于 head.next，反转的区间应该是从第 m - 1 个元素开始的；那么对于 head.next.next 呢……
+            // 如果 m != 1 怎么办？
+            // 如果我们把 head 的索引视为 1，那么我们是想从第 m 个元素开始反转对吧；
+            // 如果把 head.next 的索引视为 1 呢？
+            // 那么相对于 head.next，反转的区间应该是从第 m - 1 个元素开始的；
+            // 那么对于 head.next.next 呢……
             // 前进到反转的起点触发 base case
             head.next = reverseBetween(head.next, m - 1, n - 1);
             return head;
@@ -72,48 +77,6 @@ public class _92_反转链表II{
             //让反转后的head 节点
             head.next = successor;
             return last;
-        }
-    }
-
-
-    /**
-     * 利用快慢指针
-     */
-    class Solution2 {
-        public boolean isPalindrome(ListNode head) {
-            ListNode slow, fast;
-            slow = fast = head;
-            while (fast!=null && fast.next!=null) {
-                slow = slow.next;
-                fast = fast.next.next;
-            }
-
-            if (fast!=null) {
-                slow = slow.next;
-            }
-
-            ListNode left = head;
-            ListNode right = reverse(slow);
-            while (right != null) {
-                if (right.val != left.val) {
-                    return false;
-                }
-                left = left.next;
-                right = right.next;
-            }
-            return true;
-        }
-
-        ListNode reverse(ListNode head) {
-            ListNode pre = null, cur, nxt;
-            cur = head;
-            while (cur != null) {
-                nxt = cur.next;
-                cur.next = pre;
-                pre = cur;
-                cur = nxt;
-            }
-            return pre;
         }
     }
 

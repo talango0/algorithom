@@ -1,7 +1,8 @@
 package leetcode.arrays;
-//给你一个下标从 1 开始的整数数组 numbers ，该数组已按 非递减顺序排列 ，请你从数组中找出满足相加之和等于目标数 target 的两个数。如果设这
-//两个数分别是 numbers[index1] 和 numbers[index2] ，则 1 <= index1 < index2 <= numbers.
-//length 。
+//给你一个下标从 1 开始的整数数组 numbers ，该数组已按 非递减顺序排列 ，
+// 请你从数组中找出满足相加之和等于目标数 target 的两个数。如果设这
+//两个数分别是 numbers[index1] 和 numbers[index2] ，
+// 则 1 <= index1 < index2 <= numbers.length 。
 //
 // 以长度为 2 的整数数组 [index1, index2] 的形式返回这两个整数的下标 index1 和 index2。
 //
@@ -47,6 +48,12 @@ package leetcode.arrays;
 
 public class _167_两数之和II_输入有序数组 {
     class Solution {
+        /**
+         * 思路：因为 numbers 已经非递减排序了，所以可以贪心的采用左右指针相向而行。
+         * @param numbers
+         * @param target
+         * @return
+         */
         public int[] twoSum(int[] numbers, int target) {
             //一左一右相向而行
             int left = 0, right = numbers.length-1;

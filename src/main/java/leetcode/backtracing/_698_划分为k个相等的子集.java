@@ -55,7 +55,10 @@ public class _698_划分为k个相等的子集{
             return backtrace(k, 0, nums, 0, used, target);
         }
 
-        // backtrace 定义：现在 k 号桶正在思考是否应该把 nums[start] 这个元素装进来；目前 k 号桶里面已经装的数字之和为 bucket；used 标志某一个元素是否已经被装到桶中；target 是每个桶需要达成的目标和。
+        // backtrace 定义：现在 k 号桶正在思考是否应该把 nums[start] 这个元素装进来；
+        // 目前 k 号桶里面已经装的数字之和为 bucket；
+        // used 标志某一个元素是否已经被装到桶中；
+        // target 是每个桶需要达成的目标和。
         // 从桶的视角：
         // 1. 需要遍历 nums 中的所有数字，决定哪些数字需要装到当前桶中
         // 2. 如果当前桶装满了（桶内的数字达到 target），则让下一个桶开始执行第1步

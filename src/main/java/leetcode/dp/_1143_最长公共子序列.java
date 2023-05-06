@@ -62,7 +62,8 @@ public class _1143_最长公共子序列{
         // 这个dp函数的定义是：dp(s1, i, s2, j)计算s1[i..]和s2[j..]的最长公共子序列长度。
 
         // 根据这个定义，那么我们想要的答案就是dp(s1, 0, s2, 0)，
-        // 且 base case 就是i == len(s1)或j == len(s2)时，因为这时候s1[i..]或s2[j..]就相当于空串了，最长公共子序列的长度显然是 0：
+        // 且 base case 就是i == len(s1)或j == len(s2)时，因为这时候s1[i..]或s2[j..]就相当于空串了，
+        // 最长公共子序列的长度显然是 0：
         // 备忘录，消除重叠子问题
         int [][] memo;
         public int longestCommonSubsequence(String text1, String text2) {

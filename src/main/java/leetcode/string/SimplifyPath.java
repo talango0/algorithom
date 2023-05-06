@@ -1,6 +1,7 @@
 package leetcode.string;
 
 /**
+ * <pre>
  * https://leetcode-cn.com/explore/interview/card/bytedance/242/string/1013/
  * path = "/home/", => "/home"
  * path = "/a/./b/../../c/", => "/c"
@@ -12,6 +13,7 @@ package leetcode.string;
  *  In this case, you should return "/".
  * Another corner case is the path might contain multiple slashes '/' together, such as "/home//foo/".
  *  In this case, you should ignore redundant slashes and return "/home/foo".
+ * </pre>
  */
 public class SimplifyPath {
 

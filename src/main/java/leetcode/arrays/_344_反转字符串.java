@@ -29,7 +29,7 @@ package leetcode.arrays;
 // Related Topics 递归 双指针 字符串 👍 612 👎 0
 
 
-public class _344_发转字符串 {
+public class _344_反转字符串 {
     class Solution {
         public void reverseString(char[] s) {
             int left = 0, right = s.length-1;

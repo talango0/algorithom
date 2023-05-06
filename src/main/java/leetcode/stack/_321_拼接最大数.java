@@ -49,6 +49,8 @@ import org.junit.jupiter.api.Test;
 public class _321_拼接最大数{
     /**
      * 要求结果相对位置和原数组相同，单调栈
+     * <pre>
+     *
      * ┌───────────┐      ┌───────────┐
      * │  912583   │ ────▶│   92583   │
      * │   k = 5   │      │   k = 5   │
@@ -72,6 +74,7 @@ public class _321_拼接最大数{
      * │└─────┘│    │└─────┘│  │└─────┘│   │└─────┘│   │└─────┘│
      * └───────┘    └───────┘  └───────┘   └───────┘   └───────┘
      * stack
+     * </pre>
      */
     class Solution{
         public int[] maxNumber(int[] nums1, int[] nums2, int k) {

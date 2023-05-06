@@ -1,6 +1,4 @@
-package 创建自己的类加载器;
-
-import org.junit.Test;
+package classloader;
 
 /**
  * 创建自己类加载器的场景：

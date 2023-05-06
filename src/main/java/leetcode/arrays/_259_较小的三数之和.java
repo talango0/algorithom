@@ -1,5 +1,7 @@
 package leetcode.arrays;
-//给定一个长度为 n 的整数数组和一个目标值 target，寻找能够使条件 nums[i] + nums[j] + nums[k] < target 成立的三元组  i, j, k 个数（0 <= i < j < k < n）。
+//给定一个长度为 n 的整数数组和一个目标值 target，
+// 寻找能够使条件 nums[i] + nums[j] + nums[k] < target
+// 成立的三元组  i, j, k 个数（0 <= i < j < k < n）。
 //
 //示例：
 //输入: nums = [-2,0,1,3], target = 2

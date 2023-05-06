@@ -81,7 +81,6 @@ public class _25_K个一组翻转链表{
             ListNode pre, cur, nxt;
             pre = null;
             cur = a;
-            nxt = a;
             while (cur != b) {
                 nxt = cur.next;
                 // 逐个节点反转

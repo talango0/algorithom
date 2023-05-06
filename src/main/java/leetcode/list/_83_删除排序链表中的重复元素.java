@@ -30,8 +30,13 @@ package leetcode.list;
 
 
 import common.ListNode;
+import leetcode.arrays._26_删除有序数组中的重复项;
 
 //leetcode submit region begin(Prohibit modification and deletion)
+
+/**
+ * @see _26_删除有序数组中的重复项
+ */
 public class _83_删除排序链表中的重复元素 {
     class Solution {
         public ListNode deleteDuplicates(ListNode head) {

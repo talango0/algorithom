@@ -55,6 +55,12 @@ import java.util.Map;
 public class _76_最小覆盖子串{
 
     class Solution{
+        /**
+         * init window
+         * @param s
+         * @param t
+         * @return
+         */
         public String minWindow(String s, String t) {
             // window 是活动窗口，need 是目标串对应字母字典
             char[] schars = s.toCharArray();

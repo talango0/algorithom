@@ -89,7 +89,7 @@ public class _381_常数时间插入_删除和获取随机元素_允许重复{
             int lastNum = nums.get(nums.size() - 1);
             // 将下标i设置为list中最后一个元素值
             nums.set(i, lastNum);
-            // 从值-小标字典 中删除小表i
+            // 从值-小标字典 中删除下标 i
             idx.get(val).remove(i);
             // 从值-下标字典中删除 最后一个下标
             idx.get(lastNum).remove(nums.size() - 1);

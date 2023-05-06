@@ -1,16 +1,14 @@
 package leetcode.arrays.binarySearch;
 //传送带上的包裹必须在 days 天内从一个港口运送到另一个港口。
 //
-// 传送带上的第 i 个包裹的重量为 weights[i]。每一天，我们都会按给出重量（weights）的顺序往传送带上装载包裹。我们装载的重量不会超过船的最
-//大运载重量。
+// 传送带上的第 i 个包裹的重量为 weights[i]。每一天，我们都会按给出重量（weights）的顺序往传送带上装载包裹。
+// 我们装载的重量不会超过船的最大运载重量。
 //
 // 返回能在 days 天内将传送带上的所有包裹送达的船的最低运载能力。
 //
 //
 //
 // 示例 1：
-//
-//
 //输入：weights = [1,2,3,4,5,6,7,8,9,10], days = 5
 //输出：15
 //解释：
@@ -26,8 +24,6 @@ package leetcode.arrays.binarySearch;
 //
 //
 // 示例 2：
-//
-//
 //输入：weights = [3,2,2,4,1,4], days = 3
 //输出：6
 //解释：
@@ -38,8 +34,6 @@ package leetcode.arrays.binarySearch;
 //
 //
 // 示例 3：
-//
-//
 //输入：weights = [1,2,3,1,1], days = 4
 //输出：3
 //解释：
@@ -85,6 +79,7 @@ public class _1011_在D天内送达包裹的能力{
             }
             return days;
         }
+        //题目：在days天内运完weights的最低运载能力
         public int shipWithinDays(int[] weights, int days) {
             //船的最小在中应该是 weights 中元素的最大值，因为每次都得运一件获取走，不能装不下
             int left = 0;

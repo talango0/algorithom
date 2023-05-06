@@ -50,11 +50,13 @@ import java.util.Arrays;
 
 /**
  * 字节
+ *
  * @author mayanwei
  * @date 2022-09-01.
  */
 public class _1147_段式回文{
     /**
+     * <pre>
      *        ┌──────┐                                                   ┌──────┐
      *        │ g h i│a b c d e f h e l l o z c z m h e l l o a b c d e f│g h i │
      *        └──────┘                                                   └──────┘
@@ -70,6 +72,7 @@ public class _1147_段式回文{
      *                                     ┌───────┐
      *                                     │z c z m│
      *                                     └───────┘
+     * <pre/>
      */
     class Solution{
         public int longestDecomposition(String text) {
@@ -90,17 +93,17 @@ public class _1147_段式回文{
         }
     }
 
-    class Solution2 {
+    class Solution2{
         public int longestDecomposition(String text) {
             //four pointers;
-            if(text == null || text.length() == 0) return 0;
+            if (text == null || text.length() == 0) return 0;
             int left = 0, right = text.length();
             int low = left + 1, high = right - 1;
             int count = 0;
-            while(low <= high) {
+            while (low <= high) {
                 String sl = text.substring(left, low);
                 String sr = text.substring(high, right);
-                if(sl.equals(sr)) {
+                if (sl.equals(sr)) {
                     count += 2;
                     left = low;
                     right = high;
@@ -108,7 +111,7 @@ public class _1147_段式回文{
                 low++;
                 high--;
             }
-            if(left < right) {
+            if (left < right) {
                 count += 1;
             }
             return count;
@@ -116,7 +119,7 @@ public class _1147_段式回文{
     }
 
 
-    class Solution1 {
+    class Solution1{
         int[][] dp;
         String text;
 
@@ -129,11 +132,12 @@ public class _1147_段式回文{
             this.text = text;
 
             // 求整个字符串的回文字段k
-            return helper(0, n-1);
+            return helper(0, n - 1);
         }
 
         /**
          * 求回文字段数 text的子串
+         *
          * @param s 起始位置
          * @param e 终止位置
          * @return 该字段的回文字段数
@@ -149,14 +153,14 @@ public class _1147_段式回文{
             // 字符串本身算一回文字段
             int res = 1;
             // 枚举长度 1 ~ (e-s+1)/2 从s开始的子串
-            for (int l = 1; l <= (e-s+1)/2; l++) {
-                String st = text.substring(s, s+l);
-                String ed = text.substring(e-l+1, e+1);
+            for (int l = 1; l <= (e - s + 1) / 2; l++) {
+                String st = text.substring(s, s + l);
+                String ed = text.substring(e - l + 1, e + 1);
                 // 如果两子串相等 表示找到回文字段 +2
                 if (st.equals(ed)) {
-                    int tmp = helper(s+l, e-l);
+                    int tmp = helper(s + l, e - l);
                     // 更新结果值
-                    res = tmp+2;
+                    res = tmp + 2;
                 }
             }
 

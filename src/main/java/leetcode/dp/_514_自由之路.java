@@ -64,12 +64,12 @@ import java.util.List;
  */
 public class _514_自由之路{
     class Solution {
-        // 题目输入一个字符串 ring 代表圆盘上的字符（指针位置在12点钟方向 ring[0]）， 再输入一个字符串 key 代表需要拨动圆盘输入的字符串，算法需要返回输入这个 key 至少要进行多少次操作（拨动和按下都算一次操作）
+        // 题目输入一个字符串 ring 代表圆盘上的字符（指针位置在12点钟方向 ring[0]）， 再输入一个字符串 key 代表
+        // 需要拨动圆盘输入的字符串，算法需要返回输入这个 key 至少要进行多少次操作（拨动和按下都算一次操作）。
         // 换句话说，圆盘固定，我们可以拨动指针；现在需要我们拨动指针并按下按钮，以最少的操作次数输入key 对应的字符串。
         // 状态：当前需要输入的字符key[j] 和 当前圆盘指针的位置ring[i]
         // int dp(String ring, int i, String key, int j);
         // 函数的定义： 当圆盘指针指向 ring[i] 是，输入字符串 key[j...] 至少需要 dp(ring, i, key, j) 次操作
-
         // int dp(String ring, int i, String, int j) {
         // base case 完成输入
         //     if (j == key.length()) return 0;

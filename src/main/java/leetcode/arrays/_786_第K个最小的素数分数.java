@@ -72,8 +72,11 @@ public class _786_第K个最小的素数分数{
      */
     class Solution2{
         /**
-         * 思路：当分母为给定的 arr[j] 时，分子可以在 arr[0],⋯,arr[j−1] 中进行选择。由于数组 arr 是严格递增的，那么记分子为
-         * arr[i](0≤i<j)，随着 i 的增加，分数的值也是严格递增的。
+         * <pre>
+         * 思路：当分母为给定的 arr[j] 时，分子可以在 arr[0],⋯,arr[j−1] 中进行选择。
+         * 由于数组 arr 是严格递增的，那么记分子为arr[i](0≤i < j)，
+         * 随着 i 的增加，分数的值也是严格递增的。
+         * </pre>
          */
         public int[] kthSmallestPrimeFraction(int[] arr, int k) {
             int n = arr.length;

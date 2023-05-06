@@ -56,6 +56,7 @@ public class _4_寻找两个正序数组的中位数 {
 // 👍 3444 👎 0
 
     /**
+     * <pre>
      * 分析：
      * A[m], B[n]
      * 若 m + n 为奇数， 则中位数为两个有序数组的第 (m+n)/2 个元素。
@@ -75,6 +76,7 @@ public class _4_寻找两个正序数组的中位数 {
      * 接将k减去k/2。
      * 2） 如果一个数组为空，说明该数组中的所有元素都被排除，我们可以直接返回另一个数组中的第k小的元素。
      * 3） 如果k=1，我只需要返回两个数组首元素的最小值。
+     * </pre>
      */
     static class Solution1 {
         public double findMedianSortedArrays(int[] nums1, int[] nums2) {

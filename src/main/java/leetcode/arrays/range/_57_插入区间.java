@@ -6,18 +6,14 @@ package leetcode.arrays.range;
 //
 //
 // 示例 1：
-//
-//
 //输入：intervals = [[1,3],[6,9]], newInterval = [2,5]
 //输出：[[1,5],[6,9]]
 //
 //
 // 示例 2：
-//
-//
 //输入：intervals = [[1,2],[3,5],[6,7],[8,10],[12,16]], newInterval = [4,8]
 //输出：[[1,2],[3,10],[12,16]]
-//解释：这是因为新的区间 [4,8] 与 [3,5],[6,7],[8,10] 重叠。
+//解释：这是因为新的区间 [4,8] 与 [3,5],[6,7],[8,10]重叠。
 //
 // 示例 3：
 //
@@ -65,7 +61,7 @@ import java.util.List;
  */
 public class _57_插入区间{
     /**
-     * s时间复杂度：O(n), 空间负载度 O(1)
+     * 时间复杂度：O(n), 空间复杂度 O(1)
      */
     class Solution{
         public int[][] insert(int[][] intervals, int[] newInterval) {
@@ -97,12 +93,12 @@ public class _57_插入区间{
             if (!place) {
                 ansList.add(new int[]{left, right});
             }
-            int[][] ans = new int[ansList.size()][2];
-            for (int i = 0; i < ansList.size(); i++) {
-                ans[i] = ansList.get(i);
-            }
-
-            return ans;
+            //int[][] ans = new int[ansList.size()][2];
+            //for (int i = 0; i < ansList.size(); i++) {
+            //    ans[i] = ansList.get(i);
+            //}
+            //return ans;
+            return ansList.toArray(new int[0][]);
         }
     }
 }

@@ -39,10 +39,25 @@ package leetcode.arrays;
  * @date 2022-08-09.
  */
 public class _42_接雨水{
-
     /**
-     * 暴力法
      * <pre>
+     * 思考：
+     *   ▲         rmax
+     *   │         ┌─┐
+     *   │lmax     │ │
+     *   ├─┐╌╌╌╌╌╌╌│ │
+     *   │ │   ┊▪┊ │ │
+     *   │ │   ┌─┐ │ │
+     *   │ ├─┐ │ ├─┤ │
+     *   │ │ │ │ │ │5│
+     *   └─┴─┴─┴─┴─┴─┴─▶
+     *          i
+     *   water[i] = min(lmax, rmax)-height[i]
+     * </pre>
+     *
+     *
+     * <pre>
+     * 暴力法:
      * ▲         ┌─┐
      * │         │ │
      * ├─┐       │ │
@@ -108,6 +123,8 @@ public class _42_接雨水{
             int res = 0;
             int l_max = 0, r_max = 0;
             while (left < right) {
+                // l_max 是 height[0..left] 中最高柱子的高度，
+                // r_max 是 height[right..end] 的最高柱子的高度
                 l_max = Math.max(l_max, height[left]);
                 r_max = Math.max(r_max, height[right]);
                 // res += min(l_max, r_max)-height[i]

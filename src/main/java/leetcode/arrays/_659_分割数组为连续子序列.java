@@ -58,6 +58,26 @@ import java.util.Map;
  */
 public class _659_分割数组为连续子序列{
     class Solution{
+        /**
+         * <pre>
+         * ┌─────────────────┐
+         * │[1,2,3,3,4,5]    │
+         * │                 │
+         * │freq 1:1         │
+         * │     2:1         │
+         * │     3:2         │
+         * │     4:1         │
+         * │     5:1         │
+         * │                 │
+         * │need:[1,2]       │
+         * │     [3,4]       │
+         * │      need[3]=1  │
+         * │      need[5]=1  │
+         * └─────────────────┘
+         * </pre>
+         * @param nums
+         * @return
+         */
         public boolean isPossible(int[] nums) {
             // freq 记录每个元素出现的次数，比如 freq[3] = 2说明元素3 在nums 中出现了2次
             Map<Integer, Integer> freq = new HashMap<>();

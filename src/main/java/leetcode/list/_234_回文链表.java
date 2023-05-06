@@ -41,6 +41,9 @@ package leetcode.list;
  */
 public class _234_回文链表{
 
+    /**
+     * 利用快慢指针
+     */
     class Solution {
         public boolean isPalindrome(ListNode head) {
             ListNode slow, fast;

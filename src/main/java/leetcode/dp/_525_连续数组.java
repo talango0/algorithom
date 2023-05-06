@@ -1,4 +1,4 @@
-package leetcode.jzhoffer;
+package leetcode.dp;
 
 import java.util.HashMap;
 import java.util.Map;

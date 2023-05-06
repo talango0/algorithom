@@ -30,8 +30,8 @@ package leetcode.arrays.binarySearch;
  * @date 2022-08-30.
  */
 public class _4_寻找两个正序数组的中位数{
-    // O(m+n) 不满足题意
 
+    // O(m+n) 不满足题意
     class Solution{
         public double findMedianSortedArrays(int[] A, int[] B) {
             int m = A.length;
@@ -59,6 +59,17 @@ public class _4_寻找两个正序数组的中位数{
     }
 
     /**
+     * <pre>
+     *             ┌───────┐
+     * ┌───────┐   │ k = 7 │
+     * │1 3 4 9│   │k/2 = 3│
+     * └────▲──┘   └───────┘
+     *      │
+     * ┌─────────────────────┐
+     * │1 2 3 4 5 6 7 8 9 10 │
+     * └────▲────────────────┘
+     *      │
+     * </pre>
      * 时间复杂度：每进行一次循环，我们就减少 k/2 个元素，所以时间复杂度是 O(log(k)，而 k=(m+n)/2，所以最终的复杂也就是
      * O(log(m+n）。
      * <p>
@@ -72,7 +83,8 @@ public class _4_寻找两个正序数组的中位数{
             int left = (n + m + 1) / 2;
             int right = (n + m + 2) / 2;
             // 将偶数和奇数的情况合并，如果是奇数，会求两次同样的 k
-            return (getKth(A, 0, n - 1, B, 0, m - 1, left) + getKth(A, 0, n - 1, B, 0, m - 1, right)) * 0.5;
+            return (getKth(A, 0, n - 1, B, 0, m - 1, left)
+                    + getKth(A, 0, n - 1, B, 0, m - 1, right)) * 0.5;
         }
 
         private int getKth(int[] nums1, int start1, int end1, int[] nums2, int start2, int end2, int k) {

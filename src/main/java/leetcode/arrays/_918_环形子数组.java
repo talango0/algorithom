@@ -1,8 +1,6 @@
 package leetcode.arrays;
 
-public class _918_环形子数组 {
-
-    //给定一个由整数数组 A 表示的环形数组 C，求 C 的非空子数组的最大可能和。
+//给定一个由整数数组 A 表示的环形数组 C，求 C 的非空子数组的最大可能和。
 //
 // 在此处，环形数组意味着数组的末端将会与开头相连呈环状。（形式上，当0 <= i < A.length 时 C[i] = A[i]，且当 i >= 0 时
 //C[i+A.length] = C[i]）
@@ -58,14 +56,30 @@ public class _918_环形子数组 {
 // Related Topics 数组
 // 👍 127 👎 0
 
+import leetcode.dp._53_最大子数组和;
+
+/**
+ * @see _53_最大子数组和
+ */
+public class _918_环形子数组{
+
 
     /**
+     * <pre>
+     * 环形数组和普通数组的区别是环形数组多一种情况，就是子数组取了头尾相连的情况。
+     * 也就是头部取从a[0]到a[i], 然后尾部取a[j]到a[N-1]， 然后0 <= i < j <= N-1
+     * 对于任何一个i，从a[0]到a[i]的和可以简单的从前向后遍历计算，可以建立表格left[i] = sum(a[0]….a[i])
+     * 对于任何一个j，从a[j]到a[N-1]的和可以简单的从后向前计算, 可以建立表格right[j] = sum(a[j]…a[N-1])
+     * 由于i < j, 所以我们可以修改left和right表格，可以在遍历数组k=0…N-1的时候，
+     * 对于任何一个k, left[k]表示从a[0]开始到a[i], 其中i <=k 的最大和, right[k]表示从a[j]到a[N-1]，其中j >k的最大和，
+     * 这样的话，一次遍历, 然后取left[k] + right[k+1]的最大值，就可以了。
      * 复杂度分析
-     *
-     * 时间复杂度：O(N)O(N)，其中 NN 是 A 的长度。
-     * 空间复杂度：O(N)O(N)。
+     * <p>
+     * 时间复杂度：O(N)，其中 N 是 A 的长度。
+     * 空间复杂度：O(N)。
+     * </pre>
      */
-    class Solution {
+    class Solution{
         public int maxSubarraySumCircular(int[] A) {
             int N = A.length;
 
@@ -75,32 +89,30 @@ public class _918_环形子数组 {
                 ans = Math.max(ans, cur);
             }
 
-            // ans is the answer for 1-interval subarrays.
-            // Now, let's consider all 2-interval subarrays.
+            // ans is the answer for 1-interval subArrays.
+            // Now, let's consider all 2-interval subArrays.
             // For each i, we want to know
             // the maximum of sum(A[j:]) with j >= i+2
 
-            // rightsums[i] = A[i] + A[i+1] + ... + A[N-1]
-            int[] rightsums = new int[N];
-            rightsums[N-1] = A[N-1];
-            for (int i = N-2; i >= 0; --i)
-                rightsums[i] = rightsums[i+1] + A[i];
+            // rightSums[i] = A[i] + A[i+1] + ... + A[N-1]
+            int[] rightSums = new int[N];
+            rightSums[N - 1] = A[N - 1];
+            for (int i = N - 2; i >= 0; --i)
+                rightSums[i] = rightSums[i + 1] + A[i];
 
-            // maxright[i] = max_{j >= i} rightsums[j]
-            int[] maxright = new int[N];
-            maxright[N-1] = A[N-1];
-            for (int i = N-2; i >= 0; --i) {
-                maxright[i] = Math.max(maxright[i+1], rightsums[i]);
+            // maxRight[i] = max_{j >= i} rightSums[j]
+            int[] maxRight = new int[N];
+            maxRight[N - 1] = A[N - 1];
+            for (int i = N - 2; i >= 0; --i) {
+                maxRight[i] = Math.max(maxRight[i + 1], rightSums[i]);
             }
 
-            int leftsum = 0;
-            for (int i = 0; i < N-2; ++i) {
-                leftsum += A[i];
-                ans = Math.max(ans, leftsum + maxright[i+2]);
+            int leftSum = 0;
+            for (int i = 0; i < N - 2; ++i) {
+                leftSum += A[i];
+                ans = Math.max(ans, leftSum + maxRight[i + 2]);
             }
-
             return ans;
-
         }
     }
 

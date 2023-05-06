@@ -107,6 +107,8 @@ public class _528_按权重随机选择{
         public int pickIndex() {
             int n = preSum.length;
             // 在闭区间 [1, preSum[n-1]] 中随机选择一个数字
+            // Java 的 nextInt(n) 方法在 [0, n) 中生成一个随机整数
+            // 再加一就是在闭区间 [1, preSum[n - 1]] 中随机选择一个数字
             int target = rand.nextInt(preSum[n-1]) + 1;
             // 获取 target 在前缀和数组 preSum 中的索引
             // 前缀和数组 preSum 和原始数组 w 有一位索引偏移

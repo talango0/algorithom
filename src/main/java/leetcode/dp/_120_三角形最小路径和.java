@@ -16,7 +16,7 @@ package leetcode.dp;
 //  3 4
 // 6 5 7
 //4 1 8 3
-//自顶向下的最小路径和为 11（即，2 + 3 + 5 + 1 = 11）。
+//自顶向下的最小路径和为11（即，2+3+5+1= 11）。
 //
 //
 // 示例 2：
@@ -70,7 +70,7 @@ public class _120_三角形最小路径和{
          */
         public int minimumTotal(List<List<Integer>> triangle) {
             int n = triangle.size();
-            // 定义：走到底i行第j个元素的最小路径和时 dp[i][j]
+            // 定义：走到第i行第j个元素的最小路径和是 dp[i][j]
             int[][] dp = new int[n][n];
             for (int i = 0; i < dp.length; i++) {
                 // 因为求最小值，所以全部初始化为极大值

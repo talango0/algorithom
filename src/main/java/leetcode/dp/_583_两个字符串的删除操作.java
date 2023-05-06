@@ -54,6 +54,7 @@ public class _583_两个字符串的删除操作{
         public int longestCommonSubsequence(String text1, String text2) {
             int m = text1.length();
             int n = text2.length();
+            //dp[i][j]表示text1[i...]和text2[j..]最长公共子序列长度
             int dp[][] = new int[m+1][n+1];
             for(int i = 1; i <= m; i++){
                 for(int j = 1; j <= n; j++){

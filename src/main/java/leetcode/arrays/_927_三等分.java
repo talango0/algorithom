@@ -1,6 +1,43 @@
 package leetcode.arrays;
 
 import java.util.Arrays;
+//给定一个由 0 和 1 组成的数组 arr ，将数组分成  3 个非空的部分 ，使得所有这些部分表示相同的二进制值。
+//
+//如果可以做到，请返回任何 [i, j]，其中 i+1 < j，这样一来：
+//
+//arr[0], arr[1], ..., arr[i] 为第一部分；
+//arr[i + 1], arr[i + 2], ..., arr[j - 1] 为第二部分；
+//arr[j], arr[j + 1], ..., arr[arr.length - 1] 为第三部分。
+//这三个部分所表示的二进制值相等。
+//如果无法做到，就返回 [-1, -1]。
+//
+//注意，在考虑每个部分所表示的二进制时，应当将其看作一个整体。例如，[1,1,0] 表示十进制中的 6，
+// 而不会是 3。此外，前导零也是被允许的，所以 [0,1,1] 和 [1,1] 表示相同的值。
+//
+// 
+//
+//示例 1：
+//输入：arr = [1,0,1,0,1]
+//输出：[0,3]
+//
+//示例 2：
+//输入：arr = [1,1,0,1,1]
+//输出：[-1,-1]
+//
+//示例 3:
+//输入：arr = [1,1,0,0,1]
+//输出：[0,2]
+// 
+//
+//提示：
+//
+//3 <= arr.length <= 3 * 104
+//arr[i] 是 0 或 1
+//
+//
+//来源：力扣（LeetCode）
+//链接：https://leetcode.cn/problems/three-equal-parts
+//著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
 /**
  * @author mayanwei
@@ -74,12 +111,30 @@ public class _927_三等分{
     }
 
     class Solution2{
+        /**
+         * <pre>
+         * 思路：
+         * 首先判断 1 的总个数能否被 3 整除，然后从末尾先选出第一个包含正确个数个 1 且不包含前导零的序列
+         * （这个序列可以确定，因为它一定属于第三部分，并且添加若干个前导零值也不会变）；根据这个序列再划分第一、二部分。
+         *
+         * 首先获取不考虑前导零应该有的序列（此时 seperator2 不是指代第二个分割点）。
+         *
+         * 利用第一部分去除前导零的序列 [start1, seperator1] 检查 [seperator2, ...)， 如果不相等，说明第二部分分割失败。
+         *
+         * 如果第二部分也分割成功，此时序列已经被分成三个部分：
+         * 第一部分是前导零 [0, start1) 和正式序列 [start1, seperator1]构成的第一部分；
+         * 第二部分是前导零加上正式序列的(seperator1, seperator2)；
+         * 那么剩下的自然分给第三部分。
+         *
+         * 第三部分一定是合法的，首先，我们已经保证第一二部分的 1 的个数都是 sum 个，
+         * 且是由末尾的第一个包含 sum 个 1 的不含前导零的序列确定的，那么第三部分一定包含了末尾的这个序列，
+         * 前面可能还有第二部分之后的若干个前导零。这时候两个分割点都确定了，要注意 seperator2 是第三部分开始的下标，所以不需要再自减。
+         * </pre>
+         * @param arr
+         * @return
+         */
         public int[] threeEqualParts(int[] arr) {
-            /** 思路：首先判断 1 的总个数能否被 3 整除，然后从末尾
-             先选出第一个包含正确个数个 1 且不包含前导零的序列（
-             这个序列可以确定，因为它一定属于第三部分，并且添加
-             若干个前导零值也不会变）；根据这个序列再划分第一、
-             二部分。 **/
+
             int n = arr.length;
             // 首先对整个数组求和，要能够分成三个相同的二进制数，1 的个数必须能被三等分。
             int sum = 0;
@@ -96,7 +151,7 @@ public class _927_三等分{
             }
             // 此时的 sum 是每一份应该有的 1 的个数。
             sum /= 3;
-            // 首先获取不考虑前导零应该有的序列（此时 seperator2 不是指代第二个分割点）。
+            /**首先获取不考虑前导零应该有的序列（此时 seperator2 不是指代第二个分割点）。**/
             int count = 0;
             int seperator2 = n - 1;
             while (count < sum) {
@@ -105,16 +160,14 @@ public class _927_三等分{
                 }
             }
             seperator2++;
-            /** 到现在为止 [seperator2, n) 就是除掉前导零每一部分应
-             该有的序列，先求出第一个分割点。 **/
+            /** 到现在为止 [seperator2, n) 就是除掉前导零每一部分应该有的序列，先求出第一个分割点。 **/
             int seperator1;
             // 忽略第一部分的前导零。
             for (seperator1 = 0; seperator1 < n && arr[seperator1] == 0; seperator1++) ;
             // start1 标记第一部分除去前导零开始的位置。
             int start1 = seperator1;
-            /** [start1, ...) 和 [seperator2, n) 比较，如果存在对应
-             位置不相等，就说明分割失败，否则 seperator1 应该可以
-             增加到 n - seperator2 + start1 处。 **/
+            /** [start1, ...) 和 [seperator2, n) 比较，如果存在对应位置不相等，就说明分割失败，
+             否则 seperator1 应该可以增加到 n - seperator2 + start1 处。 **/
             for (int i = seperator2; i < n; seperator1++, i++) {
                 if (arr[seperator1] != arr[i]) {
                     return new int[]{-1, -1};
@@ -124,8 +177,8 @@ public class _927_三等分{
             seperator1--;
             // seperator2 作为第二个分割点，同样地先忽略第二部分的前导零
             for (seperator2 = seperator1 + 1; seperator2 < n && arr[seperator2] == 0; seperator2++) ;
-            /** 利用第一部分去除前导零的序列 [start1, seperator1] 检
-             查 [seperator2, ...)，如果不相等，说明第二部分分割失败。 **/
+            /** 利用第一部分去除前导零的序列 [start1, seperator1] 检查 [seperator2, ...)，
+             如果不相等，说明第二部分分割失败。 **/
             for (int i = start1; i <= seperator1; i++, seperator2++) {
                 if (arr[i] != arr[seperator2]) {
                     return new int[]{-1, -1};

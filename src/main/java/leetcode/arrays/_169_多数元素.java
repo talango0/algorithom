@@ -20,6 +20,9 @@ package leetcode.arrays;
 // 👍 798 👎 0
 
 
+import org.junit.Assert;
+import org.junit.Test;
+
 import java.util.Arrays;
 
 public class _169_多数元素 {
@@ -58,6 +61,12 @@ public class _169_多数元素 {
             return candidate;
         }
 
+    }
+
+    @Test
+    public void testSolution(){
+        Solution2 solution2 = new Solution2();
+        Assert.assertEquals( 3, solution2.majorityElement(new int[]{3,2,3}));
     }
 
 }

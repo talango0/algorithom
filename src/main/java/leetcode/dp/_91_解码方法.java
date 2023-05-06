@@ -62,7 +62,7 @@ public class _91_解码方法 {
             if (n < 1) {
                 return 0;
             }
-            //定义 dp[i] 表示 s[0..i-1]的解码数量,及长度为i的前缀最多解码个数
+            //定义 dp[i] 表示 s[0..i-1]的解码数量,即长度为i的前缀最多解码个数
             int[] dp = new int[n + 1];
             // base case
             dp[0] = 1;

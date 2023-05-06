@@ -7,8 +7,6 @@ package leetcode.arrays.binarySearch;
 //
 //
 // 示例 1：
-//
-//
 //输入：nums = [1,3,1], k = 1
 //输出：0
 //解释：数对和对应的距离如下：
@@ -19,24 +17,15 @@ package leetcode.arrays.binarySearch;
 //
 //
 // 示例 2：
-//
-//
 //输入：nums = [1,1,1], k = 2
 //输出：0
 //
 //
 // 示例 3：
-//
-//
 //输入：nums = [1,6,1], k = 3
 //输出：5
 //
-//
-//
-//
 // 提示：
-//
-//
 // n == nums.length
 // 2 <= n <= 10⁴
 // 0 <= nums[i] <= 10⁶
@@ -47,6 +36,7 @@ package leetcode.arrays.binarySearch;
 
 
 import java.util.Arrays;
+import java.util.TreeSet;
 
 /**
  * @author mayanwei

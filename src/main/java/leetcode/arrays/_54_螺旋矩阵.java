@@ -29,6 +29,8 @@ package leetcode.arrays;
 //
 // Related Topics 数组 矩阵 模拟 👍 1130 👎 0
 
+import leetcode.string._151_颠倒字符串中的单词;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,10 +38,26 @@ import java.util.List;
  * @author mayanwei
  * @date 2022-07-01.
  *
+ * @see _151_颠倒字符串中的单词
  * @see _59_螺旋矩阵2
  */
 public class _54_螺旋矩阵{
 
+    /**
+     * <pre>
+     * upper_bound right_boud    upper_bound right_boud
+     *     ───────────
+     *    │1 ──▶2 ──▶3│              1 ──▶2 ──▶3
+     *    │          ││                        │
+     *    │          ▼│              ──────    ▼
+     *    │4 ──▶5    6│             │4 ──▶5│   6
+     *    │▲         ││             │▲     │   │
+     *    ││         ▼│             ││     │   ▼
+     *    │7 ◀──8 ◀──9│             │7 ◀──8│◀──9
+     *     ───────────               ──────
+     * left_bound lower_bound    left_bound lower_bound
+     * </pre>
+     */
     class Solution {
         public List<Integer> spiralOrder(int[][] matrix) {
             if(matrix == null){

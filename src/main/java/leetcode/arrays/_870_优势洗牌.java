@@ -1,25 +1,19 @@
 package leetcode.arrays;
-//给定两个大小相等的数组 nums1 和 nums2，nums1 相对于 nums 的优势可以用满足 nums1[i] > nums2[i] 的索引 i 的数
-//目来描述。
+//给定两个大小相等的数组 nums1 和 nums2，nums1 相对于 nums
+// 的优势可以用满足 nums1[i] > nums2[i] 的索引 i 的数目来描述。
 //
 // 返回 nums1 的任意排列，使其相对于 nums2 的优势最大化。
 //
 //
 //
 // 示例 1：
-//
-//
 //输入：nums1 = [2,7,11,15], nums2 = [1,10,4,11]
 //输出：[2,11,7,15]
 //
 //
 // 示例 2：
-//
-//
 //输入：nums1 = [12,24,8,32], nums2 = [13,25,32,11]
 //输出：[24,32,8,12]
-//
-//
 //
 //
 // 提示：
@@ -42,14 +36,36 @@ import java.util.PriorityQueue;
 public class _870_优势洗牌{
 
     class Solution {
+        /**
+         * <pre>
+         * ┌──────────────────────────────────────────┐
+         * │ nums2=[1,10,4,11] => [11,10,4,1] <= maxpq│
+         * │        0  1 2  3       3  1 2 0          │
+         * │                                          │
+         * │      left     right                      │
+         * │        │       │                         │
+         * │        ▼       ▼                         │
+         * │        0 1  2  3                         │
+         * │ nums1=[2,7,11,15]                        │
+         * │ res  =[2,11,7,15]                        │
+         * │ 15 > 11  => res[3] = nums[3]=15          │
+         * │ 11 > 10  => res[1] = nums[0]=11          │
+         * │  7 > 4   => res[2] = nums[2]=7           │
+         * │  2 > 1   => res[0] = nums[1]=2           │
+         * └──────────────────────────────────────────┘
+         * </pre>
+         * @param nums1
+         * @param nums2
+         * @return
+         */
         public int[] advantageCount(int[] nums1, int[] nums2) {
             int n = nums1.length;
-            //给 nums2 将序排列
+            //将 nums2 降序排列
             PriorityQueue<int[]> maxpq = new PriorityQueue<>((o1, o2)->o2[1] - o1[1]);
             for (int i = 0;i < nums2.length; i++) {
                 maxpq.offer(new int[]{i, nums2[i]});
             }
-            //给 nums1升序排列
+            //将 nums1 升序排列
             Arrays.sort(nums1);
 
             //nums1[left] 是最小值， nums1[right] 是最大值

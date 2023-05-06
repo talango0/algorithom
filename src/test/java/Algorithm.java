@@ -132,6 +132,9 @@ public class Algorithm {
         Solution solution = new Solution();
         List<List<Integer>> permute = solution.combine(3,2);
         System.out.println(permute.toString());
+        while (true){
+
+        }
 
     }
 

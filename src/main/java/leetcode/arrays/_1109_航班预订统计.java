@@ -9,8 +9,6 @@ package leetcode.arrays;
 //
 //
 // 示例 1：
-//
-//
 //输入：bookings = [[1,2,10],[2,3,20],[2,5,25]], n = 5
 //输出：[10,55,45,25,25]
 //解释：
@@ -23,8 +21,6 @@ package leetcode.arrays;
 //
 //
 // 示例 2：
-//
-//
 //输入：bookings = [[1,2,10],[2,2,15]], n = 2
 //输出：[10,25]
 //解释：
@@ -48,6 +44,10 @@ package leetcode.arrays;
 //
 // Related Topics 数组 前缀和 👍 373 👎 0
 
+/**
+ * @see _370_区间加法
+ * @see _1094_拼车
+ */
 public class _1109_航班预订统计 {
     class Solution {
         public int[] corpFlightBookings(int[][] bookings, int n) {
@@ -69,7 +69,7 @@ public class _1109_航班预订统计 {
             diff = new int[nums.length];
             diff[0] = nums[0];
             for (int i = 1; i<nums.length; i++){
-                diff[i] = nums[i] = nums[i-1];
+                diff[i] = nums[i] - nums[i-1];
             }
         }
 

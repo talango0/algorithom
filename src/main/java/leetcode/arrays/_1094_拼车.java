@@ -9,15 +9,11 @@ package leetcode.arrays;
 //
 //
 // 示例 1：
-//
-//
 //输入：trips = [[2,1,5],[3,3,7]], capacity = 4
 //输出：false
 //
 //
 // 示例 2：
-//
-//
 //输入：trips = [[2,1,5],[3,3,7]], capacity = 5
 //输出：true
 //
@@ -35,6 +31,10 @@ package leetcode.arrays;
 //
 // Related Topics 数组 前缀和 排序 模拟 堆（优先队列） 👍 190 👎 0
 
+/**
+ * @see _370_区间加法
+ * @see _1109_航班预订统计
+ */
 public class _1094_拼车 {
     class Solution {
         public boolean carPooling(int[][] trips, int capacity) {
@@ -69,7 +69,7 @@ public class _1094_拼车 {
             diff = new int[nums.length];
             diff[0] = nums[0];
             for (int i = 1; i<nums.length; i++){
-                diff[i] = nums[i] = nums[i-1];
+                diff[i] = nums[i] - nums[i-1];
             }
         }
 

@@ -37,7 +37,6 @@ package leetcode;
 // 👍 586 👎 0
 
 import java.util.HashMap;
-import java.util.Set;
 
 public class _128_最长连续序列{
 

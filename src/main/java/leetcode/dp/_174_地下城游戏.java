@@ -12,76 +12,59 @@ package leetcode.dp;
 //
 // 为了尽快到达公主，骑士决定每次只向右或向下移动一步。
 //
-//
-//
 // 编写一个函数来计算确保骑士能够拯救到公主所需的最低初始健康点数。
 //
 // 例如，考虑到如下布局的地下城，如果骑士遵循最佳路径 右 -> 右 -> 下 -> 下，则骑士的初始健康点数至少为 7。
 //
 //
 //
-// -2 (K)
-// -3
-// 3
-//
-//
-// -5
-// -10
-// 1
-//
-//
-// 10
-// 30
-// -5 (P)
-//
-//
-//
-//
-//
+// -2 (K) -3  3
+// -5    -10  1
+// 10     30  -5 (P)
 //
 // 说明:
 //
-//
 // 骑士的健康点数没有上限。
 // 任何房间都可能对骑士的健康点数造成威胁，也可能增加骑士的健康点数，包括骑士进入的左上角房间以及公主被监禁的右下角房间。
-//
-//
 // Related Topics 数组 动态规划 矩阵 👍 643 👎 0
 
 import java.util.Arrays;
 
 /**
  * 字节
+ *
  * @author mayanwei
  * @date 2022-07-25.
  */
 public class _174_地下城游戏{
-    class Solution {
-        //  定义 从grid[i][j] 到达终点（右下角）所需的最少生命值是 dp(grid, i, j)
+    class Solution{
+        // 定义: 从grid[i][j] 到达终点（右下角）所需的最少生命值是 dp(grid, i, j)
         // int res = min(dp(i+1, j), dp(i, j+1)) - grid[i][j];
         // dp[i][j] = res <= 0 ? 1:res
         public int calculateMinimumHP(int[][] dungeon) {
-            if ( dungeon == null) {
+            if (dungeon == null) {
                 return -1;
             }
             int m = dungeon.length;
             int n = dungeon[0].length;
             // 备忘录中都初始化为-1
             memo = new int[m][n];
-            for (int [] row : memo) {
+            for (int[] row : memo) {
                 Arrays.fill(row, -1);
             }
             return dp(dungeon, 0, 0);
 
         }
+
         //备忘录，消除重叠子问题
-        private int [][] memo;
-        private int dp(int [][] grid, int i, int j) {
+        private int[][] memo;
+
+        private int dp(int[][] grid, int i, int j) {
             int m = grid.length;
             int n = grid[0].length;
             // base case
-            if (i == m-1 && j == n-1) {
-                return grid[i][j] >=0 ? 1 : -grid[i][j] + 1;
+            if (i == m - 1 && j == n - 1) {
+                return grid[i][j] >= 0 ? 1 :-grid[i][j] + 1;
             }
             if (i == m || j == n) {
                 return Integer.MAX_VALUE;
@@ -92,10 +75,10 @@ public class _174_地下城游戏{
             }
             // 状态转移方程
             int res = Math.min(
-                    dp(grid, i+1, j),
-                    dp(grid, i, j+1)
+                    dp(grid, i + 1, j),
+                    dp(grid, i, j + 1)
             ) - grid[i][j];
-            memo[i][j] = res <= 0 ? 1 : res;
+            memo[i][j] = res <= 0 ? 1 :res;
             return memo[i][j];
         }
     }

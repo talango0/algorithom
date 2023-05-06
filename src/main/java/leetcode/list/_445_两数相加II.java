@@ -46,6 +46,10 @@ package leetcode.list;
 
 
 //leetcode submit region begin(Prohibit modification and deletion)
+
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 /**
  * @author mayanwei
  * @date 2022-10-27.
@@ -53,51 +57,7 @@ package leetcode.list;
  */
 public class _445_两数相加II{
 
-    class Solution{
-        ListNode dummy = new ListNode();
-        int carry = 0;
-
-        public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-            if (l1 == null) {
-                int val = carry;
-                val += l2.val;
-                carry = val / 10;
-                carry = carry % 10;
-                ListNode node = new ListNode(val);
-                node.next = dummy.next;
-                dummy.next = node;
-                return dummy.next;
-            }
-            if (l2 == null) {
-                int val = carry;
-                val += l1.val;
-                carry = val / 10;
-                carry = carry % 10;
-                ListNode node = new ListNode(val);
-                node.next = dummy.next;
-                dummy.next = node;
-                return dummy.next;
-            }
-            if (l1.next == null && l2.next == null) {
-                int val = 0;
-                val = l1.val + l2.val;
-                carry = val / 10;
-                carry = carry % 10;
-                ListNode node = new ListNode(val);
-                node.next = dummy.next;
-                dummy.next = node;
-                return dummy.next;
-            }
-            ListNode node = addTwoNumbers(l1.next, l2.next);
-            node.next = dummy.next;
-            dummy.next = node;
-            return dummy.next;
-
-        }
-    }
-
-
-    class Solution2 {
+    class Solution2{
         public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
             l1 = reverse(l1);
             l2 = reverse(l2);
@@ -170,6 +130,52 @@ public class _445_两数相加II{
                 current = next;
             }
             return prev;
+        }
+    }
+
+
+    class Solution3{
+        /**
+         * 时间复杂度 O(max(m,n))
+         * 空间复杂度 O(m + n)
+         */
+        public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+            // 把链表转入栈中
+            Deque<Integer> stk1 = new ArrayDeque<Integer>();
+            Deque<Integer> stk2 = new ArrayDeque<Integer>();
+            while (l1 != null) {
+                stk1.push(l1.val);
+                l1 = l1.next;
+            }
+            while (l2 != null) {
+                stk2.push(l2.val);
+                l2 = l2.next;
+            }
+            // 接下来基本上是复用在第 2 题的代码逻辑
+            // 注意新节点要直接插入到 dummy 后面
+
+            // 虚拟头结点（构建新链表时的常用技巧）
+            ListNode dummy = new ListNode(-1);
+            // 记录进位
+            int carry = 0;
+
+            // 开始执行加法，两条链表走完且没有进位时才能结束循环
+            ListNode p = dummy;
+            while (!stk1.isEmpty() || !stk2.isEmpty() || carry != 0) {
+                // 先加上上次的进位
+                int val = carry;
+                val += stk1.isEmpty() ? 0 :stk1.pop();
+                val += stk2.isEmpty() ? 0 :stk2.pop();
+                // 处理进位情况
+                carry = val / 10;
+                val %= 10;
+                // 构建新节点，直接接在 dummy 后面
+                ListNode curNode = new ListNode(val);
+                curNode.next = p.next;
+                p.next = curNode;
+            }
+            // 返回结果链表的头结点（去除虚拟头结点）
+            return dummy.next;
         }
     }
 }

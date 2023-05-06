@@ -42,7 +42,6 @@ import java.util.LinkedList;
 public class _84_柱状图中最大的矩形{
 
     //暴力超时
-
     class Solution{
         public int largestRectangleArea(int[] heights) {
             int n = heights.length;
@@ -63,7 +62,6 @@ public class _84_柱状图中最大的矩形{
     }
 
     //单调栈
-
     class Solution2{
         public int largestRectangleArea(int[] heights) {
             int n = heights.length;

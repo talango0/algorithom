@@ -5,15 +5,20 @@ package leetcode.arrays;
 //
 //
 //示例 1：
+//输入：matrix = [[1,1,1],
+//               [1,0,1],
+//               [1,1,1]]
+//输出：[[1,0,1],
+//      [0,0,0],
+//      [1,0,1]]
 //
-//
-//输入：matrix = [[1,1,1],[1,0,1],[1,1,1]]
-//输出：[[1,0,1],[0,0,0],[1,0,1]]
 //示例 2：
-//
-//
-//输入：matrix = [[0,1,2,0],[3,4,5,2],[1,3,1,5]]
-//输出：[[0,0,0,0],[0,4,5,0],[0,3,1,0]]
+//输入：matrix = [[0,1,2,0],
+//               [3,4,5,2],
+//               [1,3,1,5]]
+//输出：[[0,0,0,0],
+//      [0,4,5,0],
+//      [0,3,1,0]]
 //
 //
 //提示：
@@ -33,8 +38,8 @@ package leetcode.arrays;
 /**
  * @see _289_生命游戏
  */
-public class _73_矩阵置零 {
-    class Solution {
+public class _73_矩阵置零{
+    class Solution{
         public void setZeroes(int[][] matrix) {
             int m = matrix.length, n = matrix[0].length;
             boolean[] row = new boolean[m];
@@ -63,10 +68,14 @@ public class _73_矩阵置零 {
      * <p>
      * 空间复杂度 O(1)
      */
-    class Solution1 {
+    class Solution1{
         /**
-         * 只使用一个标记变量记录第一列是否原本存在 0。这样，第一列的第一个元素即可以标记第一行是否出现 0。
+         * <pre>
+         * 只使用一个标记变量记录第一列是否原本存在 0。
+         * 这样，第一列的第一个元素即可以标记第一行是否出现 0。
+         *
          * 但为了防止每一列的第一个元素被提前更新，我们需要从最后一行开始，倒序地处理矩阵元素。
+         * </pre>
          */
         public void setZeroes(int[][] matrix) {
             int m = matrix.length, n = matrix[0].length;

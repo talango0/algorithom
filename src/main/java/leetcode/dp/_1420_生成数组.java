@@ -68,6 +68,7 @@ package leetcode.dp;
  */
 public class _1420_生成数组{
     /**
+     * <pre>
      *                                 j-1
      * f[i][s][j] = f[i-1][s][j] * j +  ∑ f[i-1][s-1][j]
      *                                  1
@@ -77,6 +78,7 @@ public class _1420_生成数组{
      *
      * 时间复杂度 O(N*M^2*K)
      * 空间复杂度 O(N*M*K)
+     * </pre>
      */
     class Solution{
         int[][][] f = new int[51][51][101];

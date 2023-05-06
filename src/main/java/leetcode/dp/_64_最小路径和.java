@@ -35,11 +35,26 @@ package leetcode.dp;
 
 
 /**
+ * （中等）{@link _62_不同路径}
+ * <p>
+ * 63.不同路径 II（中等）：路径问题第二讲
+ * <p>
+ * （中等）{@link _120_三角形最小路径和}
+ * <p>
+ * （中等）{@link _931_下降路径最小和}
+ * <p>
+ * 1289.下降路径最小和 II（困难）
+ * <p>
+ * 1575.统计所有可行路径（困难）
+ * <p>
+ * 576.出界的路径数（中等）
+ * <p>
+ * 1301.最大得分的路径数目（困难）
  * @author mayanwei
  * @date 2022-07-25.
  */
 public class _64_最小路径和{
-    class Solution {
+    class Solution{
         // dp[i][j] 表示从 grid[0][0] 到 grid[i][j] 的距离之和, 设置初始值均为0
         // dp[i][j] = min{dp[i][j-1], dp[i-1][j]} + grid[i][j] 其中 0 <= i <= m-1, 0 <= j < n-1
         // base case dp[0][0] = grid[0][0];
@@ -49,22 +64,25 @@ public class _64_最小路径和{
             }
             int m = grid.length;
             int n = grid[0].length;
-            int [][] dp = new int[m][n];
+            int[][] dp = new int[m][n];
             /**base case */
             dp[0][0] = grid[0][0];
-            for (int i = 1; i<m; i++) {
-                dp[i][0] = dp[i-1][0] + grid[i][0];
+            for (int i = 1; i < m; i++) {
+                dp[i][0] = dp[i - 1][0] + grid[i][0];
             }
-            for (int j = 1; j<n; j++) {
-                dp[0][j] = dp[0][j-1] + grid[0][j];
+            for (int j = 1; j < n; j++) {
+                dp[0][j] = dp[0][j - 1] + grid[0][j];
             }
 
-            for (int i = 1; i<m; i++) {
-                for(int j = 1; j<n; j++) {
-                    dp[i][j] = Math.min(dp[i][j-1], dp[i-1][j]) + grid[i][j];
+            for (int i = 1; i < m; i++) {
+                for (int j = 1; j < n; j++) {
+                    dp[i][j] = Math.min(dp[i][j - 1], dp[i - 1][j]) + grid[i][j];
                 }
             }
-            return dp[m-1][n-1];
+            return dp[m - 1][n - 1];
         }
     }
+
+    //如果要打印路径和最小的路径呢， 如果存在多条，打印出一条即可
+
 }

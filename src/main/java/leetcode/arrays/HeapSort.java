@@ -85,7 +85,7 @@ public class HeapSort {
 //        solution.maxHeapify(nums,1);
 //        System.out.println(Arrays.toString(nums));
 
-        int [] nums = {5, 3, 17, 10, 84, 19, 6, 22, 9};
+        int [] nums = { 2,3,1,6,5,4};
 //        solution.buildMaxHeap(nums,nums.length);
 
         solution.heapSort(nums, nums.length);

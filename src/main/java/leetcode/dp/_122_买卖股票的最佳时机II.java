@@ -47,7 +47,24 @@ package leetcode.dp;
  * @date 2022-06-25.
  */
 public class _122_买卖股票的最佳时机II{
-
+    //股票系列问题状态定义：
+    //
+    //dp[i][k][0 or 1]
+    //0 <= i <= n - 1, 1 <= k <= K
+    //n 为天数，大 K 为交易数的上限，0 和 1 代表是否持有股票。
+    //股票系列问题通用状态转移方程和 base case：
+    //
+    //状态转移方程：
+    //dp[i][k][0] = max(dp[i-1][k][0], dp[i-1][k][1] + prices[i])
+    //dp[i][k][1] = max(dp[i-1][k][1], dp[i-1][k-1][0] - prices[i])
+    //
+    //base case：
+    //dp[-1][...][0] = dp[...][0][0] = 0
+    //dp[-1][...][1] = dp[...][0][1] = -infinity
+    //特化到 k 无限制的情况，状态转移方程如下：
+    //
+    //dp[i][0] = max(dp[i-1][0], dp[i-1][1] + prices[i])
+    //dp[i][1] = max(dp[i-1][1], dp[i-1][0] - prices[i])
     class Solution0{
          public int maxProfit(int[] prices) {
              int n = prices.length;

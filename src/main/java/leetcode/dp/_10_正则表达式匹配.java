@@ -234,7 +234,10 @@ public class _10_正则表达式匹配 {
     }
     @Test
     void testSolution(){
+        Solution solution1 = new Solution();
+        Assert.assertTrue(solution1.isMatch("a",".*"));
         Solution3 solution = new Solution3();
         Assert.assertEquals(true, solution.isMatch("aab","c*a*b"));
+        Assert.assertEquals(true, solution.isMatch("a",".*"));
     }
 }

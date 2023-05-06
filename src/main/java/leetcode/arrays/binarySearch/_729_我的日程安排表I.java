@@ -92,6 +92,13 @@ public class _729_我的日程安排表I{
             // 对于 [start, end)，我们每次查找起点大于等于 end 的第一个区间 [l1, r1), 同时
             // 紧挨着 [l1, r1)的前一个区间为 [l2,r2), 此时如果满足 r2 <= start < end <= l1,
             // 则区间可以预定
+            //     r2
+            // ─────
+            //             l1
+            //             ─────
+            //      start  end
+            //       ──────    这个可以预定
+
             TreeSet<int[]> booked;
 
             public MyCalendar() {

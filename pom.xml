@@ -61,8 +61,41 @@
             <version>3.12.0</version>
             <scope>test</scope>
         </dependency>
+        <!--无锁队列-->
+        <dependency>
+            <groupId>org.jctools</groupId>
+            <artifactId>jctools-core</artifactId>
+            <version>4.0.1</version>
+        </dependency>
 
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-core</artifactId>
+            <version>1.23</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-generator-annprocess</artifactId>
+            <version>1.23</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/edu.princeton.cs/algs4 -->
+        <dependency>
+            <groupId>edu.princeton.cs</groupId>
+            <artifactId>algs4</artifactId>
+            <version>1.0.3</version>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.eaio.stringsearch</groupId>-->
+<!--            <artifactId>stringsearch</artifactId>-->
+<!--            <version>2.2</version>-->
+<!--        </dependency>-->
     </dependencies>
+<!--    <repositories>-->
+<!--        <repository>-->
+<!--            <id>eaio.com</id>-->
+<!--            <url>http://repo.eaio.com/maven2</url>-->
+<!--        </repository>-->
+<!--    </repositories>-->
     <build>
         <plugins>
             <plugin>

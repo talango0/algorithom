@@ -26,6 +26,7 @@ package leetcode.arrays;
 //Related Topics
 //
 //👍 977, 👎 0
+
 /**
  * @author mayanwei
  * @date 2022-08-31.
@@ -37,14 +38,25 @@ public class _135_分发糖果{
     //右规则：当 ratings[i]>ratings[i+1] 时，i 号学生的糖果数量将比 i+1 号孩子的糖果数量多。
     //我们遍历该数组两次，处理出每一个学生分别满足左规则或右规则时，最少需要被分得的糖果数量。每个人最终分得的糖果数量即为这两个数量的最大值。
 
-    class Solution {
+    /**
+     * <pre>
+     * ┌───────────────────────┐
+     * │                  1,0,2│
+     * │        left[i]:  1,1,2│
+     * │       right[j]:  2,1,1│
+     * │max(left,right):  2,1,2│ ==> return 5
+     * └───────────────────────┘
+     * </pre>
+     */
+    class Solution{
         public int candy(int[] ratings) {
             int n = ratings.length;
             int[] left = new int[n];
             for (int i = 0; i < n; i++) {
                 if (i > 0 && ratings[i] > ratings[i - 1]) {
                     left[i] = left[i - 1] + 1;
-                } else {
+                }
+                else {
                     left[i] = 1;
                 }
             }
@@ -52,7 +64,8 @@ public class _135_分发糖果{
             for (int i = n - 1; i >= 0; i--) {
                 if (i < n - 1 && ratings[i] > ratings[i + 1]) {
                     right++;
-                } else {
+                }
+                else {
                     right = 1;
                 }
                 ret += Math.max(left[i], right);
@@ -61,7 +74,20 @@ public class _135_分发糖果{
         }
     }
 
-    class Solution2 {
+    /**
+     * <pre>
+     * 我们从左到右枚举每一个同学，记前一个同学分得的糖果数量为  pre：
+     * <li>如果当前同学比上一个同学评分高，说明我们就在最近的递增序列中，直接分配给该同学 pre+1 个糖果即可。</li>
+     * <li>
+     * 否则我们就在一个递减序列中，我们直接分配给当前同学一个糖果，并把该同学所在的递减序列中所有的同学都再多分配一个糖果，
+     * 以保证糖果数量还是满足条件。
+     * <ol>我们无需显式地额外分配糖果，只需要记录当前的递减序列长度，即可知道需要额外分配的糖果数量。</ol>
+     * <ol>同时注意当当前的递减序列长度和上一个递增序列等长时，需要把最近的递增序列的最后一个同学也并进递减序列中。</ol>
+     * </li>
+     * 这样，我们只要记录当前递减序列的长度 dec，最近的递增序列的长度 inc 和前一个同学分得的糖果数量  pre 即可。
+     * </pre>
+     */
+    class Solution2{
         public int candy(int[] ratings) {
             int n = ratings.length;
             int ret = 1;
@@ -69,10 +95,11 @@ public class _135_分发糖果{
             for (int i = 1; i < n; i++) {
                 if (ratings[i] >= ratings[i - 1]) {
                     dec = 0;
-                    pre = ratings[i] == ratings[i - 1] ? 1 : pre + 1;
+                    pre = ratings[i] == ratings[i - 1] ? 1 :pre + 1;
                     ret += pre;
                     inc = pre;
-                } else {
+                }
+                else {
                     dec++;
                     if (dec == inc) {
                         dec++;
