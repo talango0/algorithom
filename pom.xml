@@ -82,10 +82,18 @@
             <version>1.23</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/edu.princeton.cs/algs4 -->
-        <dependency>
+        <!-- <dependency>
             <groupId>edu.princeton.cs</groupId>
             <artifactId>algs4</artifactId>
             <version>1.0.3</version>
+        </dependency> -->
+           <!--引入本地jar包-->
+        <dependency>
+            <groupId>edu.princeton.cs</groupId>
+            <artifactId>algs4-local</artifactId>
+            <version>0.2</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/algs4.jar</systemPath>
         </dependency>
 <!--        <dependency>-->
 <!--            <groupId>com.eaio.stringsearch</groupId>-->
@@ -99,6 +107,21 @@
 <!--            <url>http://repo.eaio.com/maven2</url>-->
 <!--        </repository>-->
 <!--    </repositories>-->
+<repositories>
+    <repository>
+      <id>bintray-algs4-maven</id>
+      <name>bintray</name>
+      <url>https://dl.bintray.com/algs4/maven</url>
+    </repository>
+           <repository>
+           <id>eaio.com</id>
+           <url>http://repo.eaio.com/maven2</url>
+       </repository>
+       <repository>
+           <id>aliyun</id>
+           <url>https://maven.aliyun.com/repository/public</url>
+       </repository>
+  </repositories>
     <build>
         <plugins>
             <plugin>
