@@ -102,102 +102,103 @@ public class _04_09_二叉搜索树序列{
             second.addFirst(headSecond);
         }
     }
-}
+    class Solution2{
 
-class Solution2{
-
-    public List<List<Integer>> BSTSequences(TreeNode root) {
-        if (root == null) {
-            List<List<Integer>> empty = new ArrayList<>();
-            empty.add(new ArrayList<>());
-            return empty;
-        }
-        List<List<Integer>> listl = BSTSequences(root.left);
-        List<List<Integer>> listr = BSTSequences(root.right);
-        List<List<Integer>> merge;
-        //特殊情况不用merge减少递归次数
-        if ((listl.size() == 1 && listl.get(0).size() == 0) || (listr.size() == 1 && listr.get(0).size() == 0)) {
-            merge = listl.get(0).size() == 0 ? listr :listl;
-        }
-        else merge = merge(listl, listr);
-        for (List<Integer> list : merge) {
-            list.add(0, root.val);
-        }
-        return merge;
-    }
-
-    private List<List<Integer>> merge(List<List<Integer>> lList, List<List<Integer>> rList) {
-        List<List<Integer>> res = new ArrayList<>();
-        for (List<Integer> l1 : lList) {
-            for (List<Integer> l2 : rList) {
-                res.addAll(relativeMerge(l1, l2, 0));
+        public List<List<Integer>> BSTSequences(TreeNode root) {
+            if (root == null) {
+                List<List<Integer>> empty = new ArrayList<>();
+                empty.add(new ArrayList<>());
+                return empty;
             }
+            List<List<Integer>> listl = BSTSequences(root.left);
+            List<List<Integer>> listr = BSTSequences(root.right);
+            List<List<Integer>> merge;
+            //特殊情况不用merge减少递归次数
+            if ((listl.size() == 1 && listl.get(0).size() == 0) || (listr.size() == 1 && listr.get(0).size() == 0)) {
+                merge = listl.get(0).size() == 0 ? listr :listl;
+            }
+            else merge = merge(listl, listr);
+            for (List<Integer> list : merge) {
+                list.add(0, root.val);
+            }
+            return merge;
         }
-        return res;
-    }
 
-    // 回溯进行相对排序
-    private List<List<Integer>> relativeMerge(List<Integer> listl, List<Integer> listr, int start) {
-        List<List<Integer>> res = new ArrayList<>();
-        if (listr.size() == 0) {
-            res.add(listl);
+        private List<List<Integer>> merge(List<List<Integer>> lList, List<List<Integer>> rList) {
+            List<List<Integer>> res = new ArrayList<>();
+            for (List<Integer> l1 : lList) {
+                for (List<Integer> l2 : rList) {
+                    res.addAll(relativeMerge(l1, l2, 0));
+                }
+            }
             return res;
         }
-        int lenl = listl.size();
-        //一个长度为lenl的list首尾都可以插入，所以可以插入的点实际上是lenl+1
-        for (int j = start; j <= lenl; j++) {
-            listl.add(j, listr.get(0));
-            Integer remove = listr.remove(0);
-            res.addAll(relativeMerge(new ArrayList<>(listl), new ArrayList<>(listr), j + 1));
-            listl.remove(j);
-            listr.add(0, remove);
+
+        // 回溯进行相对排序
+        private List<List<Integer>> relativeMerge(List<Integer> listl, List<Integer> listr, int start) {
+            List<List<Integer>> res = new ArrayList<>();
+            if (listr.size() == 0) {
+                res.add(listl);
+                return res;
+            }
+            int lenl = listl.size();
+            //一个长度为lenl的list首尾都可以插入，所以可以插入的点实际上是lenl+1
+            for (int j = start; j <= lenl; j++) {
+                listl.add(j, listr.get(0));
+                Integer remove = listr.remove(0);
+                res.addAll(relativeMerge(new ArrayList<>(listl), new ArrayList<>(listr), j + 1));
+                listl.remove(j);
+                listr.add(0, remove);
+            }
+            return res;
         }
-        return res;
     }
-}
 
-class Solution3{
-    private List<List<Integer>> ans;
+    class Solution3{
+        private List<List<Integer>> ans;
 
-    public List<List<Integer>> BSTSequences(TreeNode root) {
-        ans = new ArrayList<>();
-        List<Integer> path = new ArrayList<>();
-        // 如果 root==null 返回 [[]]
-        if (root == null) {
-            ans.add(path);
+        public List<List<Integer>> BSTSequences(TreeNode root) {
+            ans = new ArrayList<>();
+            List<Integer> path = new ArrayList<>();
+            // 如果 root==null 返回 [[]]
+            if (root == null) {
+                ans.add(path);
+                return ans;
+            }
+            List<TreeNode> queue = new LinkedList<>();
+            queue.add(root);
+            // 开始进行回溯
+            bfs(queue, path);
             return ans;
         }
-        List<TreeNode> queue = new LinkedList<>();
-        queue.add(root);
-        // 开始进行回溯
-        bfs(queue, path);
-        return ans;
+
+        /**
+         * 回溯法+广度优先遍历.
+         */
+        private void bfs(List<TreeNode> queue, List<Integer> path) {
+            // queue 为空说明遍历完了，可以返回了
+            if (queue.isEmpty()) {
+                ans.add(new ArrayList<>(path));
+                return;
+            }
+            // 将 queue 拷贝一份，用于稍后回溯
+            List<TreeNode> copy = new ArrayList<>(queue);
+            // 对 queue 进行循环，每循环考虑 “是否 「将当前 cur 节点从 queue 中取出并将其左右子
+            // 节点加入 queue ，然后将 cur.val 加入到 path 末尾」 ” 的情况进行回溯
+            for (int i = 0; i < queue.size(); i++) {
+                TreeNode cur = queue.get(i);
+                path.add(cur.val);
+                queue.remove(i);
+                // 将左右子节点加入队列
+                if (cur.left != null) queue.add(cur.left);
+                if (cur.right != null) queue.add(cur.right);
+                bfs(queue, path);
+                // 恢复 path 和 queue ，进行回溯
+                path.remove(path.size() - 1);
+                queue = new ArrayList<>(copy);
+            }
+        }
     }
 
-    /**
-     * 回溯法+广度优先遍历.
-     */
-    private void bfs(List<TreeNode> queue, List<Integer> path) {
-        // queue 为空说明遍历完了，可以返回了
-        if (queue.isEmpty()) {
-            ans.add(new ArrayList<>(path));
-            return;
-        }
-        // 将 queue 拷贝一份，用于稍后回溯
-        List<TreeNode> copy = new ArrayList<>(queue);
-        // 对 queue 进行循环，每循环考虑 “是否 「将当前 cur 节点从 queue 中取出并将其左右子
-        // 节点加入 queue ，然后将 cur.val 加入到 path 末尾」 ” 的情况进行回溯
-        for (int i = 0; i < queue.size(); i++) {
-            TreeNode cur = queue.get(i);
-            path.add(cur.val);
-            queue.remove(i);
-            // 将左右子节点加入队列
-            if (cur.left != null) queue.add(cur.left);
-            if (cur.right != null) queue.add(cur.right);
-            bfs(queue, path);
-            // 恢复 path 和 queue ，进行回溯
-            path.remove(path.size() - 1);
-            queue = new ArrayList<>(copy);
-        }
-    }
 }
+
