@@ -35,46 +35,79 @@ package leetcode.tree;
 //// Related Topics 树 数组 哈希表 分治 二叉树 👍 1631 👎 0
 //
 
+import java.util.HashMap;
+
 /**
  * @author mayanwei
  * @date 2022-06-11.
  */
 public class _105_从前序遍历和中序遍历构造二叉树{
-    TreeNode buildTree(int[] preorder, int[] inorder) {
-        return build(preorder, 0, preorder.length - 1, inorder, 0, inorder.length - 1);
+
+    class Solution1 {
+        TreeNode buildTree(int[] preorder, int[] inorder) {
+            return build(preorder, 0, preorder.length - 1, inorder, 0, inorder.length - 1);
+        }
+
+        /**
+         * build 函数的定义：
+         * 若前序遍历数组为 preorder[preStart...preEnd]
+         *   中序遍历数组为 inorder[inStart...inEnd]
+         *   构造二叉树，返回该二叉树的根节点
+         * @param preorder
+         * @param preStart
+         * @param preEnd
+         * @param inorder
+         * @param inStart
+         * @param inEnd
+         * @return
+         */
+        private TreeNode build(int[] preorder, int preStart, int preEnd, int[] inorder, int inStart, int inEnd) {
+            if (preStart > preEnd) {
+                return null;
+            }
+            // root 节点对应的值就是前序遍历数组的第一个元素
+            int rootVal = preorder[preStart];
+            // root 在中序遍历的索引
+            int i = inStart;
+            for (; i <= inEnd; i++) {
+                if (inorder[i] == rootVal) {
+                    break;
+                }
+            }
+            int leftSize = i - inStart;
+            TreeNode root = new TreeNode(rootVal);
+            // 递归的构造左右子树
+            root.left = build(preorder, preStart + 1, preStart + leftSize, inorder, inStart, i - 1);
+            root.right = build(preorder, preStart + leftSize + 1, preEnd, inorder, i + 1, inEnd);
+            return root;
+        }
     }
 
-    /**
-     * build 函数的定义：
-     * 若前序遍历数组为 preorder[preStart...preEnd]
-     *   中序遍历数组为 inorder[inStart...inEnd]
-     *   构造二叉树，返回该二叉树的根节点
-     * @param preorder
-     * @param preStart
-     * @param preEnd
-     * @param inorder
-     * @param inStart
-     * @param inEnd
-     * @return
-     */
-    private TreeNode build(int[] preorder, int preStart, int preEnd, int[] inorder, int inStart, int inEnd) {
-        if (preStart > preEnd) {
-            return null;
-        }
-        // root 节点对应的值就是前序遍历数组的第一个元素
-        int rootVal = preorder[preStart];
-        // root 在中序遍历的索引
-        int i = inStart;
-        for (; i <= inEnd; i++) {
-            if (inorder[i] == rootVal) {
-                break;
+    class Solution2 {
+        HashMap<Integer, Integer> valToIndex = new HashMap<>();
+        TreeNode buildTree(int[] preorder, int[] inorder) {
+            for (int i = 0; i < inorder.length; i++) {
+                valToIndex.put(inorder[i], i);
             }
+            return build(preorder, 0, preorder.length - 1, inorder, 0, inorder.length - 1);
         }
-        int leftSize = i - inStart;
-        TreeNode root = new TreeNode(rootVal);
-        // 递归的构造左右子树
-        root.left = build(preorder, preStart + 1, preStart + leftSize, inorder, inStart, i - 1);
-        root.right = build(preorder, preStart + leftSize + 1, preEnd, inorder, i + 1, inEnd);
-        return root;
+
+        private TreeNode build(int[] preorder, int preStart, int preEnd, int[] inorder, int inStart, int inEnd) {
+            if (preStart > preEnd) {
+                return null;
+            }
+            // root 节点对应的值就是前序遍历数组的第一个元素
+            int rootVal = preorder[preStart];
+            // root 在中序遍历的索引
+            int i = valToIndex.get(rootVal);
+            int leftSize = i - inStart;
+            TreeNode root = new TreeNode(rootVal);
+            // 递归的构造左右子树
+            root.left = build(preorder, preStart + 1, preStart + leftSize, inorder, inStart, i - 1);
+            root.right = build(preorder, preStart + leftSize + 1, preEnd, inorder, i + 1, inEnd);
+            return root;
+        }
     }
+
 }
+

@@ -34,31 +34,61 @@ package leetcode.tree;
 // Related Topics 树 数组 哈希表 分治 二叉树 👍 789 👎 0
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 //leetcode submit region begin(Prohibit modification and deletion)
-public class _106_从中序与后序遍历序列构造二叉树 {
-    class Solution {
+public class _106_从中序与后序遍历序列构造二叉树{
+    class Solution{
         public TreeNode buildTree(int[] inorder, int[] postorder) {
-            return build(inorder, 0, inorder.length-1, postorder, 0, postorder.length-1);
+            return build(inorder, 0, inorder.length - 1, postorder, 0, postorder.length - 1);
         }
 
-        private TreeNode build(int [] inorder, int inStart, int inEnd, int [] postorder, int postStart, int postEnd) {
+        private TreeNode build(int[] inorder, int inStart, int inEnd, int[] postorder, int postStart, int postEnd) {
             //base case
-            if(inStart > inEnd){
+            if (inStart > inEnd) {
                 return null;
             }
             TreeNode root = new TreeNode(postorder[postEnd]);
             int i = inStart;
-            for(; i<=inEnd; i++) {
-                if(inorder[i] == root.val) {
+            for (; i <= inEnd; i++) {
+                if (inorder[i] == root.val) {
                     break;
                 }
             }
-            int leftSize = i-inStart;
-            root.left = build(inorder, inStart,i-1, postorder, postStart, postStart+leftSize-1);
-            root.right = build(inorder, i+1, inEnd, postorder, postStart + leftSize, postEnd-1);
+            int leftSize = i - inStart;
+            root.left = build(inorder, inStart, i - 1, postorder, postStart, postStart + leftSize - 1);
+            root.right = build(inorder, i + 1, inEnd, postorder, postStart + leftSize, postEnd - 1);
             //构造root
             //递归构造root的左右子树
             return root;
         }
     }
+
+    class Solution2{
+        Map<Integer,Integer> valToIndex = new HashMap<>();
+        public TreeNode buildTree(int[] inorder, int[] postorder) {
+            for (int i = 0; i < inorder.length; i++) {
+                valToIndex.put(inorder[i], i);
+            }
+            return build(inorder, 0, inorder.length - 1, postorder, 0, postorder.length - 1);
+        }
+
+        private TreeNode build(int[] inorder, int inStart, int inEnd, int[] postorder, int postStart, int postEnd) {
+            //base case
+            if (inStart > inEnd) {
+                return null;
+            }
+            int rootVal = postorder[postEnd];
+            int i = valToIndex.get(rootVal);
+            TreeNode root = new TreeNode(rootVal);
+            int leftSize = i - inStart;
+            root.left = build(inorder, inStart, i - 1, postorder, postStart, postStart + leftSize - 1);
+            root.right = build(inorder, i + 1, inEnd, postorder, postStart + leftSize, postEnd - 1);
+            //构造root
+            //递归构造root的左右子树
+            return root;
+        }
+    }
+
 }
