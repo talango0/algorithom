@@ -45,24 +45,32 @@ package leetcode.tree;
 
 //leetcode submit region begin(Prohibit modification and deletion)
 public class _222_完全二叉树的节点个数 {
+    public int countNodesNormalTree(TreeNode root) {
+        if (root == null) return 0;
+        //如果是普通的二叉树显然只要向下遍历一遍即可，时间复杂度为 O(N)
+        return 1 + countNodesNormalTree(root.left) + countNodesNormalTree(root.right);
+    }
+    public  int countNodesFullTree(TreeNode root) {
+        if (root == null) return 0;
+        int h = 0;
+        //如果是一颗满二叉树
+        while (root != null){
+            root = root.left;
+            h++;
+        }
+        return (int)Math.pow(2, h) - 1;
+    }
 
     class Solution {
-        // public int countNodes(TreeNode root) {
-        //     if (root == null) return 0;
-        //     //如果是普通的二叉树显然只要向下遍历一遍即可，时间复杂度为 O(N)
-        //     return 1 + countNodes(root.left) + countNodes(root.right);
-        // }
-        // public int countNodes(TreeNode root) {
-        //     if (root == null) return 0;
-        //     int h = 0;
-        //     //如果是一颗满二叉树
-        //     while (root != null){
-        //         root = root.left;
-        //         h++;
-        //     }
-        //     return (int)Math.pow(2, h) - 1;
-        // }
 
+        /**
+         * 对于一颗完全二叉树，则是二者的结合。<p>
+         * 直觉感觉好像最坏情况下是 O(N*logN) 吧，因为之前的 while 需要 logN 的时间，最后要 O(N) 的时间向左右子树递归。
+         * 由于完全二叉树的性质，其子树一定有一棵是满的，所以一定会触发 hl == hr，只消耗 O(logN) 的复杂度而不会继续递归。
+         * 综上，算法的递归深度就是树的高度 O(logN)，每次递归所花费的时间就是 while 循环，需要 O(logN)，所以总体的时间复杂度是 O(logN*logN)。
+         * @param root
+         * @return
+         */
         public int countNodes(TreeNode root) {
             if (root == null) return 0;
             //如果是完全二叉树，则是两种树的结合
