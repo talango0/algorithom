@@ -22,11 +22,16 @@ package leetcode.arrays;
 //
 // Related Topics 数组 分治 快速选择 排序 堆（优先队列） 👍 1936 👎 0
 
+import leetcode.jzhoffer.剑指_Offer_II_060_出现频率最高的k个数字;
+import org.junit.platform.commons.util.CollectionUtils;
+
+import java.util.Arrays;
 import java.util.PriorityQueue;
 
 /**
  * @author mayanwei
  * @date 2022-11-02.
+ * @see 剑指_Offer_II_060_出现频率最高的k个数字
  */
 public class _215_数组中的第K个最大元素{
     class Solution {
@@ -44,6 +49,16 @@ public class _215_数组中的第K个最大元素{
             // pq 中剩下的是 nums 中 k 个最大元素，
             // 堆顶是最小的那个，即第 k 个最大元素
             return pq.peek();
+        }
+    }
+
+    public static void main(String[] args) {
+        PriorityQueue<Integer> queue = new PriorityQueue<Integer>((a,b)->{return b-a;});
+        queue.offer(2);
+        queue.offer(1);
+        queue.offer(3);
+        while (!queue.isEmpty()) {
+            System.out.println(queue.poll());
         }
     }
 }

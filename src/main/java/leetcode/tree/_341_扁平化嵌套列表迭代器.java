@@ -49,8 +49,23 @@ class NestedIntegerImpl implements NestedInteger {
 class NTree {
     int val;
     NTree [] children;
-}
 
+    /**
+     * N 叉树的遍历框架
+     * @param root
+     */
+    void traverse(NTree root) {
+        if (root == null) {
+            return;
+        }
+        for (NTree child: root.children) {
+            traverse(child);
+        }
+    }
+}
+/**
+ * 遍历一颗 N 叉树
+ */
 public class _341_扁平化嵌套列表迭代器 {
     //我们只对整数型的 NestedInteger感兴趣，也就是我们只要叶子节点，所以在traverse函数中只要到达叶子节点的时候val加进去即可
     public class NestedIterator implements Iterator<Integer> {

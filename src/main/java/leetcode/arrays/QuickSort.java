@@ -9,6 +9,14 @@ import java.util.Deque;
  */
 public class QuickSort {
 
+    /**
+     * 一句话说明快速排序：
+     * 快速排序是先将一个元素排好序，然后在将剩余元素排好序。
+     * 一句话说明归并排序
+     * 先把左边的数组排好序，再把右边的数组排好序，然后再把两半数组排合并。
+     * 剩下的元素有哪些？左边一坨，右边一坨，去吧，对子数组进行递归，用 partition 函数把剩下的元素也排好序。
+     * 从二叉树的视角，我们可以把子数组 nums[lo..hi] 理解成二叉树节点上的值，sort 函数理解成二叉树的遍历函数。
+     */
     static class Solution{
         public int partition(int[] args, int p, int r){
             int x = args[r];

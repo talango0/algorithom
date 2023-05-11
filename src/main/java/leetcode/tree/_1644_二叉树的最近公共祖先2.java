@@ -32,6 +32,15 @@ public class _1644_二叉树的最近公共祖先2 {
         }
         return left != null ? left:right;
     }
+
+    /**
+     * 对二叉树进行完全搜索，同时记录 p 和 q 是否存在树中。
+     * 下面在改一下题目，让在二叉搜索树中寻找 p 和 q 的最近公共祖先，应该如何做，见 235
+     * @param root
+     * @param p
+     * @param q
+     * @return
+     */
     TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         TreeNode res = find(root, p, q);
         if (!foundP || !foundQ) {
