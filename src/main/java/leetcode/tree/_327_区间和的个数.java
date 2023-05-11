@@ -33,7 +33,37 @@ package leetcode.tree;
 // Related Topics 树状数组 线段树 数组 二分查找 分治 有序集合 归并排序 👍 461 👎 0
 
 
+import leetcode.arrays.BucketSort;
+import org.junit.Test;
+
+import java.util.Arrays;
+
 public class _327_区间和的个数 {
+    /**
+     * 题目的意思，计算元素和落在 [lower, upper] 的所有子数组的个数。
+     * 暴力法:2层循环
+     */
+    class BruteSolution {
+        public int countRangSum(int [] nums, int lower, int upper) {
+            int res = 0;
+            for (int i = 0; i< nums.length; i++) {
+                for (int j = i + 1; j <= nums.length; j++) {
+                    int sum = Arrays.stream(Arrays.copyOfRange(nums, i, j)).sum();
+                    if(sum >= lower && sum <= upper) {
+                        res++;
+                    }
+                }
+            }
+            return res;
+        }
+    }
+
+    /**
+     * 要实现快速计算子数组的和，可以采用前缀和计算区间和。
+     * count[i] = COUNT(j) where lower <= preSum[j] - preSum[i] <= upper
+     * 归并算法，本质上都是在遍历一棵（递归）树，然后在节点（前中后序位置）上执行代码，写递归，本质上就是告诉每个节点需要做什么
+     * 比如，归并排序算法，递归的sort 函数就是二叉树的遍历函数，而merge函数就是在每个节点上做的事。
+     */
     class Solution {
         private int lower, upper;
         private int count;
@@ -41,7 +71,7 @@ public class _327_区间和的个数 {
         public int countRangeSum(int[] nums, int lower, int upper) {
             this.lower = lower;
             this.upper = upper;
-            //构造前缀和
+            //构造前缀和, int 可能溢出，用long存储
             long [] preSum = new long [nums.length+1];
             for (int i = 0; i< nums.length; i++) {
                 preSum[i+1] += preSum[i] + (long)nums[i];
@@ -117,5 +147,15 @@ public class _327_区间和的个数 {
             }
 
         }
+    }
+
+    @Test
+    public void test() {
+        int [] nums = new int[] {-2,5,-1}; int lower = -2, upper = 2;
+        BruteSolution bruteSolution = new BruteSolution();
+        int count = bruteSolution.countRangSum(nums, lower, upper);
+
+        System.out.println(count);
+
     }
 }

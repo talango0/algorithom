@@ -25,13 +25,13 @@ public class MergeSort {
      * @param start
      * @param end
      */
-    void MergeSort(int[] array, int start, int end){
+    void sort(int[] array, int start, int end){
         if(start >= end) {
             return;
         }
         int mid = start+(end-start)/2;
-        MergeSort(array, start, mid);
-        MergeSort(array, mid+1, end);
+        sort(array, start, mid);
+        sort(array, mid+1, end);
         Merge(array, start, mid, end);
 
     }
@@ -92,10 +92,8 @@ public class MergeSort {
 
     public static void main(String [] args) {
         int [] nums = {13, 19, 9, 5, 12, 8, 7, 4, 21, 2, 5, 11};
-        QuickSort.Solution solution = new QuickSort.Solution();
-        solution.quickSort(nums, 0, nums.length-1);
+        MergeSort mergeSort = new MergeSort();
+        mergeSort.sort(nums, 0, nums.length-1);
         System.out.println(Arrays.toString(nums));
-
-
     }
 }
