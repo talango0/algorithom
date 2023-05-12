@@ -57,18 +57,93 @@ package leetcode.tree;
 // Related Topics 树 二叉搜索树 二叉树 👍 902 👎 0
 
 
+import edu.princeton.cs.algs4.BST;
+
 //leetcode submit region begin(Prohibit modification and deletion)
 public class _450_删除二叉搜索树中的节点 {
+
+    //先写框架
+    TreeNode deleteNode(TreeNode root, int key) {
+        if (root.val == key) {
+            // 找到了，进行删除
+        } else if (root.val < key) {
+            root.right = deleteNode(root.right, key);
+        } else if (root.val > key) {
+            root.left = deleteNode(root.left, key);
+        }
+        return root;
+    }
+
+    /**
+     * <pre>
+     *
+     * ┌───────────┬───┬───────────────────────────────┬───┬───────┐
+     * │   case 1  │ 5 │                               │ 5 │       │
+     * │           └───┘                               └───┘       │
+     * │      ┌──────┴─────┐                      ┌──────┴─────┐   │
+     * │    ┌─▼─┐        ┌─▼─┐                  ┌─▼─┐        ┌─▼─┐ │
+     * │    │ 2 │        │ 6 │                  │ 2 │        │ 6 │ │
+     * │    └───┘        └───┘                  └───┘        └───┘ │
+     * │  ┌───┴──┐         └───┐   ───────▶   ┌───┴──┐             │
+     * │┌─▼─┐  ┌─▼─┐         ┌ ▼ ┐          ┌─▼─┐  ┌─▼─┐           │
+     * ││ 1 │  │ 4 │           7            │ 1 │  │ 4 │           │
+     * │└───┘  └───┘         └ ─ ┘          └───┘  └───┘           │
+     * │     ┌───┘                               ┌───┘             │
+     * │   ┌─▼─┐                               ┌─▼─┐               │
+     * │   │ 3 │                               │ 3 │               │
+     * │   └───┘                               └───┘               │
+     * ├───────────────────────────────────────────────────────────┤
+     * │   case 2                                                  │
+     * │           ┌───┐                               ┌───┐       │
+     * │           │ 5 │                               │ 5 │       │
+     * │           └───┘                               └───┘       │
+     * │      ┌──────┴─────┐                      ┌──────┴─────┐   │
+     * │    ┌─▼─┐        ┌ ▼ ┐                  ┌─▼─┐        ┌─▼─┐ │
+     * │    │ 2 │          6                    │ 2 │        │ 7 │ │
+     * │    └───┘        └ ─ ┘                  └───┘        └───┘ │
+     * │  ┌───┴──┐         └───┐   ───────▶   ┌───┴──┐             │
+     * │┌─▼─┐  ┌─▼─┐         ┌─▼─┐          ┌─▼─┐  ┌─▼─┐           │
+     * ││ 1 │  │ 4 │         │ 7 │          │ 1 │  │ 4 │           │
+     * │└───┘  └───┘         └───┘          └───┘  └───┘           │
+     * │     ┌───┘                               ┌───┘             │
+     * │   ┌─▼─┐                               ┌─▼─┐               │
+     * │   │ 3 │                               │ 3 │               │
+     * │   └───┘                               └───┘               │
+     * ├───────────────────────────────────────────────────────────┤
+     * │   case 3                                                  │
+     * │           ┌───┐                               ┌───┐       │
+     * │           │ 5 │                               │ 5 │       │
+     * │           └───┘                               └───┘       │
+     * │      ┌──────┴─────┐                      ┌──────┴─────┐   │
+     * │    ┌ ▼ ┐        ┌─▼─┐                  ╔═▼═╗        ┌─▼─┐ │
+     * │      2          │ 6 │                  ║ 3 ║        │ 7 │ │
+     * │    └ ─ ┘        └───┘                  ╚═══╝        └───┘ │
+     * │  ┌───┴──┐         └───┐   ───────▶   ┌───┴──┐             │
+     * │┌─▼─┐  ┌─▼─┐         ┌─▼─┐          ┌─▼─┐  ┌─▼─┐           │
+     * ││ 1 │  │ 4 │         │ 7 │          │ 1 │  │ 4 │           │
+     * │└───┘  └───┘         └───┘          └───┘  └───┘           │
+     * │     ┌───┘                                                 │
+     * │   ╔═▼═╗                                                   │
+     * │   ║ 3 ║                                                   │
+     * │   ╚═══╝                                                   │
+     * └───────────────────────────────────────────────────────────┘
+     * </pre>
+     */
     class Solution {
         public TreeNode deleteNode(TreeNode root, int val) {
             if (root == null) {
                 return null;
             }
             if (root.val == val) {
+                // 处理情况1，2
                 if (root.left == null) return root.right;
                 if (root.right == null) return root.left;
+                // 处理情况3
+                // 获取右子树最小的节点
                 TreeNode minNode = getMin(root.right);
+                // 删除右子树最小节点
                 root.right = deleteNode(root.right, minNode.val);
+                // 用右子树最小的节点替换 root 节点
                 minNode.left = root.left;
                 minNode.right = root.right;
                 root = minNode;
@@ -83,6 +158,7 @@ public class _450_删除二叉搜索树中的节点 {
         }
 
         TreeNode getMin(TreeNode node) {
+            //BST 最左边的就是最小值
             while (node.left != null) node = node.left;
             return node;
         }

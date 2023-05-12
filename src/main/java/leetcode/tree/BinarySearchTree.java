@@ -5,7 +5,30 @@ import common.TreeNode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 /**
+ * <pre>
+ * ┌────────────────────────────────────┐
+ * │                ┌───┐               │
+ * │   BST          │ 8 │               │
+ * │                └───┘               │
+ * │                  │                 │
+ * │        ┌─────────┴────────┐        │
+ * │        │                  │        │
+ * │      ┌─▼─┐              ┌─▼─┐      │
+ * │      │ 3 │              │ 10│      │
+ * │      └───┘              └───┘      │
+ * │        │                  │        │
+ * │  ┌─────┴────┐             └─────┐  │
+ * │┌─▼─┐      ┌─▼─┐               ┌─▼─┐│
+ * ││ 1 │      │ 6 │               │ 14││
+ * │└───┘      └───┘               └───┘│
+ * │             │                   │  │
+ * │         ┌───┴────┐         ┌────┘  │
+ * │       ┌─▼─┐    ┌─▼─┐     ┌─▼─┐     │
+ * │       │ 4 │    │ 7 │     │ 13│     │
+ * │       └───┘    └───┘     └───┘     │
+ * └────────────────────────────────────┘
  * 1、如果当前节点会对下面的子节点有整体影响，可以通过辅助函数增长参数列表，借助参数传递信息。
  *
  * 2、在二叉树递归框架之上，扩展出一套 BST 代码框架：
@@ -19,9 +42,17 @@ import java.util.Optional;
  *         BST(root.left, target);
  * }
  * 3、根据代码框架掌握了 BST 的增删查改操作。
- */
-
-/**
+ * </pre>
+ * @see leetcode.tree._450_删除二叉搜索树中的节点
+ * @see leetcode.tree._700_二叉搜索树中的搜索
+ * @see leetcode.tree._701_二叉搜索树中的插入操作
+ * @see leetcode.tree._98_验证二叉搜索树
+ * @see leetcode.tree._230_二叉搜索树第k小的元素
+ * @see leetcode.tree._1038_从二叉搜索树到累加树
+ * @see leetcode.jzhoffer.剑指_Offer_II_054_所有大于等于节点的值之和
+ * @see leetcode.tree._95_不同的二叉搜索树2
+ * @see leetcode.tree._96_不同的二叉搜索树
+ *
  * @author mayanwei
  */
 public class BinarySearchTree {
@@ -117,11 +148,10 @@ public class BinarySearchTree {
     }
 
 
+    /* 前驱和后继 */
+
     /**
-     *  前驱和后继
-     */
-    /**
-     * 后继
+     * 后继，找比它大的里面的最小值
      * @param x
      * @return
      */
@@ -138,7 +168,7 @@ public class BinarySearchTree {
     }
 
     /**
-     * 前驱
+     * 前驱，找比它小的里面的最大值
      * @param x
      * @return
      */
@@ -158,7 +188,6 @@ public class BinarySearchTree {
      * 定理；
      *     在一颗高度为h的二叉树上，动态集合上的操作 search,minimum,maxmum,successor,Predecessor 可以在O（h）时间内完成
      */
-
 
     /**
      * 插入二叉搜索树

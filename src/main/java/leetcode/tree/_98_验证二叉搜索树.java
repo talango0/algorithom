@@ -42,23 +42,46 @@ package leetcode.tree;
  * @date 2022-06-11.
  */
 public class _98_验证二叉搜索树{
-    class Solution {
-        // 下面的错误在与只是检查了它的左右孩子节点是否符合左小右大的元素； 但是根据BST的定义，root的整个左子树都要小于 root.val,整个右子树都要大于 root.val
-        // public boolean isValidBST(TreeNode root) {
-        //     if (root == null) {
-        //         return true;
-        //     }
-        //     // root 的左边更小
-        //     if (root.left != null && root.left.val > root.val) {
-        //         return false;
-        //     }
-        //     // root 的右边更大
-        //     if (root.right != null && root.right.val < root.val) {
-        //         return false;
-        //     }
-        //     return isValidBST(root.left) && isValidBST(root.right);
-        // }
+    /**
+     * <pre>
+     * ┌─────────────────────────┐
+     * │        ┌ ─ ┐            │
+     * │          10             │
+     * │        └ ─ ┘            │
+     * │   ┌──────┴─────┐        │
+     * │ ┌─▼─┐        ┌─▼─┐      │
+     * │ │ 5 │        │ 15│      │
+     * │ └───┘        └───┘      │
+     * │          ┌─────┴─────┐  │
+     * │        ┌ ▼ ┐       ┌─▼─┐│
+     * │          6         │ 10││
+     * │        └ ─ ┘       └───┘│
+     * └─────────────────────────┘
+     * 下面的错误在与只是检查了它的左右孩子节点是否符合左小右大的元素；
+     * 但是根据BST的定义，root的整个左子树都要小于 root.val,整个右子树都要大于 root.val
+     * </pre>
+     */
+    class Wrong{
+        public boolean isValidBST(TreeNode root) {
+            if (root == null) {
+                return true;
+            }
+            // root 的左边更小
+            if (root.left != null && root.left.val > root.val) {
+                return false;
+            }
+            // root 的右边更大
+            if (root.right != null && root.right.val < root.val) {
+                return false;
+            }
+            return isValidBST(root.left) && isValidBST(root.right);
+        }
+    }
 
+    /**
+     * 对于一个root 只能管自己的左右节点，怎么把root 的约束传递给子树呢？
+     */
+    class Solution{
         public boolean isValidBST(TreeNode root) {
             if (root == null) {
                 return true;
@@ -69,15 +92,18 @@ public class _98_验证二叉搜索树{
         //限定以root 为根的结点必须满足 l.val < root.val < g.val
         //通过使用辅助函数，增减函数参数列表，在参数中携带额外信息，将这种约束传递给子树的所有节点，这也是二叉树算法的一个小技巧
         public boolean isValidBST(TreeNode root, TreeNode l, TreeNode g) {
+            // base case
             if (root == null) {
                 return true;
             }
-            if (l != null && l.val >= root.val){
+            // 若 root 不符合 l 和 r 的限制，说明不是合法的 BST
+            if (l != null && l.val >= root.val) {
                 return false;
             }
-            if (g != null && g.val <= root.val){
+            if (g != null && g.val <= root.val) {
                 return false;
             }
+            // 限定左子树的最大值为 root.val, 右子树的最小值为 root.val
             return isValidBST(root.left, l, root) && isValidBST(root.right, root, g);
         }
     }

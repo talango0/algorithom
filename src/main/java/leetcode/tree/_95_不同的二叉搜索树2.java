@@ -37,12 +37,19 @@ import java.util.List;
 /**
  * @author mayanwei
  * @date 2022-06-11.
+ * @see _96_不同的二叉搜索树
  */
 public class _95_不同的二叉搜索树2{
+    /**
+     * 思路：
+     * 1. 穷举 root 节点的所有可能
+     * 2. 递归构造出左右子树的所有合法 BST
+     * 3. 给 root 节点穷举所有左右子树的组合
+     */
     class Solution {
         public List<TreeNode> generateTrees(int n) {
             if (n == 0) {
-                return new ArrayList<TreeNode>(0);
+                return new LinkedList<TreeNode>();
             }
 
             return build(1, n);
