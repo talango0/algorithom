@@ -12,6 +12,64 @@ import java.util.Arrays;
  * @date 2022-08-05.
  */
 public class BitOperation{
+    /* 常见位操作，获取与设置数位*/
+    /**
+     * 1. 获取数位
+     * 将1左移i位，得到形如 000010000，然后对这个值与num执行 位与(AND) 操作,从而将 i 位之外的所有位清0，最后检查结果是否位0，
+     * 不为 0 说明 i 位为 1，否则，i位为0
+     */
+    public boolean getBit(int num, int i) {
+        return ((1 << i) & num) != 0;
+    }
+
+
+    /**
+     * 2. 设置数位
+     * <pre>
+     * 1 l mv i ->  0000010000
+     * or op |  ->  0110001000
+     *              0110011000
+     * </pre>
+     */
+    public int setBit(int num, int i) {
+        return num | (i << i);
+    }
+
+    /**
+     *3. 清零数位
+     * 该方法与 setBit 相反，首先将 00010000 取反进而得到 11101111 的数字。
+     * 接着，对该数字和 num 执行位与（AND），这样只会清零 num 的第 i 为，其余则保持不变。
+     */
+    public int clearBit(int num, int i) {
+        int mask = 1 << i;
+        return num & mask;
+    }
+
+    //如果要清零最高位至第i位所有的数位（包括最高位和第 i 位），就需要创建一个第i位为1 (1<<i) 的掩码。然后将其减1得到一串第一部分全为0
+    // 第二部分全为 1 的数字。之后，将目标数字与该掩码执行 位与（AND） 操作，即得到只保留了最后 i 位的数字。
+    public int clearBitsMBSthroughI(int num, int i) {
+        int mask = (1 << i) - 1;
+        return num & mask;
+    }
+
+    // 如果要清零第i位至第0位的所有数位（包括第i位和第0位），使用一串 1 构成数字（-1）并将其左移 i + 1 位，如此便得到一串第一部分全为1
+    // 第二部分全为 0 的数字
+    public int clearBitsthrough0(int num, int i) {
+        int mask = (-1 << (i + 1));
+        return  num & mask;
+    }
+
+    /**
+     * 4. 更新数位
+     * 将第 i 位的值设置为 v ，首先，用类似 1111101111 将第 i 清零，然后将待写入值 v 左移 i 位，得倒一个 i 位为 v,但其余位均为0的数。
+     * 最后，对之前取得的两个结果执行 位或 操作，v 为1，则将num的i位更新位1，否则该位仍为 0
+     */
+    public int updateBit(int num, int i, boolean bitIs1) {
+        int v = bitIs1 ? 1 : 0;
+        int mask = ~(v << i);
+        return (num & mask) | (v << i);
+    }
+
     @Test
     public void test1() {
 
