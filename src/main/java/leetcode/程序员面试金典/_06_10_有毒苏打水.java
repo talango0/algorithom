@@ -12,7 +12,7 @@ import java.util.Set;
  * @author mayanwei
  * @date 2023-05-19.
  */
-public class _6_10_有毒苏打水{
+public class _06_10_有毒苏打水{
     // 药瓶
     static class Bottle{
         private boolean poisoned = false;
