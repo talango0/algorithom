@@ -63,6 +63,7 @@ public class 剑指_Offer_II_084_含有重复元素集合的全排列{
             return res;
         }
 
+
         private void backTrace(int[] nums) {
             if (tmp.size() == nums.length) {
                 res.add(new ArrayList(tmp));
@@ -73,7 +74,7 @@ public class 剑指_Offer_II_084_含有重复元素集合的全排列{
                 if (used[i]) {
                     continue;
                 }
-                // 排除重复包含排列
+                // 排除重复包含排列,!used[i - 1]剪枝和 used[i - 1]剪枝都可以得到正确的结果，但是前者效率高
                 if (i > 0 && nums[i] == nums[i - 1] && !used[i - 1]) {
                     // 如果前面的相邻相等的元素没有用过，则跳过。
                     continue;
@@ -82,6 +83,36 @@ public class 剑指_Offer_II_084_含有重复元素集合的全排列{
                 used[i] = true;
                 backTrace(nums);
                 tmp.removeLast();
+                used[i] = false;
+            }
+        }
+
+        void backtrack(int[] nums, LinkedList<Integer> track) {
+            if (track.size() == nums.length) {
+                res.add(new LinkedList(track));
+                return;
+            }
+
+            // 记录之前树枝上元素的值，设想一个节点出现了相同的树枝。
+            // 题目说 -10 <= nums[i] <= 10，所以初始化为特殊值
+            int prevNum = -666;
+            for (int i = 0; i < nums.length; i++) {
+                // 排除不合法的选择
+                if (used[i]) {
+                    continue;
+                }
+                if (nums[i] == prevNum) {
+                    continue;
+                }
+
+                track.add(nums[i]);
+                used[i] = true;
+                // 记录这条树枝上的值
+                prevNum = nums[i];
+
+                backtrack(nums, track);
+
+                track.removeLast();
                 used[i] = false;
             }
         }
