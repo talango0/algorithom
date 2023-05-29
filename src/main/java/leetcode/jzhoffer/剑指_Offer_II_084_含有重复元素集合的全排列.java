@@ -75,6 +75,7 @@ public class 剑指_Offer_II_084_含有重复元素集合的全排列{
                 }
                 // 排除重复包含排列
                 if (i > 0 && nums[i] == nums[i - 1] && !used[i - 1]) {
+                    // 如果前面的相邻相等的元素没有用过，则跳过。
                     continue;
                 }
                 tmp.addLast(nums[i]);
