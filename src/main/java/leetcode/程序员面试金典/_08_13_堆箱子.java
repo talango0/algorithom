@@ -153,34 +153,35 @@ public class _08_13_堆箱子{
             return box[0] < bottom[0] && box[1] < bottom[1] && box[2] < bottom[2];
         }
     }
+    class Solution3{
+        public int pileBox(int[][] box) {
+            Arrays.sort(box, (a, b) -> {
+                if (a[0] == b[0]) {
+                    if (a[1] == b[1]) {
+                        return b[2] - a[2];
+                    }
+                    else {
+                        return b[1] - a[1];
+                    }
+                }
+                return a[0] - b[0];
+            });
+            int ans = box[0][2];
+            int n = box.length;
+            int[] dp = new int[n];
+            dp[0] = box[0][2];
+            for (int i = 1; i < n; i++) {
+                dp[i] = box[i][2];
+                for (int j = 0; j < i; j++) {
+                    if (box[j][1] < box[i][1] && box[j][2] < box[i][2]) {
+                        dp[i] = Math.max(dp[i], dp[j] + box[i][2]);
+                    }
+                }
+                ans = Math.max(ans, dp[i]);
+            }
+            return ans;
+        }
+    }
+
 }
 
-class Solution2{
-    public int pileBox(int[][] box) {
-        Arrays.sort(box, (a, b) -> {
-            if (a[0] == b[0]) {
-                if (a[1] == b[1]) {
-                    return b[2] - a[2];
-                }
-                else {
-                    return b[1] - a[1];
-                }
-            }
-            return a[0] - b[0];
-        });
-        int ans = box[0][2];
-        int n = box.length;
-        int[] dp = new int[n];
-        dp[0] = box[0][2];
-        for (int i = 1; i < n; i++) {
-            dp[i] = box[i][2];
-            for (int j = 0; j < i; j++) {
-                if (box[j][1] < box[i][1] && box[j][2] < box[i][2]) {
-                    dp[i] = Math.max(dp[i], dp[j] + box[i][2]);
-                }
-            }
-            ans = Math.max(ans, dp[i]);
-        }
-        return ans;
-    }
-}
