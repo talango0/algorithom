@@ -91,7 +91,6 @@ public class _273_整数转换英文表示{
                 curr.append(singles[num / 100]).append(" Hundred ");
                 recursion(curr, num % 100);
             }
-
         }
     }
 
