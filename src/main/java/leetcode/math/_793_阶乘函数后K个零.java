@@ -14,7 +14,7 @@ package leetcode.math;
 //
 //输入：k = 0
 //输出：5
-//解释：0!, 1!, 2!, 3!, 和 4! 均符合 k = 0 的条件。
+//解释：0!, 1!, 2!, 3!, 和 4!均符合 k = 0 的条件。
 //
 //
 // 示例 2：
@@ -106,7 +106,7 @@ public class _793_阶乘函数后K个零{
             return lo;
         }
 
-        // 为避免一处的问题，该函数把所有数据类型改成long
+        // 为避免溢出的问题，该函数把所有数据类型改成long
         private long trailingZeroes(long n) {
             long res = 0;
             for (long d = n; d / 5 > 0; d = d / 5) {
