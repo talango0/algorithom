@@ -56,7 +56,7 @@ public class _17_08_马戏团人塔{
             HW[] items = buildWH(height, weight);
             Arrays.sort(items, (o1, o2) -> {
                 return o1.height == o2.height ?
-                        ((Integer) o1.weight).compareTo(o2.weight) :
+                        ((Integer) o2.weight).compareTo(o1.weight) :
                         ((Integer) o1.height).compareTo(o2.height);
             });
             ArrayList<HW> res = bestSeqAtIndex(items, new ArrayList<HW>(), 0);
@@ -142,7 +142,7 @@ public class _17_08_马戏团人塔{
         public int bestSeqAtIndex(int[] height, int[] weight) {
             HW[] items = buildWH(height, weight);
             Arrays.sort(items, (o1, o2) -> o1.height == o2.height ?
-                    ((Integer) o1.weight).compareTo(o2.weight) :
+                    ((Integer) o2.weight).compareTo(o1.weight) :
                     ((Integer) o1.height).compareTo(o2.height));
             ArrayList<ArrayList<HW>> solutions = new ArrayList<>();
             ArrayList<HW> bestSequences = null;
