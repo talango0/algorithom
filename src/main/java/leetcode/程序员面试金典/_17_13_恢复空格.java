@@ -25,6 +25,7 @@ package leetcode.程序员面试金典;
 //链接：https://leetcode.cn/problems/re-space-lcci
 //著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
+import leetcode.string._139_单词拆分;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -34,6 +35,7 @@ import java.util.HashSet;
 /**
  * @author mayanwei
  * @date 2023-06-24.
+ * @see _139_单词拆分
  */
 public class _17_13_恢复空格{
     /**
@@ -174,6 +176,16 @@ public class _17_13_恢复空格{
         }
     }
 
+    /**
+     * 定义：dp[i] 表示考虑前 i 个字符最少的未识别的字符数量，从前往后计算dp的值。
+     *
+     * 考虑状态转移方程，每次转移的时候我们考虑第 j(j<=i) 个到第 i 个字符组成的子串 sentence[j-1...i-1](注字符串
+     * 下表从个0开始)是否能在词典中找到，如果能找到的话按照定义转移方即为
+     * dp[i] = min(dp[i], dp[j-1])
+     * 否则，没有找到的话我们可以复用 dp[i-1] 的状态加上未被识别的第 i 个字符，因此此时 dp 值为
+     * dp[i] = dp[i-1]+1
+     * 最后问题化简成了转移的时候如何快速判断当前子串是否存在于词典中.
+     */
     class Solution3{
         public int respace(String[] dictionary, String sentence) {
             int n = sentence.length();
