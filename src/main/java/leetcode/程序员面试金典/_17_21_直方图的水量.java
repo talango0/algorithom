@@ -1,11 +1,7 @@
 package leetcode.程序员面试金典;
 
-/**
- *字节
- */
-public class _17_21_直方图的水量{
-
- //给定一个直方图(也称柱状图)，假设有人从上面源源不断地倒水，最后直方图能存多少水量?直方图的宽度为 1。
+import leetcode.arrays._42_接雨水;
+//给定一个直方图(也称柱状图)，假设有人从上面源源不断地倒水，最后直方图能存多少水量?直方图的宽度为 1。
 //
 //
 //
@@ -19,11 +15,34 @@ public class _17_21_直方图的水量{
 // Related Topics 栈 数组 双指针
 // 👍 32 👎 0
 
+/**
+ * 字节
+ *
+ * @see _42_接雨水
+ */
+public class _17_21_直方图的水量{
 
-    // TODO: 2022/8/28
-    class Solution {
+    class Solution{
         public int trap(int[] height) {
-            return 0;
+            int left = 0, right = height.length - 1;
+            int res = 0;
+            int l_max = 0, r_max = 0;
+            while (left < right) {
+                // l_max 是 height[0..left] 中最高柱子的高度，
+                // r_max 是 height[right..end] 的最高柱子的高度
+                l_max = Math.max(l_max, height[left]);
+                r_max = Math.max(r_max, height[right]);
+                // res += min(l_max, r_max)-height[i]
+                if (l_max < r_max) {
+                    res += l_max - height[left];
+                    left++;
+                }
+                else {
+                    res += r_max - height[right];
+                    right--;
+                }
+            }
+            return res;
         }
     }
 
