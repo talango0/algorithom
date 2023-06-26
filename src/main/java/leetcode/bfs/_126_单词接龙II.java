@@ -54,12 +54,15 @@ package leetcode.bfs;
 //
 // Related Topics 广度优先搜索 哈希表 字符串 回溯 👍 610 👎 0
 
+import leetcode.程序员面试金典._17_22_单词转换;
+
 import java.util.*;
 
 /**
  * @author mayanwei
  * @date 2022-09-11.
  * @see _127_单词接龙
+ * @see _17_22_单词转换
  */
 public class _126_单词接龙II{
     class Solution{
