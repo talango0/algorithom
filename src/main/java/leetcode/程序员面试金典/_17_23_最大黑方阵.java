@@ -242,4 +242,32 @@ public class _17_23_最大黑方阵{
             return res[2] == 0 ? new int[]{} :res;
         }
     }
+    class Solution4 {
+        public int[] findSquare(int[][] matrix) {
+            int n = matrix.length;
+            int[][] left = new int[n + 1][n + 1];
+            int[][] up = new int[n + 1][n + 1];
+            int r = 0, c = 0, size = 0;
+            for (int i = 1; i <= n; i++) {
+                for (int j = 1; j <= n; j++) {
+                    if (matrix[i - 1][j - 1] == 0) {
+                        left[i][j] = left[i][j - 1] + 1;
+                        up[i][j] = up[i - 1][j] + 1;
+                        int border = Math.min(left[i][j], up[i][j]);
+                        while (left[i - border + 1][j] < border || up[i][j - border + 1] < border) {
+                            border--;
+                        }
+                        if (border > size) {
+                            r = i - border;
+                            c = j - border;
+                            size = border;
+                        }
+                    }
+                }
+            }
+            return size > 0 ? new int[]{r, c, size} : new int[0];
+        }
+    }
+
+
 }
