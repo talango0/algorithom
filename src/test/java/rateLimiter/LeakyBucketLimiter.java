@@ -16,7 +16,7 @@ public class LeakyBucketLimiter{
     private int capacity;
 
     /**
-     * 以一定的速率请求
+     * 以一定的速率请求，这个处理速率依赖于消费方，这个速率在极速的情况下无法控制。
      */
     private int rate;
 

@@ -19,9 +19,9 @@ public class TokenBucketLimiter{
      */
     private AtomicInteger tokenSize;
     /**
-     * 产生令牌的速度 n/s
+     * 产生令牌的速度 n/s,可以调整产生令牌的速度调节
      */
-    private int rate;
+    private volatile int rate;
 
 
     public TokenBucketLimiter(int bucketSize, int rate) {
@@ -30,17 +30,25 @@ public class TokenBucketLimiter{
         this.tokenSize = new AtomicInteger(0);
         new Thread(() -> {
             while (true) {
-                if (tokenSize.get() < bucketSize) {
+                if (tokenSize.get() < this.bucketSize) {
                     tokenSize.incrementAndGet();
                 }
                 try {
-                    Thread.sleep(1000 / rate);
+                    Thread.sleep(1000 / this.rate);
                 } catch (InterruptedException e) {
                     //just do nothing
                 }
             }
 
         }).start();
+    }
+
+    public int getRate() {
+        return rate;
+    }
+
+    public void setRate(int rate) {
+        this.rate = rate;
     }
 
     public synchronized boolean tryAcquire() {
