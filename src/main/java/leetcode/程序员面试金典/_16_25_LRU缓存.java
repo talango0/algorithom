@@ -91,20 +91,21 @@ public class _16_25_LRU缓存{
     }
 
 
-    class ListNode{
-        int key;
-        int value;
-        ListNode next;
-        ListNode pre;
-
-        public ListNode(int key, int value) {
-            this.key = key;
-            this.value = value;
-        }
-    }
 
 
     class LRUCache2{
+        class ListNode{
+            int key;
+            int value;
+            ListNode next;
+            ListNode pre;
+
+            public ListNode(int key, int value) {
+                this.key = key;
+                this.value = value;
+            }
+        }
+
         int capacity;
         int num;
         Map<Integer, ListNode> map;

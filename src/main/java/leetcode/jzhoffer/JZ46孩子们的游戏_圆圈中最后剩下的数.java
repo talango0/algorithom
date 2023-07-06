@@ -1,7 +1,10 @@
 package leetcode.jzhoffer;
 
 
-public class JZ46孩子们的游戏_圆圈中最后剩下的数 {
+/**
+ * 约瑟夫环
+ */
+public class JZ46孩子们的游戏_圆圈中最后剩下的数{
 
     /**
      * 题目描述
@@ -14,7 +17,7 @@ public class JZ46孩子们的游戏_圆圈中最后剩下的数 {
      * 请你试着想下,哪个小朋友会得到这份礼品呢？(注：小朋友的编号是从0到n-1)
      * 如果没有小朋友，请返回-1
      */
-    public static class Solution {
+    public static class Solution{
         /*
         题目抽象：
         给定由一个 [0, ... , n-1] 构成的数组，第一次由 0 开始数 m 个数，然后删除，以后每次从删除的数下一个位置开始数 m 个数，然后删除，直到剩余一个数字，找出那个数字。
@@ -28,12 +31,50 @@ public class JZ46孩子们的游戏_圆圈中最后剩下的数 {
         假设
          */
 
+        /**
+         * <pre>
+         * ┌────────────────────────────────────────────────────────────────────────┐
+         * │ n = 5                                                                  │
+         * │ m = 3                    delete number : (m-1)%n                       │
+         * │                          next number   : (m % n)                       │
+         * │ 0 1 2 3 4                          t = (m%n)                           │
+         * │                                                                        │
+         * │ 3 4 0 1                  t, t+1, t+2, ... , 0, 1, ... , t-3, t-2       │
+         * │                                                                        │
+         * │ 1 3 4                   [n - 1,m]    ->  [n ,m]                        │
+         * │                                0          t + 0                        │
+         * │ 1 3                            1          t + 1                        │
+         * │                               ...          ...                         │
+         * │ 3                             n-2         t - 2                        │
+         * │                                                                        │
+         * │                         x in  [n-1, m]                                 │
+         * │                         x ->(x+t)%n                                    │
+         * │                         f(n) = (f(n-1) + t) % n                        │
+         * │                              = (f(n-1) + m%n)%n                        │
+         * │                              = (f(n-1) + m)%n                          │
+         * │                         f(1) = 0                                       │
+         * └────────────────────────────────────────────────────────────────────────┘
+         * 动态规划解析：
+         * 1. 状态定义：设[i,m] 的解为 dp[i]
+         * 2. 状态转移方程：dp[i] = (dp[i-1] + m)%i
+         * 3. 初始状态：[1,m] 的解恒为0， 即 dp[1] = 0
+         * 4. 返回值：返回[n,m]的解 dp[n]
+         *
+         * input n = 5, m = 3
+         * [1,3] : f(1)=0
+         * [2,3] : f(2)= f(f(1)+m)%2 = 1
+         * [3,3] : f(3)= f(f(2)+m)%2 = 1
+         * [4,3] : f(4)= f(f(3)+m)%2 = 0
+         * [5,3] : f(5)= f(f(4)+m)%2 = 3
+         * </pre>
+         * @return
+         */
         public int LastRemaining_Solution(int n, int m) {
-            if(n <= 0){
+            if (n <= 0) {
                 return -1;
             }
             int index = 0;
-            for(int i=2; i<=n; ++i){
+            for (int i = 2; i <= n; ++i) {
                 index = (index + m) % i;
             }
             return index;
@@ -43,6 +84,6 @@ public class JZ46孩子们的游戏_圆圈中最后剩下的数 {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        System.out.println(solution.LastRemaining_Solution(5,3));
+        System.out.println(solution.LastRemaining_Solution(5, 3));
     }
 }
