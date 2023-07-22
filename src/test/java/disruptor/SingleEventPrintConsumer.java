@@ -10,6 +10,12 @@ import org.slf4j.LoggerFactory;
  */
 public class SingleEventPrintConsumer implements EventConsumer{
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    /**
+     * Once we have the event defined, we need to create a consumer that will handle these events.
+     * As an example, we will create an EventHandler that will print the value out to the console.
+     * @return
+     */
     @Override
     public EventHandler<ValueEvent>[] getEventHandler() {
         final EventHandler<ValueEvent> eventHandler = (event, sequence, endOfBatch) -> print(event.getValue(), sequence);

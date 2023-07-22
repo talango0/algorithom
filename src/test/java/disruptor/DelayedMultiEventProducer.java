@@ -3,6 +3,9 @@ package disruptor;
 import com.lmax.disruptor.RingBuffer;
 
 /**
+ * Finally, we will need a source for these events.
+ * For simplicity, we will assume that the data is coming from some sort of I/O device,
+ * e.g. network or file in the form of a ByteBuffer.
  * @author mayanwei
  * @date 2022-12-10.
  */
