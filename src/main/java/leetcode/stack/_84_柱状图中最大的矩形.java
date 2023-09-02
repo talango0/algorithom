@@ -65,7 +65,9 @@ public class _84_柱状图中最大的矩形{
     class Solution2{
         public int largestRectangleArea(int[] heights) {
             int n = heights.length;
+            // left[i] 表示 nums[0...i] 大于等于 nums[i] 时的最小下标
             int[] left = new int[n];
+            // right[i] 表示 nums[i...n-1] 大于等于 nums[i] 时的最大下标
             int[] right = new int[n];
 
             Deque<Integer> mono_stack = new ArrayDeque<Integer>();

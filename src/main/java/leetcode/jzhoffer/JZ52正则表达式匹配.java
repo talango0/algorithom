@@ -7,6 +7,7 @@ import leetcode.dp._44_通配符匹配;
 /**
  * 字节
  * leetcode 剑指 Offer 19. 正则表达式匹配
+ *
  * @see _44_通配符匹配
  * @see _10_正则表达式匹配
  */
@@ -62,17 +63,17 @@ public class JZ52正则表达式匹配{
 
 
     /**
+     * <pre>
      * 分析：
      * 用f[i][j] 表示s的前i个字符与p中的前j个字符是否匹配。在状态转移时，考虑p的第j个字符的匹配情况：
-     * <p>
      * 1. p[j] != '*'
      * f[i][j] = matches(s[i],p[j])  ? f[i-1][j-1] : false
      * 2. p[j] == '*'
      * f[i][j] = matches(s[i], p[j-1]) ? (f[i-1][j] or f[i][j-2]) : f[i][j-2]
      * 初始状态 f[0][0] = true,表示空字符串为true，最终的答案为f[m][n]
-     * <p>
      * 空间复杂度 O(m*n)
      * 时间复杂度 O(n*n)
+     * </pre>
      */
 
 

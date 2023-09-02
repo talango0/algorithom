@@ -30,8 +30,6 @@ package leetcode.tree;
 // Related Topics 树 深度优先搜索 二叉搜索树 二叉树 👍 881 👎 0
 
 
-//leetcode submit region begin(Prohibit modification and deletion)
-
 /**
  * 在标准的最近公共祖先问题中，我们要在后续位置通过左右子树的搜索结果来判断当前节点是不是LCA
  * <pre>

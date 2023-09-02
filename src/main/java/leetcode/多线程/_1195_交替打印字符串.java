@@ -64,7 +64,7 @@ public class _1195_交替打印字符串{
          * 构造方法： parties 是参与线程的个数，barriAction  最后一个到达线程要做的事
          * <p>
          * public int await() throws InterruptedException, BrokenBarrierException
-         * public int await() thrwos InterruptedException, BrokenBarrierException
+         * public int await() throws InterruptedException, BrokenBarrierException
          * 函数调用 await 表示已经到达栅栏
          * BrokenBarrierException 表示栅栏已经破坏，破坏的原因可能是其中的一个线程 await 时被中断或者超时。
          * 调用 await 方法的线程告诉CyclicBarrier自己已经到达同步点，然后当前线程阻塞，直到 parties个线程调用了await方法

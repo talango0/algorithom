@@ -173,7 +173,7 @@ public class _1114_按序打印{
     }
 
     static class Solution4{
-        class Foo{
+        static class Foo{
             private ReentrantLock lock;
             private Condition condition1, condition2, condition3;
             volatile int i;
@@ -241,7 +241,7 @@ public class _1114_按序打印{
 
     @Test
     public void test() throws InterruptedException {
-        Solution1.Foo foo = new Solution1.Foo();
+        Solution4.Foo foo = new Solution4.Foo();
         new Thread(() -> {
             try {
                 foo.first(new Runnable(){

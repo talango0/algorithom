@@ -47,6 +47,8 @@ package leetcode.list;
 
 //leetcode submit region begin(Prohibit modification and deletion)
 
+import leetcode.jzhoffer.剑指_Offer_II_024_反转链表;
+
 import java.util.ArrayDeque;
 import java.util.Deque;
 
@@ -54,6 +56,7 @@ import java.util.Deque;
  * @author mayanwei
  * @date 2022-10-27.
  * @see _2_两数相加
+ * @see 剑指_Offer_II_024_反转链表
  */
 public class _445_两数相加II{
 
@@ -169,7 +172,7 @@ public class _445_两数相加II{
                 // 处理进位情况
                 carry = val / 10;
                 val %= 10;
-                // 构建新节点，直接接在 dummy 后面
+                // 构建新节点，直接接在 dummy 后面，采用头插法
                 ListNode curNode = new ListNode(val);
                 curNode.next = p.next;
                 p.next = curNode;

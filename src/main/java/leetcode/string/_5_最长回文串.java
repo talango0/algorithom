@@ -36,9 +36,14 @@ import java.util.ArrayList;
 /**
  * @see _1312_让字符串成为回文串的最少插入次数
  * @see _516_最长回文子序列
+ * @see _647_回文子串
+ * @see _5_最长回文串
  */
 public class _5_最长回文串 {
     /**
+     * <pre>
+     * 左右指针
+     *
      * 寻找回文串的问题核心思想是：从中间开始向两边扩散来判断回文串，对于最长回文子串，就是这个意思：
      *
      * for 0 <= i < len(s):
@@ -52,6 +57,7 @@ public class _5_最长回文串 {
      *     # 找到以 s[i] 和 s[i+1] 为中心的回文串
      *     palindrome(s, i, i + 1)
      *     更新答案
+     * </pre>
      */
     class Solution {
         public String longestPalindrome(String s) {
@@ -60,22 +66,29 @@ public class _5_最长回文串 {
             }
             String res = "";
             for (int i = 0; i<s.length(); i++){
+                // 以 s[i] 为中心的最长回文子串
                 String s1 = palingdrome(s, i, i);
+                // 以 s[i] 和 s[i+1] 为中心的最长回文子串
                 String s2 = palingdrome(s, i, i+1);
+                // res = longest(res, s1, s2)
                 res = res.length() > s1.length()? res:s1;
                 res = res.length() > s2.length()? res:s2;
             }
             return res;
         }
 
-        //再s中寻找已s[l] 和 是 s[r] 为中心的回文串
+        //在 s 中寻找以 s[l] 和 s[r] 为中心的最长回文串
         String palingdrome(String s, int l, int r) {
             int n = s.length();
-            //防止越界，如果输入相同的 l 和 r，就相当于于奇数长度的回文串，如果输入相邻的两个l和r，则相当于长度为偶数的回文串
-            while (l>=0 && r<n && s.charAt(l) == s.charAt(r)) {
-                l--;
-                r++;
+            // 防止越界，
+            // 如果输入相同的 l 和 r，就相当于于奇数长度的回文串，
+            // 如果输入相邻的两个l和r，则相当于长度为偶数的回文串
+            while (l>=0 && r<n
+                    && s.charAt(l) == s.charAt(r)) {
+                // 双指针，向两边展开
+                l--; r++;
             }
+            // 返回以 s[l] 和 s[r] 为中心的最长回文串
             return s.substring(l+1, r);
         }
     }

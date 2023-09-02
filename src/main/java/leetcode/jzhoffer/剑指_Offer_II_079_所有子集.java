@@ -1,6 +1,7 @@
 package leetcode.jzhoffer;
 
-import leetcode.backtracing._78_子集;
+import leetcode.backtracing.*;
+import leetcode.dfs._37_解数独;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -45,7 +46,23 @@ import java.util.List;
 /**
  * @author mayanwei
  * @date 2022-11-05.
+ * @see _39_组合总和
+ * @see _40_组合总和2
+ * @see _216_组合总和3
+ * @see _46_全排列
+ * @see _47_全排列2
+ * @see _77_组合
  * @see _78_子集
+ * @see _90_子集2
+ * @see 剑指_Offer_II_079_所有子集
+ * @see 剑指_Offer_II_080_含有_k_个元素的组合
+ * @see 剑指_Offer_II_081_允许重复选择元素的组合
+ * @see 剑指_Offer_II_082_含有重复元素集合的组合
+ * @see 剑指_Offer_II_083_没有重复元素集合的全排列
+ * @see 剑指_Offer_II_084_含有重复元素集合的全排列
+ * @see _37_解数独
+ * @see _51_N皇后
+ * @see _52_N皇后II
  */
 public class 剑指_Offer_II_079_所有子集{
     class Solution0{

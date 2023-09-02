@@ -19,9 +19,9 @@ package leetcode.tree;
 //
 // Related Topics 树状数组 线段树 数组 二分查找 分治 有序集合 归并排序 👍 365 👎 0
 
-public class _493_翻转对 {
-    class Solution {
-        int [] tmp;
+public class _493_翻转对{
+    class Solution{
+        int[] tmp;
         int count;
 
         //count[i] = COUNT(j) where j > i and nums[i] > 2*nums[j]
@@ -32,23 +32,25 @@ public class _493_翻转对 {
             sort(nums);
             return count;
         }
-        private void sort(int [] nums) {
+
+        private void sort(int[] nums) {
             tmp = new int[nums.length];
-            sort(nums, 0, nums.length-1);
+            sort(nums, 0, nums.length - 1);
         }
-        private void sort(int [] nums, int lo, int hi) {
+
+        private void sort(int[] nums, int lo, int hi) {
             //注意 base case
             if (lo == hi) {
                 return;
             }
-            int mid = lo + (hi-lo)/2;
+            int mid = lo + (hi - lo) / 2;
             sort(nums, lo, mid);
-            sort(nums, mid+1, hi);
+            sort(nums, mid + 1, hi);
             merge(nums, lo, mid, hi);
         }
 
-        public void merge(int [] nums, int lo, int mid, int hi) {
-            for (int i = lo; i<= hi; i++) {
+        public void merge(int[] nums, int lo, int mid, int hi) {
+            for (int i = lo; i <= hi; i++) {
                 tmp[i] = nums[i];
             }
 
@@ -62,21 +64,21 @@ public class _493_翻转对 {
             //}
             //进行效率优化，维护左闭右开区间 [mid+1, end) 中的元素乘以2 小于 nums[i]
             //为什么 end 是开区间呢？因为这样的话可以保证初始区间 [mid+1, mid+1) 是一个空区间
-            int end = mid+1;
-            for (int i=lo; i<= mid; i++) {
-                while (end<= hi && ((long)nums[i] > (long)nums[end]*2)) {
+            int end = mid + 1;
+            for (int i = lo; i <= mid; i++) {
+                while (end <= hi && ((long) nums[i] > (long) nums[end] * 2)) {
                     end++;
                 }
-                count += (end-(mid+1)); 
+                count += (end - (mid + 1));
             }
 
             //数组双指针技巧，合并两个有效数组
-            int i = lo, j = mid+1;
-            for (int p = lo; p<=hi; p++) {
-                if (i == mid+1) {
+            int i = lo, j = mid + 1;
+            for (int p = lo; p <= hi; p++) {
+                if (i == mid + 1) {
                     nums[p] = tmp[j++];
                 }
-                else if (j == hi+1) {
+                else if (j == hi + 1) {
                     nums[p] = tmp[i++];
                 }
                 else if (tmp[i] > tmp[j]) {

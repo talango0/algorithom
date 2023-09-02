@@ -8,14 +8,25 @@ package leetcode.tree;
 //
 //
 // 返回 nums 构建的 最大二叉树 。
-//
-//
-//
+
 // 示例 1：
-//
-//
 //输入：nums = [3,2,1,6,0,5]
 //输出：[6,3,5,null,2,0,null,null,1]
+//     ┌───┐
+//     │ 6 │
+//     └───┘
+//  ┌────┴───────┐
+//┌─▼─┐        ┌─▼─┐
+//│ 3 │        │ 5 │
+//└───┘        └───┘
+//  └───┐     ┌──┘
+//    ┌─▼─┐ ┌─▼─┐
+//    │ 2 │ │ 0 │
+//    └───┘ └───┘
+//      └───┐
+//        ┌─▼─┐
+//        │ 1 │
+//        └───┘
 //解释：递归调用如下所示：
 //- [3,2,1,6,0,5] 中的最大值是 6 ，左边部分是 [3,2,1] ，右边部分是 [0,5] 。
 //    - [3,2,1] 中的最大值是 3 ，左边部分是 [] ，右边部分是 [2,1] 。
@@ -47,20 +58,21 @@ package leetcode.tree;
 // Related Topics 栈 树 数组 分治 二叉树 单调栈 👍 455 👎 0
 
 
-//leetcode submit region begin(Prohibit modification and deletion)
 
-public class _654_最大二叉树 {
-    class Solution {
+public class _654_最大二叉树{
+    class Solution{
         /**
          * 二叉树的构造问题一般都是使用 分解问题的思路： 构造整棵树 = 根节点 + 构造左子树 + 构造右子树
+         *
          * @param nums
          * @return
          */
         public TreeNode constructMaximumBinaryTree(int[] nums) {
-            return build(nums, 0, nums.length-1);
+            return build(nums, 0, nums.length - 1);
         }
+
         //定义；将 nums[lo ... hi] 构造成一颗二叉树
-        private TreeNode build(int [] nums, int lo, int hi) {
+        private TreeNode build(int[] nums, int lo, int hi) {
             //base case
             if (lo > hi) {
                 return null;
@@ -68,7 +80,7 @@ public class _654_最大二叉树 {
 
             //找到数组中的最大值和对应的索引下标
             int index = -1, maxVal = Integer.MIN_VALUE;
-            for(int i = lo; i<= hi; i++) {
+            for (int i = lo; i <= hi; i++) {
                 if (nums[i] > maxVal) {
                     index = i;
                     maxVal = nums[i];
@@ -76,10 +88,10 @@ public class _654_最大二叉树 {
             }
 
             //先构造出根节点
-            TreeNode root =  new TreeNode(maxVal);
+            TreeNode root = new TreeNode(maxVal);
             //递归调用构造左右子树
-            root.left = build(nums, lo, index-1);
-            root.right = build(nums, index+1, hi);
+            root.left = build(nums, lo, index - 1);
+            root.right = build(nums, index + 1, hi);
             return root;
         }
     }

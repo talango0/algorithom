@@ -40,13 +40,24 @@ package leetcode.tree;
 //
 // Related Topics 树状数组 线段树 数组 二分查找 分治 有序集合 归并排序 👍 844 👎 0
 
+import leetcode.arrays.MergeSort;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
 /**
  * 字节
+ * 归并排序详解及应用
+ *
+ * @see MergeSort
+ * @see _315_计算右侧小于当前元素的个数
+ * @see _327_区间和的个数
+ * @see _493_翻转对
+ * @see _912_排序数组
  */
-public class _315_计算右侧小于当前元素的个数 {
+public class _315_计算右侧小于当前元素的个数{
     /**
      * <pre>
      *
@@ -64,34 +75,39 @@ public class _315_计算右侧小于当前元素的个数 {
      *  我们只要在merge函数中叠加每次merge时记录的结果即可。
      * </pre>
      */
-    static class Solution {
-        private class Pair {
-            /**记录数组的元素值 */
+    static class Solution{
+        private class Pair{
+            /**
+             * 记录数组的元素值
+             */
             int val;
-            /**记录元素在数组中的原始索引 */
+            /**
+             * 记录元素在数组中的原始索引
+             */
             int id;
-            Pair(int val, int id){
+
+            Pair(int val, int id) {
                 this.val = val;
                 this.id = id;
             }
         }
 
         //归并排序所用到的辅助数组
-        private Pair[]tmp;
+        private Pair[] tmp;
         //记录后面比自己小的元素个数
-        private int [] count;
+        private int[] count;
 
         public List<Integer> countSmaller(int[] nums) {
             int n = nums.length;
             count = new int[n];
             tmp = new Pair[n];
-            Pair [] arr = new Pair[n];
+            Pair[] arr = new Pair[n];
             //记录元素原始的索引位置，以便在 count 数组中更新结果
-            for (int i = 0; i< n; i++) {
+            for (int i = 0; i < n; i++) {
                 arr[i] = new Pair(nums[i], i);
             }
 
-            sort(arr, 0, n-1);
+            sort(arr, 0, n - 1);
 
             List<Integer> res = new LinkedList<>();
             for (int c : count) {
@@ -101,27 +117,28 @@ public class _315_计算右侧小于当前元素的个数 {
         }
 
         private void sort(Pair[] arr, int lo, int hi) {
-            if(lo == hi) {
+            if (lo == hi) {
                 return;
             }
-            int mid = lo + (hi-lo)/2;
+            int mid = lo + (hi - lo) / 2;
             sort(arr, lo, mid);
-            sort(arr, mid+1, hi);
+            sort(arr, mid + 1, hi);
             merge(arr, lo, mid, hi);
         }
+
         private void merge(Pair[] arr, int lo, int mid, int hi) {
-            for(int i = lo; i <= hi; i++) {
+            for (int i = lo; i <= hi; i++) {
                 tmp[i] = arr[i];
             }
-            int i = lo, j = mid+1;
-            for(int p = lo; p<=hi; p++) {
-                if (i == mid+1) {
+            int i = lo, j = mid + 1;
+            for (int p = lo; p <= hi; p++) {
+                if (i == mid + 1) {
                     arr[p] = tmp[j++];
                 }
-                else if (j == hi+1) {
+                else if (j == hi + 1) {
                     arr[p] = tmp[i++];
                     //更新count数组
-                    count[arr[p].id] += j - mid -1;
+                    count[arr[p].id] += j - mid - 1;
                 }
                 else if (tmp[i].val > tmp[j].val) {
                     arr[p] = tmp[j++];
@@ -129,15 +146,14 @@ public class _315_计算右侧小于当前元素的个数 {
                 else {
                     arr[p] = tmp[i++];
                     //更新count数组
-                    count[arr[p].id] += j - mid -1;
+                    count[arr[p].id] += j - mid - 1;
                 }
             }
-
         }
     }
 
     public static void main(String[] args) {
-        int [] arr = new int[] {5,2,6,1};
+        int[] arr = new int[]{5, 2, 6, 1};
         Solution solution = new Solution();
         List<Integer> integers = solution.countSmaller(arr);
         System.out.println(integers.toString());

@@ -45,18 +45,19 @@ package leetcode.tree;
 
 
 /**
- * @see _230_二叉搜索树第k小的元素
  * @author mayanwei
  * @date 2022-06-11.
+ * @see _230_二叉搜索树第k小的元素
  */
 public class _1038_从二叉搜索树到累加树{
-    class Solution {
+    class Solution{
         public TreeNode bstToGst(TreeNode root) {
             return travers(root);
         }
 
         int sum;
-        public TreeNode travers(TreeNode root){
+
+        public TreeNode travers(TreeNode root) {
             if (root == null) {
                 return null;
             }

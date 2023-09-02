@@ -12,8 +12,6 @@ package leetcode.dp;
 //
 //
 // 示例 1：
-//
-//
 //输入：nums = [1,5,2]
 //输出：false
 //解释：一开始，玩家 1 可以从 1 和 2 中进行选择。
@@ -23,8 +21,6 @@ package leetcode.dp;
 //因此，玩家 1 永远不会成为赢家，返回 false 。
 //
 // 示例 2：
-//
-//
 //输入：nums = [1,5,233,7]
 //输出：true
 //解释：玩家 1 一开始选择 1 。然后玩家 2 必须从 5 和 7 中进行选择。无论玩家 2 选择了哪个，玩家 1 都可以选择 233 。
@@ -40,6 +36,8 @@ package leetcode.dp;
 //
 //
 // Related Topics 递归 数组 数学 动态规划 博弈 👍 567 👎 0
+
+import org.junit.Test;
 
 /**
  * @author mayanwei
@@ -60,21 +58,23 @@ public class _486_预测赢家{
         }
 
         /**
+         * <pre>
          * dp[i][j] 表示nums[i,...,j]这些子数组中，先手和后手分别拿了多少分。
          * 结果就是dp[0][n-1],n为nums的长度。
-         * <p>
+         *
          * 对于nums[i,...,j]
          * 如果先手选择left，即选择nums[i]
          * 得分情况就是 left = nums[i] + dp[i+1][j].second
-         * <p>
+         *
          * 如果先手选择的right，即选择nums[j]
          * 得分请求就是 right = nums[j] + dp[i][j-1].second
-         * <p>
-         * 先手选择得分高的
-         * <p>
-         * left > right ? (dp[i][j].first = left; dp[i][j].second = dp[i+1][j].first;)
-         * :dp[i][j].first = right; dp[i][j].second = dp[i][j-1].first;
          *
+         * 先手选择得分高的
+         *
+         * left > right ?
+         *  { dp[i][j].first = left;  dp[i][j].second = dp[i+1][j].first; }
+         * :{ dp[i][j].first = right; dp[i][j].second = dp[i][j-1].first; }
+         * </pre>
          * @param nums
          * @return
          */
@@ -113,5 +113,13 @@ public class _486_预测赢家{
             Pair res = dp[0][n - 1];
             return res.first >= res.second;
         }
+    }
+
+
+    @Test
+    public void test() {
+        Solution solution = new Solution();
+        boolean b = solution.PredictTheWinner(new int[]{2, 8, 3, 5});
+        System.out.println(b);
     }
 }

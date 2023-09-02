@@ -7,24 +7,14 @@ package leetcode.design;
 //
 // 你需要输出替换之后的句子。
 //
-//
-//
 // 示例 1：
-//
-//
-//输入：dictionary = ["cat","bat","rat"], sentence = "the cattle was rattled by
-//the battery"
+//输入：dictionary = ["cat","bat","rat"], sentence = "the cattle was rattled by the battery"
 //输出："the cat was rat by the bat"
 //
 //
 // 示例 2：
-//
-//
 //输入：dictionary = ["a","b","c"], sentence = "aadsfasf absbs bbab cadsfafs"
 //输出："a a b c"
-//
-//
-//
 //
 // 提示：
 //
@@ -47,16 +37,16 @@ package leetcode.design;
 import java.util.LinkedList;
 import java.util.List;
 
-public class _648_单词替换 {
-    class Solution {
+public class _648_单词替换{
+    class Solution{
         public String replaceWords(List<String> dictionary, String sentence) {
             TrieSet set = new TrieSet();
             for (String key : dictionary) {
                 set.add(key);
             }
             StringBuilder sb = new StringBuilder();
-            String [] words = sentence.split(" ");
-            for (int i = 0; i<words.length; i++) {
+            String[] words = sentence.split(" ");
+            for (int i = 0; i < words.length; i++) {
                 String prefix = set.shortestPrefixOf(words[i]);
                 if (!prefix.isEmpty()) {
                     // 如果搜索到了，改写成词根
@@ -66,7 +56,7 @@ public class _648_单词替换 {
                     // 否则原样放回
                     sb.append(words[i]);
                 }
-                if ( i!=words.length-1) {
+                if (i != words.length - 1) {
                     sb.append(' ');
                 }
             }
@@ -75,7 +65,7 @@ public class _648_单词替换 {
         }
     }
 
-    class TrieMap<V> {
+    class TrieMap<V>{
         // ASCII 码个数
         private static final int R = 256;
         // 当前存在 Map 中的键值对个数
@@ -83,12 +73,17 @@ public class _648_单词替换 {
         // Trie 树的根节点
         private TrieNode<V> root = null;
 
-        private class TrieNode<V> {
+        private class TrieNode<V>{
             V val = null;
             TrieNode<V>[] children = new TrieNode[R];
         }
 
-        /***** 增/改 *****/
+        /**
+         * 增/改
+         *
+         * @param key
+         * @param val
+         */
 
         // 在 map 中添加或修改键值对
         public void put(String key, V val) {
@@ -117,7 +112,11 @@ public class _648_单词替换 {
             return node;
         }
 
-        /***** 删 *****/
+        /**
+         * 删
+         *
+         * @param key
+         */
 
         // 在 Map 中删除 key
         public void remove(String key) {
@@ -137,7 +136,8 @@ public class _648_单词替换 {
             if (i == key.length()) {
                 // 找到了 key 对应的 TrieNode，删除 val
                 node.val = null;
-            } else {
+            }
+            else {
                 char c = key.charAt(i);
                 // 递归去子树进行删除
                 node.children[c] = remove(node.children[c], key, i + 1);
@@ -158,8 +158,9 @@ public class _648_单词替换 {
             return null;
         }
 
-        /***** 查 *****/
-
+        /**
+         * 查
+         */
         // 搜索 key 对应的值，不存在则返回 null
         public V get(String key) {
             // 从 root 开始搜索 key
@@ -300,7 +301,8 @@ public class _648_单词替换 {
                     traverse(node.children[j], path, pattern, i + 1, res);
                     path.deleteCharAt(path.length() - 1);
                 }
-            } else {
+            }
+            else {
                 // pattern[i] 是普通字符 c
                 path.append(c);
                 traverse(node.children[c], path, pattern, i + 1, res);
@@ -361,20 +363,23 @@ public class _648_单词替换 {
             return size;
         }
     }
-    class TrieSet {
+
+    class TrieSet{
         // 底层用一个 TrieMap，键就是 TrieSet，值仅仅起到占位的作用
         // 值的类型可以随便设置，我参考 Java 标准库设置成 Object
         private final TrieMap<Object> map = new TrieMap<>();
 
-        /***** 增 *****/
-
+        /**
+         * 增
+         */
         // 在集合中添加元素 key
         public void add(String key) {
             map.put(key, new Object());
         }
 
-        /***** 删 *****/
-
+        /**
+         * 删
+         */
         // 从集合中删除元素 key
         public void remove(String key) {
             map.remove(key);

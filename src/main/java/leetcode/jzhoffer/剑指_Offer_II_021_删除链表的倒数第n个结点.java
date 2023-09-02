@@ -13,7 +13,7 @@ public class 剑指_Offer_II_021_删除链表的倒数第n个结点{
         public ListNode removeNthFromEnd(ListNode head, int n) {
             ListNode dummy = new ListNode(-1);
             dummy.next = head;
-            // 删除第 n 个，先要找到第 n + 1 个节点
+            // 删除倒数第 n 个，先要找到倒数第 n + 1 个节点
             ListNode x = findFromEnd(dummy, n + 1);
             x.next = x.next.next;
             return dummy.next;

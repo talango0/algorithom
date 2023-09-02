@@ -1,5 +1,5 @@
 package leetcode.dfs;
-//261. Graph Valid Tree 图验证树
+//261. Graph Valid Tree 以图判树
 //
 //
 // Given n nodes labeled from 0 to n-1 and a list of undirected edges (each edge is a pair of nodes),
@@ -41,6 +41,7 @@ public class _261_图验证树{
 
     /**
      * DFS
+     * <p>
      * 根据 pair 来建立一个图的结构，用邻接链表来表示，还需要一个一位数组v来记录某个结点是否被访问过，然后用 DFS 来搜索结点0，遍历的思想是，
      * 当 DFS 到某个结点，先看当前结点是否被访问过，如果已经被访问过，说明环存在，直接返回 false，如果未被访问过，现在将其状态标记为已访问过，
      * 然后到邻接链表里去找跟其相邻的结点继续递归遍历，注意还需要一个变量 pre 来记录上一个结点，以免回到上一个结点，这样遍历结束后，
@@ -93,6 +94,7 @@ public class _261_图验证树{
 
     /**
      * BFS
+     * <p>
      * 需要用 queue 来辅助遍历，这里没有用一维向量来标记节点是否访问过，而是用了一个 HashSet，如果遍历到一个节点，在 HashSet 中没有，
      * 则加入 HashSet，如果已经存在，则返回false，还有就是在遍历邻接链表的时候，遍历完成后需要将结点删掉
      */

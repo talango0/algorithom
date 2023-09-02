@@ -43,19 +43,25 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-public class _207_课程表 {
-    class Solution {
+public class _207_课程表{
+    /**
+     * 思路：构建有向图，如果有环，则说明不能完成，反之则可以。
+     */
+    class Solution{
         //依赖问题转化为有向图，用领接表表示该图
         private List<Integer>[] graph;
-        /**构建一颗有向图 */
-        private List<Integer> [] buildGraph(int numCourses, int [][] prerequisites) {
+
+        /**
+         * 构建一颗有向图
+         */
+        private List<Integer>[] buildGraph(int numCourses, int[][] prerequisites) {
             //图中共有numsCourses门课程
-            List<Integer> [] graph = new LinkedList[numCourses];
-            for (int i = 0; i<numCourses; i++) {
+            List<Integer>[] graph = new LinkedList[numCourses];
+            for (int i = 0; i < numCourses; i++) {
                 graph[i] = new LinkedList<Integer>();
             }
 
-            for (int [] edge: prerequisites) {
+            for (int[] edge : prerequisites) {
                 int from = edge[0], to = edge[1];
                 //添加一条从from指向to的有向边
                 //边的方向是【被依赖】的关系，即修完课程from，才能修课程to
@@ -68,12 +74,13 @@ public class _207_课程表 {
 
         //只要会遍历图，就可以判断是否存在环
         //用visited 防止重复遍历一个节点
-        boolean [] visited;
+        boolean[] visited;
 
         //把traverse看作在图中节点上游走的指针，只需要再添加一个布尔数组 onPath 记录当前 traverse 经过的路径
-        boolean [] onPath;
+        boolean[] onPath;
         boolean hasCycle;
-        void traverse(List<Integer> [] graph, int s) {
+
+        void traverse(List<Integer>[] graph, int s) {
             if (onPath[s]) {
                 hasCycle = true;
             }
@@ -86,7 +93,7 @@ public class _207_课程表 {
             visited[s] = true;
             // 开始遍历节点s
             onPath[s] = true;
-            for (int to: graph[s]) {
+            for (int to : graph[s]) {
                 traverse(graph, to);
             }
             // 后序遍历的位置
@@ -108,18 +115,21 @@ public class _207_课程表 {
     }
 
 
-    class Solution2 {
+    class Solution2{
         //依赖问题转化为有向图，用领接表表示该图
-        private List<Integer> [] graph;
-        /**构建一颗有向图 */
-        private List<Integer> [] buildGraph(int numCourses, int [][] prerequisites) {
+        private List<Integer>[] graph;
+
+        /**
+         * 构建一颗有向图
+         */
+        private List<Integer>[] buildGraph(int numCourses, int[][] prerequisites) {
             //图中共有numsCourses门课程
-            List<Integer> [] graph = new LinkedList[numCourses];
-            for (int i = 0; i<numCourses; i++) {
+            List<Integer>[] graph = new LinkedList[numCourses];
+            for (int i = 0; i < numCourses; i++) {
                 graph[i] = new LinkedList<Integer>();
             }
 
-            for (int [] edge: prerequisites) {
+            for (int[] edge : prerequisites) {
                 int from = edge[0], to = edge[1];
                 //添加一条从from指向to的有向边
                 //边的方向是【被依赖】的关系，即修完课程from，才能修课程to
@@ -133,8 +143,8 @@ public class _207_课程表 {
 
         public boolean canFinish(int numCourses, int[][] prerequisites) {
             graph = buildGraph(numCourses, prerequisites);
-            int [] indegree = new int[numCourses];
-            for (int [] edge: prerequisites) {
+            int[] indegree = new int[numCourses];
+            for (int[] edge : prerequisites) {
                 int from = edge[0];
                 int to = edge[1];
                 //节点to的入度加1
@@ -152,12 +162,12 @@ public class _207_课程表 {
             //记录遍历的节点个数
             int count = 0;
             //开始执行BFS循环
-            while(!q.isEmpty()) {
+            while (!q.isEmpty()) {
                 //弹出节点 cur，并将它指向的节点的入度减1
                 int cur = q.poll();
                 count++;
-                for (int next: graph[cur]) {
-                    indegree[next] --;
+                for (int next : graph[cur]) {
+                    indegree[next]--;
                     if (indegree[next] == 0) {
                         // 如果入度变为0， 说明next依赖的节点都已被遍历
                         q.offer(next);

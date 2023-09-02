@@ -28,6 +28,7 @@ import java.util.Arrays;
  */
 public class _214_最短回文串{
     /**
+     * <pre>
      *  s :       abccda
      *  s':  adccb
      *
@@ -40,6 +41,7 @@ public class _214_最短回文串{
      * If we want to get shortest s', we can maximum the prefix s1
      * which is the palindrome string, then the reverse str of
      * s2 will be s'.
+     * </pre>
      *
      */
     class Solution{

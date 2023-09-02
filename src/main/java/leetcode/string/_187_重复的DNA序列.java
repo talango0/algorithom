@@ -22,6 +22,8 @@ package leetcode.string;
 //
 //👍 396, 👎 0
 
+import leetcode.dp._28_实现strStr;
+
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -30,6 +32,7 @@ import java.util.List;
  * @author mayanwei
  * @date 2022-08-14.
  * @see SubStringSearch.RabinKarp
+ * @see _28_实现strStr
  */
 public class _187_重复的DNA序列{
     class Solution {

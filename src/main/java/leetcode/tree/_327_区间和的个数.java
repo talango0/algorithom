@@ -6,16 +6,12 @@ package leetcode.tree;
 //
 //
 //示例 1：
-//
-//
 //输入：nums = [-2,5,-1], lower = -2, upper = 2
 //输出：3
 //解释：存在三个区间：[0,0]、[2,2] 和 [0,2] ，对应的区间和分别是：-2 、-1 、2 。
 //
 //
 // 示例 2：
-//
-//
 //输入：nums = [0], lower = 0, upper = 0
 //输出：1
 //
@@ -38,18 +34,20 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
-public class _327_区间和的个数 {
+public class _327_区间和的个数{
     /**
+     * <pre>
      * 题目的意思，计算元素和落在 [lower, upper] 的所有子数组的个数。
      * 暴力法:2层循环
+     * </pre>
      */
-    class BruteSolution {
-        public int countRangSum(int [] nums, int lower, int upper) {
+    class BruteSolution{
+        public int countRangSum(int[] nums, int lower, int upper) {
             int res = 0;
-            for (int i = 0; i< nums.length; i++) {
+            for (int i = 0; i < nums.length; i++) {
                 for (int j = i + 1; j <= nums.length; j++) {
                     int sum = Arrays.stream(Arrays.copyOfRange(nums, i, j)).sum();
-                    if(sum >= lower && sum <= upper) {
+                    if (sum >= lower && sum <= upper) {
                         res++;
                     }
                 }
@@ -59,43 +57,49 @@ public class _327_区间和的个数 {
     }
 
     /**
+     * <pre>
      * 要实现快速计算子数组的和，可以采用前缀和计算区间和。
      * count[i] = COUNT(j) where lower <= preSum[j] - preSum[i] <= upper
      * 归并算法，本质上都是在遍历一棵（递归）树，然后在节点（前中后序位置）上执行代码，写递归，本质上就是告诉每个节点需要做什么
      * 比如，归并排序算法，递归的sort 函数就是二叉树的遍历函数，而merge函数就是在每个节点上做的事。
+     * </pre>
      */
-    class Solution {
+    class Solution{
         private int lower, upper;
         private int count;
-        private long [] tmp;
+        private long[] tmp;
+
         public int countRangeSum(int[] nums, int lower, int upper) {
             this.lower = lower;
             this.upper = upper;
             //构造前缀和, int 可能溢出，用long存储
-            long [] preSum = new long [nums.length+1];
-            for (int i = 0; i< nums.length; i++) {
-                preSum[i+1] += preSum[i] + (long)nums[i];
+            long[] preSum = new long[nums.length + 1];
+            for (int i = 0; i < nums.length; i++) {
+                preSum[i + 1] += preSum[i] + (long) nums[i];
             }
             //对前缀和数组进行归并排序
             sort(preSum);
             return count;
         }
-        private void sort(long [] nums) {
+
+        private void sort(long[] nums) {
             tmp = new long[nums.length];
-            sort(nums, 0, nums.length-1);
+            sort(nums, 0, nums.length - 1);
         }
-        private void sort(long [] nums, int lo, int hi) {
+
+        private void sort(long[] nums, int lo, int hi) {
             if (lo == hi) {
                 return;
             }
-            int mid = lo + (hi-lo)/2;
+            int mid = lo + (hi - lo) / 2;
             sort(nums, lo, mid);
-            sort(nums, mid+1, hi);
+            sort(nums, mid + 1, hi);
             merge(nums, lo, mid, hi);
         }
 
+        // 将 nums[lo...mid] 和 mid[mid+1..hi] 这两个有序数组组合成一个有序数组
         private void merge(long[] nums, int lo, int mid, int hi) {
-            for (int i=lo; i<=hi; i++) {
+            for (int i = lo; i <= hi; i++) {
                 tmp[i] = nums[i];
             }
             //在归并前加点东西
@@ -112,30 +116,29 @@ public class _327_区间和的个数 {
 
             //进行效率优化
             //维护左闭右开区间 [start, end) 中的元素和 nums[i] 的差在 [lower, upper] 中
-            int start = mid+1;
-            int end = mid+1;
+            int start = mid + 1;
+            int end = mid + 1;
             for (int i = lo; i <= mid; i++) {
                 //如果 nums[i] 对应的区间是 [start, end]
                 //那么 nums[i+1] 对应的区间一定会整体右移，类似滑动窗口
                 //让窗口中的元素和 nums[i] 的差落在 [lower, upper]中
-                while (start <= hi && nums[start]-nums[i] < lower) {
-                    start ++;
+                while (start <= hi && nums[start] - nums[i] < lower) {
+                    start++;
                 }
                 while (end <= hi && nums[end] - nums[i] <= upper) {
-                    end ++;
+                    end++;
                 }
-                count += end-start;
+                count += end - start;
             }
 
 
-
             //进行归并
-            int i = lo, j = mid+1;
+            int i = lo, j = mid + 1;
             for (int p = lo; p <= hi; p++) {
-                if (i == mid+1) {
+                if (i == mid + 1) {
                     nums[p] = tmp[j++];
                 }
-                else if (j == hi+1) {
+                else if (j == hi + 1) {
                     nums[p] = tmp[i++];
                 }
                 else if (tmp[i] > tmp[j]) {
@@ -151,7 +154,8 @@ public class _327_区间和的个数 {
 
     @Test
     public void test() {
-        int [] nums = new int[] {-2,5,-1}; int lower = -2, upper = 2;
+        int[] nums = new int[]{-2, 5, -1};
+        int lower = -2, upper = 2;
         BruteSolution bruteSolution = new BruteSolution();
         int count = bruteSolution.countRangSum(nums, lower, upper);
 

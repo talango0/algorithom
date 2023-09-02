@@ -54,26 +54,28 @@ package leetcode.jzhoffer;
 //链接：https://leetcode.cn/problems/ur2n8P
 //著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
-import leetcode.graph._444_Sequence_Reconstruction_序列重建;
+import leetcode.graph._444_序列重建;
 
 import java.util.*;
 
 /**
- * @see _444_Sequence_Reconstruction_序列重建
+ * @see _444_序列重建
  */
-public class 剑指_Offer_II_115_重建序列 {
-    class Solution {
+public class 剑指_Offer_II_115_重建序列{
+    class Solution{
         /**
+         * <pre>
          * 1.假设nums数组是唯一最短超序列，必须完全符合其排列顺序才算验证成功。
          * 2.最小确定顺序是两个相邻的数之间的顺序。
          * 3.由于子序列未改变原序列的顺序，因此不可能出现数顺序颠倒的情况，无需对此判断。
          * 例如[5,1,4,2,3]，可以出现子序列[1,2,3]，但不可能出现子序列[4,1,2,3]。
          * 4.如果原序列中的相邻两数没有在子序列中出现相邻，说明当前无法确定唯一顺序。
          * 例如[5,1,4,2,3]，对于1的相邻数只找到[1,2],[1,3]而没有找到[1,4]，那么4的位置可能紧跟在1或2或3之后，无法确定4一定紧跟在1之后。
-         * <p>
+         *
          * 若没有找到之后，在子序列中出现该数但是相邻的另一个数与原序列不同，要么仍然无法确定唯一顺序，要么确定唯一顺序是紧跟在其他数之后，这两种情况都是错的。
-         * <p>
+         *
          * 5.最终验证思路为遍历子序列数组，若其中出现所有原序列中两两相邻的数仍然都相邻，则顺序完全一致。
+         * </pre>
          */
         public boolean sequenceReconstruction(int[] nums, int[][] sequences) {
             int n = nums.length;
@@ -94,7 +96,7 @@ public class 剑指_Offer_II_115_重建序列 {
         }
     }
 
-    class Solution2 {
+    class Solution2{
         /**
          * 拓扑排序
          * <p>

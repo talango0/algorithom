@@ -11,7 +11,7 @@ import java.util.concurrent.locks.StampedLock;
  */
 public class StampedLockDemo{
 
-    public class Point {
+    public class Point{
         private final StampedLock stampedLock = new StampedLock();
 
         private double x;

@@ -1,33 +1,20 @@
 package leetcode.dp;
 //给你一个整数数组 coins ，表示不同面额的硬币；以及一个整数 amount ，表示总金额。
-//
 // 计算并返回可以凑成总金额所需的 最少的硬币个数 。如果没有任何一种硬币组合能组成总金额，返回 -1 。
-//
 // 你可以认为每种硬币的数量是无限的。
 //
-//
-//
 // 示例 1：
-//
-//
 //输入：coins = [1, 2, 5], amount = 11
 //输出：3
 //解释：11 = 5 + 5 + 1
 //
 // 示例 2：
-//
-//
 //输入：coins = [2], amount = 3
 //输出：-1
 //
 // 示例 3：
-//
-//
 //输入：coins = [1], amount = 0
 //输出：0
-//
-//
-//
 //
 // 提示：
 //
@@ -45,6 +32,7 @@ import java.util.Arrays;
 
 /**
  * @see _518_零钱兑换II
+ * @see _416_分割等和子集
  */
 public class _322_零钱兑换{
     // 1. 先确定状态
@@ -52,9 +40,14 @@ public class _322_零钱兑换{
     // 3. 然后确定 选择 并择优
 
     /**
+     * <pre>
+     * 为什么说它符合最优子结构呢？假设你有面值为 1, 2, 5 的硬币，你想求 amount = 11 时的最少硬币数（原问题），如果你知道凑出
+     * amount = 10, 9, 6 的最少硬币数（子问题），你只需要把子问题的答案加一（再选一枚面值为 1, 2, 5 的硬币），
+     * 求个最小值，就是原问题的答案。因为硬币的数量是没有限制的，所以子问题之间没有相互制，是互相独立的。
      * dp[n] = 0 if n = 0
      * dp[n] = -1 if n < 0
      * dp[n] = min{dp[n-coin]+1, dp[n]} coin in coins, n > 0
+     * </pre>
      */
     class Solution{
         public int coinChange(int[] coins, int amount) {
@@ -74,6 +67,27 @@ public class _322_零钱兑换{
         }
     }
 
+
+    /**
+     * <pre>
+     * {@code
+     * // 伪码框架
+     * int coinChange(int[] coins, int amount) {
+     *     // 题目要求的最终结果是 dp(amount)
+     *     return dp(coins, amount)
+     * }
+     *
+     * // 定义：要凑出金额 n，至少要 dp(coins, n) 个硬币
+     * int dp(int[] coins, int n) {
+     *     // 做选择，选择需要硬币最少的那个结果
+     *     for (int coin : coins) {
+     *         res = min(res, 1 + dp(coins, n - coin))
+     *     }
+     *     return res
+     * }
+     * }
+     * </pre>
+     */
     class Solution2{
         /**
          * 思路：

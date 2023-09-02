@@ -28,20 +28,23 @@ package leetcode.dp;
 // sum(piles[i]) 是 奇数
 //
 // Related Topics 数组 数学 动态规划 博弈 👍 441 👎 0
+
 /**
  * @author mayanwei
  * @date 2022-07-31.
  */
 public class _877_石子游戏{
-    class Solution {
+    class Solution{
         class Pair{
             int fir;
             int sec;
-            public Pair(int first, int second){
+
+            public Pair(int first, int second) {
                 this.fir = first;
                 this.sec = second;
             }
         }
+
         public boolean stoneGame(int[] piles) {
             int n = piles.length;
             // 初始化 dp 数组
@@ -59,25 +62,26 @@ public class _877_石子游戏{
             for (int i = n - 2; i >= 0; i--) {
                 for (int j = i + 1; j < n; j++) {
                     // 先手选择最左边或最右边的分数
-                    int left = piles[i] + dp[i+1][j].sec;
-                    int right = piles[j] + dp[i][j-1].sec;
+                    int left = piles[i] + dp[i + 1][j].sec;
+                    int right = piles[j] + dp[i][j - 1].sec;
                     // 套用状态转移方程
                     // 先手肯定会选择更大的结果，后手的选择随之改变
                     if (left > right) {
                         dp[i][j].fir = left;
-                        dp[i][j].sec = dp[i+1][j].fir;
-                    } else {
+                        dp[i][j].sec = dp[i + 1][j].fir;
+                    }
+                    else {
                         dp[i][j].fir = right;
-                        dp[i][j].sec = dp[i][j-1].fir;
+                        dp[i][j].sec = dp[i][j - 1].fir;
                     }
                 }
             }
-            Pair res = dp[0][n-1];
+            Pair res = dp[0][n - 1];
             return res.fir > res.sec;
         }
     }
 
-    class Solution2 {
+    class Solution2{
         // 这是为什么呢，因为题目有两个条件很重要：一是石头总共有偶数堆，石头的总数是奇数。这两个看似增加游戏公平性的条件，
         // 反而使该游戏成为了一个割韭菜游戏。我们以 piles=[2, 1, 9, 5] 讲解，假设这四堆石头从左到右的索引分别是 1，2，3，4。
 

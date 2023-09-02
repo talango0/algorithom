@@ -1,5 +1,6 @@
 package leetcode.jzhoffer;
 
+import leetcode.design.*;
 import leetcode.trie._820_单词的压缩编码;
 
 import java.util.HashMap;
@@ -57,6 +58,15 @@ import java.util.Map;
  * @author mayanwei
  * @date 2022-11-03.
  * @see _820_单词的压缩编码
+ * @see _648_单词替换
+ * @see _676_实现一个魔法字典
+ * @see _677_键值映射
+ * @see _211_添加与搜索单词
+ * @see _208_实现Trie前缀树
+ * @see 剑指_Offer_II_063_替换单词
+ * @see 剑指_Offer_II_064_神奇的字典
+ * @see 剑指_Offer_II_065_最短的单词编码
+ * @see 剑指_Offer_II_066_单词之和
  */
 public class 剑指_Offer_II_065_最短的单词编码{
     class Solution{
@@ -65,7 +75,7 @@ public class 剑指_Offer_II_065_最短的单词编码{
          * 时间复杂度 O(∑ wi)
          * 空间复杂度 O(S * ∑ wi)
          * 思路
-         * 目标就是保留所有不是其他单词后缀的单词。
+         *    目标就是保留所有不是其他单词后缀的单词。
          * 算法
          * 去找到是否不同的单词具有相同的后缀，我们可以将其反序之后插入字典树中。例如，我们有 "time" 和 "me"，可以将 "emit" 和 "em" 插入字典树中。
          * 然后，字典树的叶子节点（没有孩子的节点）就代表没有后缀的单词，统计叶子节点代表的单词长度加一的和即为我们要的答案。

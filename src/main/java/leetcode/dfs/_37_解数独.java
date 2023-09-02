@@ -49,13 +49,15 @@ package leetcode.dfs;
 //
 //
 // Related Topics 数组 回溯 矩阵 👍 1349 👎 0
+
 /**
  * 字节
+ *
  * @author mayanwei
  * @date 2022-08-05.
  */
 public class _37_解数独{
-    class Solution {
+    class Solution{
         public void solveSudoku(char[][] board) {
             backtrack(board, 0, 0);
         }
@@ -93,7 +95,7 @@ public class _37_解数独{
         }
 
         // 判断board[i][j] 是否可以填入 n
-        boolean isValid(char [][] board, int r, int c, char n) {
+        boolean isValid(char[][] board, int r, int c, char n) {
             for (int i = 0; i < 9; i++) {
                 // 判断行是否存在重复
                 if (board[r][i] == n) {
@@ -104,7 +106,7 @@ public class _37_解数独{
                     return false;
                 }
                 // 判断3*3方框是否存在重复
-                if (board[(r/3)*3 + i/3][(c/3)*3 + i%3] == n) {
+                if (board[(r / 3) * 3 + i / 3][(c / 3) * 3 + i % 3] == n) {
                     return false;
                 }
             }

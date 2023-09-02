@@ -1,8 +1,6 @@
 package leetcode.jzhoffer;
 
-public class 股票的最大利润 {
-
-    //假设把某股票的价格按照时间先后顺序存储在数组中，请问买卖该股票一次可能获得的最大利润是多少？
+//假设把某股票的价格按照时间先后顺序存储在数组中，请问买卖该股票一次可能获得的最大利润是多少？
 //
 //
 //
@@ -33,20 +31,23 @@ public class 股票的最大利润 {
 // Related Topics 动态规划
 // 👍 74 👎 0
 
+import leetcode.dp._121_买卖股票的最佳时机;
+
+/**
+ * @see _121_买卖股票的最佳时机
+ */
+public class 股票的最大利润{
 
     //初始化两个变量profit=0、cost=Integer.max(),从做往右开始遍历，当前总是记录前面的最小值，当前元素与之差的最大值赋值给profit，
-    //leetcode submit region begin(Prohibit modification and deletion)
-    class Solution {
+    class Solution{
         public int maxProfit(int[] prices) {
             int cost = Integer.MAX_VALUE, profit = 0;
-            for(int price : prices){
+            for (int price : prices) {
                 cost = Math.min(cost, price);
-                profit = Math.max(profit, price-cost);
+                profit = Math.max(profit, price - cost);
             }
             return profit;
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
-
 }
 

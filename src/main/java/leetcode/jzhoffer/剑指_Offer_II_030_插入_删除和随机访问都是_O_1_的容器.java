@@ -1,6 +1,7 @@
 package leetcode.jzhoffer;
 
 import leetcode.arrays.random.searchremove._380_常数时间插入删除和获取随机元素;
+import leetcode.arrays.random.searchremove._710_黑名单中的随机数;
 
 import java.util.*;
 
@@ -8,6 +9,7 @@ import java.util.*;
  * @author mayanwei
  * @date 2022-10-30.
  * @see _380_常数时间插入删除和获取随机元素
+ * @see _710_黑名单中的随机数
  */
 public class 剑指_Offer_II_030_插入_删除和随机访问都是_O_1_的容器{
     class RandomizedSet {

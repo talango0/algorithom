@@ -7,7 +7,6 @@ package leetcode.dp;
 // 返回能够打印出 n 个 'A' 的最少操作次数。
 //
 //示例 1：
-//
 //输入：3
 //输出：3
 //解释：
@@ -15,8 +14,8 @@ package leetcode.dp;
 //第 1 步, 使用 Copy All 操作。
 //第 2 步, 使用 Paste 操作来获得 'AA'。
 //第 3 步, 使用 Paste 操作来获得 'AAA'。
-//示例 2：
 //
+//示例 2：
 //输入：n = 1
 //输出：0
 //提示：
@@ -36,19 +35,19 @@ package leetcode.dp;
 public class _650_只有两个键的键盘{
     /**
      * dp[i] 表示打印i个A需要的最少操作次数。
-     *
+     * <p>
      * 只允许两种操作，复制+粘贴。
      * 想要得到i个A，则首先需要j个A，然后指向一次【复制】操作，
      * 再用若干次【粘贴】操作得到i个A。
-     *
+     * <p>
      * 因此 j 必须是 i 的因数，可以枚举j进行状态转移，状态转移
      * 方程如下：
-     *
+     * <p>
      * f[i] = min{f[i], i/j}, j|i ，其中j|i表示i能够被j整除
      */
-    class Solution1 {
+    class Solution1{
         public int minSteps(int n) {
-            int dp [] = new int[n+1];
+            int dp[] = new int[n + 1];
             for (int i = 2; i <= n; ++i) {
                 dp[i] = i;
                 for (int j = i - 1; j > 1; --j) {
@@ -63,22 +62,23 @@ public class _650_只有两个键的键盘{
             return dp[n];
         }
     }
-    class Solution2 {
-          public int minSteps(int n) {
-             if (n==1) {
-                 return 0;
-             }
-             int res = n;
-             for (int i = n-1; i>1; i--) {
-                 if (n%i == 0) {
-                     res = Math.min(res, minSteps(n/i) + i);
-                 }
-             }
-             return res;
-         }
+
+    class Solution2{
+        public int minSteps(int n) {
+            if (n == 1) {
+                return 0;
+            }
+            int res = n;
+            for (int i = n - 1; i > 1; i--) {
+                if (n % i == 0) {
+                    res = Math.min(res, minSteps(n / i) + i);
+                }
+            }
+            return res;
+        }
     }
 
-    class Solution3 {
+    class Solution3{
         int minSteps(int n) {
             int res = 0;
             for (int i = 2; i <= n; ++i) {

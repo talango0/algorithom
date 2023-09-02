@@ -73,6 +73,7 @@ package leetcode.jzhoffer;
 
 import leetcode.tree.TreeNode;
 import leetcode.tree._1038_从二叉搜索树到累加树;
+import leetcode.tree._230_二叉搜索树第k小的元素;
 import leetcode.tree._538_把二叉搜索树转化为累加树;
 
 /**
@@ -80,14 +81,39 @@ import leetcode.tree._538_把二叉搜索树转化为累加树;
  * @date 2022-11-01.
  * @see _538_把二叉搜索树转化为累加树
  * @see _1038_从二叉搜索树到累加树
+ * @see _230_二叉搜索树第k小的元素
+ *
  */
 public class 剑指_Offer_II_054_所有大于等于节点的值之和{
-    class Solution {
+    /**
+     * <pre>
+     *           ┌───┐
+     *           │ 4 │ 30
+     *           └───┘
+     *      ┌──────┴───────┐
+     *    ┌─▼─┐          ┌─▼─┐
+     *    │ 1 │ 36       │ 6 │ 21
+     *    └───┘          └───┘
+     *   ┌──┴───┐       ┌──┴───┐
+     * ┌─▼─┐  ┌─▼─┐   ┌─▼─┐  ┌─▼─┐
+     * │ 0 │36│ 2 │35 │ 5 │26│ 7 │ 15
+     * └───┘  └───┘   └───┘  └───┘
+     *          └──┐           └───┐
+     *           ┌─▼─┐           ┌─▼─┐
+     *           │ 3 │33         │ 8 │ 8
+     *           └───┘           └───┘
+     * 维护一个外部累加变量 sum，在遍历 BST 的过程中增加 sum，同时把 sum 赋值给 BST 中的每一个节点，就将 BST 转化成累加树了。
+     * 但是注意顺序，正常的中序遍历顺序是先左子树后右子树，这里需要反过来，先右子树后左子树。
+     * </pre>
+     */
+    class Solution{
         public TreeNode convertBST(TreeNode root) {
             traverse(root);
             return root;
         }
+
         int sum = 0;
+
         public void traverse(TreeNode root) {
             if (root == null) {
                 return;

@@ -6,8 +6,6 @@ package leetcode.arrays.binarySearch;
 //
 // 返回能在 days 天内将传送带上的所有包裹送达的船的最低运载能力。
 //
-//
-//
 // 示例 1：
 //输入：weights = [1,2,3,4,5,6,7,8,9,10], days = 5
 //输出：15

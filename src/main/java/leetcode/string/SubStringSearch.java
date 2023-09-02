@@ -69,6 +69,7 @@ public class SubStringSearch{
         private int[][] dfa;
 
         public KMP(String pat) {
+            // 通过pat构建dp
             //O(M)
             //有模式字符串构造dfa
             this.pat = pat;
@@ -78,7 +79,22 @@ public class SubStringSearch{
             dfa = new int[R][M];
             // base case 只有遇到 pat[0] 这个字符才能使状态从 0 转移到 1，遇到其他字符的话还停留在状态 0 （java默认初始化数组全为0）
             dfa[pat.charAt(0)][0] = 1;
-            // X（影子状态）初始化为0，当前状态j 从1开始
+            // X（影子状态）初始化为0，当前状态j 从1开始，所谓影子状态，就是和当前状态具有相同的前缀。
+            // 状态j会把这个字符委托给状态X处理，也就是dp['A'][j] = dp['A'][X]
+            // 为什么这样可以呢？因为：既然j这边已经确定字符 "A" 无法推进状态，只能回退，而且 KMP 算法就是要尽可能少的回退，以免多余的计算。
+            // 那么j就可以去问问和自己具有相同前缀的X，如果X遇见 "A" 可以进行「状态推进」，那就转移过去，因为这样回退最少。
+            // 你也许会问，这个X怎么知道遇到字符 "B" 要回退到状态 0 呢？因为X永远跟在j的身后，状态X如何转移，在之前就已经算出来了。
+            // 动态规划算法不就是利用过去的结果解决现在的问题吗？
+            // int X # 影子状态
+            // for 0 <= j < M:
+            //    for 0 <= c < 256:
+            //        if c == pat[j]:
+            //            # 状态推进
+            //            dp[j][c] = j + 1
+            //        else:
+            //            # 状态重启
+            //            # 委托 X 计算重启位置
+            //            dp[j][c] = dp[X][c]
             for (int X = 0, j = 1; j < M; j++) {
                 // 计算dfa[][j]
                 for (int c = 0; c < R; c++) {
@@ -166,7 +182,8 @@ public class SubStringSearch{
      * 思路： 在构造函数总计算模式pat的散列值，并在文本txt中查找该散列值的匹配。
      * 指纹字符串查找算法。
      * <p>
-     * 我们不要每次都去一个字符一个字符地比较子串和模式串，而是维护一个滑动窗口，运用滑动哈希算法一边滑动一边计算窗口中字符串的哈希值，拿这个哈希值去和模式串的哈希值比较，这样就可以避免截取子串，从而把匹配算法降低为 O(N)，这就是 Rabin-Karp 指纹字符串查找算法的核心逻辑。
+     * 我们不要每次都去一个字符一个字符地比较子串和模式串，而是维护一个滑动窗口，运用滑动哈希算法一边滑动一边计算窗口中字符串的哈希值，
+     * 拿这个哈希值去和模式串的哈希值比较，这样就可以避免截取子串，从而把匹配算法降低为 O(N)，这就是 Rabin-Karp 指纹字符串查找算法的核心逻辑。
      * <p>
      * 其实就是滑动哈希配合滑动窗口，滑动哈希就是处理数字的一个小技巧
      *
@@ -225,21 +242,20 @@ public class SubStringSearch{
             }
             return h;
         }
+
         /**
-         123
-         0*10 + 1 -> 1
-         1*10 + 2 ->  12
-         12*10 + 3 -> 123
-
-         ABCC
-
-         256*0 +  'A'-> 65
-         65 * 256 + 'B' ->
-
-         (x + y)%Q = (x % Q + y %Q) % Q
-
+         * 123
+         * 0*10 + 1 -> 1
+         * 1*10 + 2 ->  12
+         * 12*10 + 3 -> 123
+         * <p>
+         * ABCC
+         * <p>
+         * 256*0 +  'A'-> 65
+         * 65 * 256 + 'B' ->
+         * <p>
+         * (x + y)%Q = (x % Q + y %Q) % Q
          */
-
 
 
         private long longRandomPrime() {
@@ -287,7 +303,7 @@ public class SubStringSearch{
     }
 
     public static void main(String[] args) {
-        System.out.println((int)'A');
+        System.out.println((int) 'A');
         BigInteger bigInteger = BigInteger.probablePrime(31, new Random());
         long l = bigInteger.longValue();
         System.out.println(l);

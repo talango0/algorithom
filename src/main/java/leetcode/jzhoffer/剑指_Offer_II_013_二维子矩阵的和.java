@@ -60,12 +60,19 @@ package leetcode.jzhoffer;
 // Related Topics 设计 数组 矩阵 前缀和 👍 59 👎 0
 
 
+import leetcode.arrays._303_区域和检索_数组不可变;
 import leetcode.arrays._304_二维区域和检索_矩阵不可变;
+import leetcode.arrays._370_区间加法;
+import leetcode.arrays._724_寻找数组的中心下标;
 
 /**
  * @author mayanwei
  * @date 2022-10-26.
+ * @see _303_区域和检索_数组不可变
  * @see _304_二维区域和检索_矩阵不可变
+ * @see _724_寻找数组的中心下标
+ *
+ * @see _370_区间加法
  */
 public class 剑指_Offer_II_013_二维子矩阵的和{
     class NumMatrix{

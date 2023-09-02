@@ -6,8 +6,8 @@ import leetcode.graph._207_课程表;
  * @see _207_课程表
  * @see 剑指_Offer_II_035_最小时间差
  */
-public class 剑指_Offer_II_118_多余的边 {
-    class Solution {
+public class 剑指_Offer_II_118_多余的边{
+    class Solution{
         /**
          * 并查集
          * <p>
@@ -26,7 +26,8 @@ public class 剑指_Offer_II_118_多余的边 {
                 int y = edge[1];
                 if (find(parent, x) != find(parent, y)) {
                     union(parent, x, y);
-                } else {
+                }
+                else {
                     return edge;
                 }
             }

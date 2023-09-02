@@ -54,6 +54,7 @@ import java.util.*;
 /**
  * @author mayanwei
  * @date 2022-07-03.
+ * @see _710_黑名单中的随机数
  */
 public class _380_常数时间插入删除和获取随机元素{
     class RandomizedSet {

@@ -57,6 +57,7 @@ package leetcode.多线程;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -103,7 +104,7 @@ public class _1115_交替打印FooBar{
                 System.out.print("foo");
             }
         };
-        new Thread(()->{
+        new Thread(() -> {
             try {
                 fooBar0.foo(foo);
             } catch (InterruptedException e) {
@@ -117,7 +118,7 @@ public class _1115_交替打印FooBar{
             }
         };
         fooBar0.bar(bar);
-        new Thread(()->{
+        new Thread(() -> {
             try {
                 fooBar0.bar(bar);
             } catch (InterruptedException e) {

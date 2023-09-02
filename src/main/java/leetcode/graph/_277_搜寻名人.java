@@ -12,26 +12,47 @@ package leetcode.graph;
 //派对最多只会有一个 “名人” 参加。
 // 若 “名人” 存在，请返回他/她的编号；若 “名人” 不存在，请返回 -1。
 
-import java.time.OffsetTime;
 
-public class _277_搜寻名人 {
-    // 名人节点的入度为 n-1， 初度为0
+public class _277_搜寻名人{
+    // 名人节点的入度为 n-1， 出度为0
     // n 个人的社交关系是如何表示的？领接表 vs 邻接矩阵
     // 对于名人问题，要经常访问两个人是否认识，也就是两个节点是否相邻，因此用邻接矩阵。
     // 因此名流问题描述成如下这样：
     // 给你输入一个大小为 n*n 的矩阵（邻接矩阵）graph 表示一幅有 n 个节点的图，每个人都是图中的一个节点，编号为 0~n-1
     // 如果 graph[i][j] == 1代表第i个人认识第j个人，如果 graph[i][j] == 0，则表示第i个人不认识第j个人
 
+    /**
+     * <pre>
+     *             .───.
+     *    ┌──────▶(█ 2 █)◀────────┐
+     *    │        `───'          │
+     *    │          ▲            │
+     *    │          │            │            ┌──────────┐
+     *    │          │            │            │  0 1 2 3 │
+     *  .───.        └─────┐    .───.          │0 1 1 1 0 │
+     * (  0  )───────┐     │   (  3  )         │1 1 1 1 1 │
+     *  `───'        │     │    `───'          │2 0 0 1 0 │
+     *    ▲          │     │      ▲            │3 0 0 1 1 │
+     *    │          ▼     │      │            └──────────┘
+     *    │        .───.   │      │
+     *    └───────(  4  )──┘      │
+     *             `───'          │
+     *               │            │
+     *               │            │
+     *               └────────────┘
+     * 这个节点没有一条指向其他节点的有向边；且其他所有节点都有一条指向这个节点的有向边。
+     * </pre>
+     */
+    class Solution{
+        private boolean[][] knows;
 
-    class Solution {
-        private boolean [][] knows;
         // 请实现，返回【名人】编号
         // 暴力法
         // 内层循环可以优化，虽然判断一个人【是名人】必须用一个 for 循环，但判断一个人【不是名人】就不用那么麻烦
-        int findCelebrity(int n){
+        int findCelebrity(int n) {
             for (int cand = 0; cand < n; cand++) {
                 int other;
-                for ( other = 0; other < n; other++) {
+                for (other = 0; other < n; other++) {
                     if (cand == other) {
                         continue;
                     }
@@ -51,19 +72,20 @@ public class _277_搜寻名人 {
         }
 
         // 可以直接调用，能够返回 i 是否认识 j
-        boolean knows(int i, int j){
+        boolean knows(int i, int j) {
             return knows[i][j];
         }
     }
 
-    class Solution1 {
-        private boolean [][] knows;
+    class Solution1{
+        private boolean[][] knows;
+
         // 请实现，返回【名人】编号
-        int findCelebrity(int n){
+        int findCelebrity(int n) {
             // 先假设 cand 是名人
             int cand = 0;
-            for (int other = 1; other<n; other++) {
-                if (!knows(other, cand) || knows(cand, other)){
+            for (int other = 1; other < n; other++) {
+                if (!knows(other, cand) || knows(cand, other)) {
                     // cand 不可能是名人，排除
                     // 假设 other是名人
                     cand = other;
@@ -74,8 +96,8 @@ public class _277_搜寻名人 {
                 }
             }
 
-            // 现在的cand 是排除的最后结果，但不能保证一定是悯人
-            for (int other = 0; other<n; other++) {
+            // 现在的cand 是排除的最后结果，但不能保证一定是名人
+            for (int other = 0; other < n; other++) {
                 if (cand == other) continue;
                 // 需要保证其他人都认识 cand，且 cand 不认识任何其他人
                 if (!knows(other, cand) || knows(cand, other)) {
@@ -86,7 +108,7 @@ public class _277_搜寻名人 {
         }
 
         // 可以直接调用，能够返回 i 是否认识 j
-        boolean knows(int i, int j){
+        boolean knows(int i, int j) {
             return knows[i][j];
         }
     }

@@ -47,7 +47,7 @@ import java.util.*;
 /**
  * @see 剑指_Offer_II_115_重建序列
  */
-public class _444_Sequence_Reconstruction_序列重建 {
+public class _444_序列重建 {
 
     class Solution {
         /**

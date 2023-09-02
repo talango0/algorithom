@@ -13,7 +13,7 @@ import java.util.LinkedList;
  * @see _84_柱状图中最大的矩形
  * @see _85_最大矩形
  */
-public class 剑指_Offer_II_039_直方图最大矩形面积 {
+public class 剑指_Offer_II_039_直方图最大矩形面积{
     class Solution{
         /**
          * 单调栈
@@ -25,8 +25,10 @@ public class 剑指_Offer_II_039_直方图最大矩形面积 {
             }
             int n = heights.length;
             Deque<Integer> monoStack = new LinkedList<>();
-            int[] right = new int[n];
+            // left[i] 表示 nums[0...i] 大于等于 nums[i] 时的最小下标
             int[] left = new int[n];
+            // right[i] 表示 nums[i...n-1] 大于等于 nums[i] 时的最大下标
+            int[] right = new int[n];
             Arrays.fill(right, n);
             for (int i = 0; i < n; i++) {
                 while (!monoStack.isEmpty() && heights[monoStack.peek()] >= heights[i]) {
@@ -41,7 +43,6 @@ public class 剑指_Offer_II_039_直方图最大矩形面积 {
                 ans = Math.max(ans, (right[i] - left[i] - 1) * heights[i]);
             }
             return ans;
-
         }
     }
 }

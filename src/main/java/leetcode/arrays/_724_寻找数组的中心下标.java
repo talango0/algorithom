@@ -43,6 +43,8 @@ package leetcode.arrays;
 //
 // Related Topics 数组 前缀和 👍 489 👎 0
 
+import org.junit.Test;
+
 /**
  * @author mayanwei
  * @date 2022-10-26.
@@ -55,12 +57,18 @@ public class _724_寻找数组的中心下标{
          * ┌──────────────────────────────────────┐
          * │  index:       0  1  2                │
          * │              [1, 2, 3]               │
-         * │  index:    0  1  2  3                │
-         * │ preSum:   [0, 1, 3, 6]               │
+         * │  index:       0  1  2  3             │
+         * │ preSum:      [0, 1, 3, 6]            │
          * │                                      │
          * │ preSum[n]- preSum[i-1]: [6, 5, 3, -6]│
-         * │ return i-1 = 2-1 = 1                 │
+         * │ return: -1                           │
          * └──────────────────────────────────────┘
+         * preSum[n] 表示 nums[0...i-1] 的和
+         * 若 nums[0...k-1] == nums[k+1...n-1] 则返回 k
+         * preSum[k]
+         * preSum[n] - preSum[k + 1]
+         * 另 k = i - 1; // 防止越界
+         * 则要求 preSum[i-1] = preSum[n] - preSum[i]
          * </pre>
          * @param nums
          * @return
@@ -78,5 +86,12 @@ public class _724_寻找数组的中心下标{
             }
             return -1;
         }
+    }
+
+    @Test
+    public void testSolution() {
+        Solution solution = new Solution();
+        int i = solution.pivotIndex(new int[]{1, 2, 3});
+        System.out.println(i);
     }
 }

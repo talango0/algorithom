@@ -35,6 +35,8 @@ package leetcode.arrays;
 /**
  * 字节
  * @see _11_盛最多水的容器
+ * @see _42_接雨水
+ * @see _407_接雨水II
  * @author mayanwei
  * @date 2022-08-09.
  */

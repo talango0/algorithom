@@ -19,13 +19,12 @@ import java.util.PriorityQueue;
  */
 public class _253_会议室II{
     //思路：贪心+优先队列
-
     class Solution{
         public int minMeetingRooms(int[][] intervals) {
             if (intervals == null && intervals.length == 0) {
                 return 0;
             }
-            Arrays.sort(intervals, (int [] a, int[] b)->{
+            Arrays.sort(intervals, (int[] a, int[] b) -> {
                 if (a[0] == b[0]) {
                     // 开始时间一样，先结束的排在前面
                     return a[1] - b[1];
@@ -51,8 +50,8 @@ public class _253_会议室II{
     class Solution2{
         public int minMeetingRooms(int[][] intervals) {
             int n = intervals.length;
-            int [] start = new int[n];
-            int [] end = new int[n];
+            int[] start = new int[n];
+            int[] end = new int[n];
             for (int i = 0; i < n; i++) {
                 start[i] = intervals[i][0];
                 end[i] = intervals[i][1];
@@ -64,16 +63,16 @@ public class _253_会议室II{
             int count = 0;
             // 双指针技巧
             int res = 0, i = 0, j = 0;
-            while ( i < n && j < n) {
+            while (i < n && j < n) {
                 if (start[i] < end[j]) {
                     // 扫描到一个红点
-                    count ++;
-                    i ++;
+                    count++;
+                    i++;
                 }
                 else {
                     // 扫描到一个绿点
-                    count --;
-                    j ++;
+                    count--;
+                    j++;
                 }
                 // 记录扫描过程中的最大值
                 res = Math.max(res, count);

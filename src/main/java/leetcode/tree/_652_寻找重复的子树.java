@@ -8,18 +8,28 @@ package leetcode.tree;
 //
 //
 // 示例 1：
-//
-//
-//
-//
 //输入：root = [1,2,3,4,null,2,4,null,null,4]
 //输出：[[2,4],[4]]
+//          ┌───┐
+//          │ 1 │
+//          └───┘
+//            │
+//       ┌────┴───────┐
+//     ┌ ▼ ┐        ┌─▼─┐
+//       2          │ 3 │
+//     └ ─ ┘        └───┘
+//       │            │
+//  ┌────┘        ┌───┴─────┐
+//┌ ▼ ┐         ┌ ▼ ┐     ┌─▼─┐
+//  4             2       │ 4 │
+//└ ─ ┘         └ ┬ ┘     └───┘
+//             ┌──┘
+//             ▼
+//           ┌ ─ ┐
+//             4
+//           └ ─ ┘
 //
 // 示例 2：
-//
-//
-//
-//
 //输入：root = [2,1,1]
 //输出：[[1]]
 //
@@ -46,17 +56,18 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
-//leetcode submit region begin(Prohibit modification and deletion)
-public class _652_寻找重复的子树 {
-    class Solution {
+public class _652_寻找重复的子树{
+    class Solution{
         //记录所有子树以及出现的次数
-        HashMap <String, Integer> memo = new HashMap<>();
+        HashMap<String, Integer> memo = new HashMap<>();
         //记录重复的子树根节点
         LinkedList<TreeNode> res = new LinkedList<>();
+
         public List<TreeNode> findDuplicateSubtrees(TreeNode root) {
             traverse(root);
             return res;
         }
+
         //辅助函数
         String traverse(TreeNode root) {
             if (root == null) {
@@ -64,7 +75,7 @@ public class _652_寻找重复的子树 {
             }
             String left = traverse(root.left);
             String right = traverse(root.right);
-            String subTree = left+ ","+ right + "," + root.val;
+            String subTree = left + "," + right + "," + root.val;
             Integer freq = memo.getOrDefault(subTree, 0);
             //多次重复只会被加进去一次
             if (freq == 1) {

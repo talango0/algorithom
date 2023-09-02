@@ -19,6 +19,7 @@ public class 剑指_Offer_II_016_不含重复字符的最长子字符串{
             // current index of character
             Map<Character, Integer> map = new HashMap<>();
             // try to extend the range [i, j]
+            // [i,j]不存在重复的字符串
             for (int j = 0, i = 0; j < n; j++) {
                 if (map.containsKey(s.charAt(j))) {
                     i = Math.max(map.get(s.charAt(j)), i);

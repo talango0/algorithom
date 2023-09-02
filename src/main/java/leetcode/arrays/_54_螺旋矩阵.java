@@ -83,7 +83,7 @@ public class _54_螺旋矩阵{
                     for (int i = upper_bound; i<=lower_bound; i++) {
                         res.add(matrix[i][right_bound]);
                     }
-                    //由边界左移
+                    //右边界左移
                     right_bound --;
                 }
 

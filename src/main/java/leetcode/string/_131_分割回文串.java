@@ -24,8 +24,6 @@ import java.util.Deque;
 import java.util.List;
 
 
-import static org.junit.Assert.*;
-
 public class _131_分割回文串{
     class Solution{
         public List<List<String>> partition(String s) {

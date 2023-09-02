@@ -34,6 +34,18 @@ package leetcode.tree;
  * @see _95_不同的二叉搜索树2
  */
 public class _96_不同的二叉搜索树{
+    /**
+     * <pre>
+     * 1            3     3     2      1
+     *  ╲          ╱     ╱     ╱ ╲      ╲
+     *    3      2     1     1     3      2
+     *   ╱      ╱       ╲                  ╲
+     * 2      1           2                 3
+     * </pre>
+     * @param lo
+     * @param hi
+     * @return
+     */
     //思考
     //定义区间 [lo, hi] 的数字能组成 count(lo，hi) 种 BST
     int numsTree(int lo, int hi) {

@@ -1,19 +1,11 @@
 package leetcode.dp;
 //给你两个单词 word1 和 word2， 请返回将 word1 转换成 word2 所使用的最少操作数 。
-//
 // 你可以对一个单词进行如下三种操作：
-//
-//
 // 插入一个字符
 // 删除一个字符
 // 替换一个字符
 //
-//
-//
-//
 // 示例 1：
-//
-//
 //输入：word1 = "horse", word2 = "ros"
 //输出：3
 //解释：
@@ -23,8 +15,6 @@ package leetcode.dp;
 //
 //
 // 示例 2：
-//
-//
 //输入：word1 = "intention", word2 = "execution"
 //输出：5
 //解释：
@@ -33,8 +23,6 @@ package leetcode.dp;
 //enention -> exention (将 'n' 替换为 'x')
 //exention -> exection (将 'n' 替换为 'c')
 //exection -> execution (插入 'u')
-//
-//
 //
 //
 // 提示：
@@ -53,6 +41,9 @@ import java.util.Arrays;
  *
  * @author mayanwei
  * @date 2022-08-04.
+ * @see _1143_最长公共子序列
+ * @see _712_两个字符串的最小ASCII删除和
+ * @see _583_两个字符串的删除操作
  */
 public class _72_编辑距离{
     // 暴力穷举 超时

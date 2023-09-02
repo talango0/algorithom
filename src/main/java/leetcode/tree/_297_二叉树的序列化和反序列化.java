@@ -58,9 +58,10 @@ import java.util.Queue;
 
 /**
  * 字节
+ *
  * @see JZ61序列化二叉树
  */
-public class _297_二叉树的序列化和反序列化 {
+public class _297_二叉树的序列化和反序列化{
     /**
      * <pre>
      *     1. 如果序例化结果中不包含指针信息，且你只会给出一种遍历顺序，那么你无法还原出唯一的一颗二叉树。
@@ -90,18 +91,18 @@ public class _297_二叉树的序列化和反序列化 {
     /**
      * Definition for a binary tree node.
      * public class TreeNode {
-     *     int val;
-     *     TreeNode left;
-     *     TreeNode right;
-     *     TreeNode(int x) { val = x; }
+     * int val;
+     * TreeNode left;
+     * TreeNode right;
+     * TreeNode(int x) { val = x; }
      * }
      */
-    public class Codec1 {
+    public class Codec1{
         String SEP = ",";
         String NULL = "#";
         StringBuilder sb = new StringBuilder();
 
-        void traverse(TreeNode root){
+        void traverse(TreeNode root) {
             if (root == null) {
                 sb.append(NULL).append(SEP);
                 return;
@@ -144,12 +145,12 @@ public class _297_二叉树的序列化和反序列化 {
         }
     }
 
-    public class Codec2 {
+    public class Codec2{
         String SEP = ",";
         String NULL = "#";
         StringBuilder sb = new StringBuilder();
 
-        void traverse(TreeNode root){
+        void traverse(TreeNode root) {
             if (root == null) {
                 sb.append(NULL).append(SEP);
                 return;
@@ -196,18 +197,18 @@ public class _297_二叉树的序列化和反序列化 {
     /**
      * 层序遍历
      */
-    public class Codec3 {
+    public class Codec3{
         String SEP = ",";
         String NULL = "#";
 
 
         // Encodes a tree to a single string.
         public String serialize(TreeNode root) {
-            if (root== null) return "";
+            if (root == null) return "";
             StringBuilder sb = new StringBuilder();
             Queue<TreeNode> q = new LinkedList<TreeNode>();
             q.offer(root);
-            while(!q.isEmpty()) {
+            while (!q.isEmpty()) {
                 TreeNode cur = q.poll();
                 //层序遍历代码位置
                 if (cur == null) {
@@ -228,13 +229,13 @@ public class _297_二叉树的序列化和反序列化 {
             //反序列化的思路；用队列进行层序遍历，同时用索引i记录对应子节点的位置
 
             if (data.isEmpty()) return null;
-            String [] nodes =  data.split(SEP);
+            String[] nodes = data.split(SEP);
             //第一个元素就是 root 的值
             TreeNode root = new TreeNode(Integer.parseInt(nodes[0]));
             // 用队列q记录父节点，将root加入队列
             Queue<TreeNode> q = new LinkedList<>();
             q.offer(root);
-            for (int i = 1; i< nodes.length; ) {
+            for (int i = 1; i < nodes.length; ) {
                 //队列中存的都是父节点
                 TreeNode parent = q.poll();
                 //父节点对应的左孩子节点的值
@@ -242,7 +243,8 @@ public class _297_二叉树的序列化和反序列化 {
                 if (!NULL.equals(left)) {
                     parent.left = new TreeNode(Integer.parseInt(left));
                     q.offer(parent.left);
-                } else {
+                }
+                else {
                     parent.left = null;
                 }
                 //父节点对应的右孩子节点的值
@@ -250,7 +252,8 @@ public class _297_二叉树的序列化和反序列化 {
                 if (!NULL.equals(right)) {
                     parent.right = new TreeNode(Integer.parseInt(right));
                     q.offer(parent.right);
-                } else {
+                }
+                else {
                     parent.right = null;
                 }
             }

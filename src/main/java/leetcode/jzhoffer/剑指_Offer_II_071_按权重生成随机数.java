@@ -16,7 +16,7 @@ public class 剑指_Offer_II_071_按权重生成随机数{
 
         public Solution(int[] w) {
             int n = w.length;
-            //构建前缀和数组，便宜一位留给presSum[0]
+            //构建前缀和数组，偏移一位留给presSum[0]
             preSum = new int[n + 1];
             for (int i = 1; i <= n; i++) {
                 preSum[i] = preSum[i - 1] + w[i - 1];

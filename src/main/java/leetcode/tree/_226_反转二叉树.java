@@ -41,16 +41,17 @@ package leetcode.tree;
 
 //leetcode submit region begin(Prohibit modification and deletion)
 
-public class _226_反转二叉树 {
+public class _226_反转二叉树{
 
-    class Solution {
+    class Solution{
         public TreeNode invertTree(TreeNode root) {
             //遍历二叉树
             traverse(root);
             return root;
         }
+
         private void traverse(TreeNode node) {
-            if(node == null){
+            if (node == null) {
                 return;
             }
             //前序位置
@@ -66,10 +67,11 @@ public class _226_反转二叉树 {
         }
     }
 
-    class Solution2 {
+    class Solution2{
         /**
          * 用分解思维
          * 定义：将以root 为根的这颗二叉树翻转，返回翻转后的二叉树的根节点
+         *
          * @param root
          * @return
          */

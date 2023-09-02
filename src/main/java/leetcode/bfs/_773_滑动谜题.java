@@ -110,7 +110,7 @@ public class _773_滑动谜题{
 
     class Solution{
 
-        //记录一位数组中的相邻下标
+        //记录一维数组中的相邻下标
         int[][] neighors = new int[][]{
                 {1, 3},
                 {0, 4, 2},

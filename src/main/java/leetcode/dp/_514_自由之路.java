@@ -2,12 +2,29 @@ package leetcode.dp;
 //电子游戏“辐射4”中，任务 “通向自由” 要求玩家到达名为 “Freedom Trail Ring” 的金属表盘，并使用表盘拼写特定关键词才能开门。
 //
 // 给定一个字符串 ring ，表示刻在外环上的编码；给定另一个字符串 key ，表示需要拼写的关键词。您需要算出能够拼写关键词中所有字符的最少步数。
-//
+//               │
+//               ▼
+//          .─────────.
+//      _.─'   ┌───┐   `──.
+//    ,'       │ G │       `.
+//   ╱┌───┐    └───┘    ┌───┐╲
+//  ╱ │ G │  .───────.  │ O │ ╲
+// ╱  └───┘─'         '─└───┘  ╲
+//;      ╱               ╲      :
+//│┌───┐;   ┌────────┐    :┌───┐│
+//││ N │:   │ Button │    ;│ D ││
+//:└───┘ ╲  └────────┘   ╱ └───┘;
+// ╲      ╲             ╱      ╱
+//  ╲      '─.       ,─'      ╱
+//   ╲  ┌───┐ `─────┌───┐    ╱
+//    ╲ │ I │       │ D │   ╱
+//     `└───┘       └───┘ ,'
+//       `──.         _.─'
+//           `───────'
 // 最初，ring 的第一个字符与 12:00 方向对齐。您需要顺时针或逆时针旋转 ring 以使 key 的一个字符在 12:00 方向对齐，然后按下中心按
 //钮，以此逐个拼写完 key 中的所有字符。
 //
 // 旋转 ring 拼出 key 字符 key[i] 的阶段中：
-//
 //
 // 您可以将 ring 顺时针或逆时针旋转 一个位置 ，计为1步。旋转的最终目的是将字符串 ring 的一个字符与 12:00 方向对齐，并且这个字符必须等于
 //字符 key[i] 。
@@ -15,17 +32,7 @@ package leetcode.dp;
 //）, 直至完成所有拼写。
 //
 //
-//
-//
 // 示例 1：
-//
-//
-//
-//
-//
-//
-//
-//
 //输入: ring = "godding", key = "gd"
 //输出: 4
 //解释:
@@ -36,8 +43,6 @@ package leetcode.dp;
 //
 //
 // 示例 2:
-//
-//
 //输入: ring = "godding", key = "godding"
 //输出: 13
 //
@@ -63,7 +68,7 @@ import java.util.List;
  * @date 2022-07-25.
  */
 public class _514_自由之路{
-    class Solution {
+    class Solution{
         // 题目输入一个字符串 ring 代表圆盘上的字符（指针位置在12点钟方向 ring[0]）， 再输入一个字符串 key 代表
         // 需要拨动圆盘输入的字符串，算法需要返回输入这个 key 至少要进行多少次操作（拨动和按下都算一次操作）。
         // 换句话说，圆盘固定，我们可以拨动指针；现在需要我们拨动指针并按下按钮，以最少的操作次数输入key 对应的字符串。
@@ -87,12 +92,13 @@ public class _514_自由之路{
         // 字符 -> 索引列表
         HashMap<Character, List<Integer>> charToIndex = new HashMap<>();
         // 备忘录
-        int [][] memo;
+        int[][] memo;
+
         public int findRotateSteps(String ring, String key) {
             int m = ring.length();
             int n = key.length();
             // 备忘录全部初始化成 0
-            memo = new int [m][n];
+            memo = new int[m][n];
             // 记录圆环上字符到索引的映射
             for (int i = 0; i < m; i++) {
                 char c = ring.charAt(i);
@@ -111,7 +117,7 @@ public class _514_自由之路{
         // 计算圆盘指针在 ring[i], 输入 key[j...] 的最小操作数
         private int dp(String ring, int i, String key, int j) {
             // base case 完成输入
-            if ( j == key.length()) {
+            if (j == key.length()) {
                 return 0;
             }
             // 查找备忘录，避免重复子问题
@@ -123,13 +129,13 @@ public class _514_自由之路{
             // 做选择
             int res = Integer.MAX_VALUE;
             // ring 上可能有多个 key[j]
-            for (int k: charToIndex.get(key.charAt(j))) {
+            for (int k : charToIndex.get(key.charAt(j))) {
                 // 拨动指针的次数
-                int delta = Math.abs(k-i);
+                int delta = Math.abs(k - i);
                 // 选择顺时针还是逆时针
                 delta = Math.min(delta, n - delta);
                 // 将指针拨到 ring[k],继续输入 key[j+1...]
-                int subProblem = dp(ring, k, key, j+1);
+                int subProblem = dp(ring, k, key, j + 1);
                 // 选择整体操作次数最少的
                 // 加一是因为按动按钮也是一次操作
                 res = Math.min(res, 1 + delta + subProblem);

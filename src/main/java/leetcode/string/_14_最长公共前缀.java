@@ -58,7 +58,27 @@ public class _14_最长公共前缀{
         }
     }
 
-    class Solution1 {
+    class Solution0{
+        public String longestCommonPrefix(String[] strs) {
+            int m = strs.length;
+            // 以第一行的列数为基准
+            int n = strs[0].length();
+            for (int col = 0; col < n; col++) {
+                for (int row = 1; row < m; row++) {
+                    String thisStr = strs[row], prevStr = strs[row - 1];
+                    // 判断每个字符串的 col 索引是否都相同
+                    if (col >= thisStr.length() || col >= prevStr.length() ||
+                            thisStr.charAt(col) != prevStr.charAt(col)) {
+                        // 发现不匹配的字符，只有 strs[row][0..col-1] 是公共前缀
+                        return strs[row].substring(0, col);
+                    }
+                }
+            }
+            return strs[0];
+        }
+    }
+
+    class Solution1{
         public String longestCommonPrefix(String[] strs) {
             if (strs.length == 0) {
                 return "";
@@ -77,35 +97,35 @@ public class _14_最长公共前缀{
 
     /**
      * 二分法
-     *
+     * <p>
      * 显然，最长公共子串长度不会超过字符串数组中的最短字符串的长度。用minLength 表示字符串数组中的最短字符串的长度，
      * 则可以在 [0, minLength] 的范围内通过二分查找的得到最长公共前缀的长度。 每次取查找范围的中间值mid， 判断每个
      * 字符串的长度为 mid 的前缀是否相同，如果相同则最长公共前缀的长度u一定大于或等于 mid， 如果不相同则最长公共前缀
      * 长度一定小于mid，通过上述方式可以将查找范围缩小一半。
-     *
+     * <p>
      * 时间复杂度 O(mnlog(m))
      * 空间复杂度 O(1)
      */
-    class Solution2 {
+    class Solution2{
         public String longestCommonPrefix(String[] strs) {
             if (strs == null || strs.length == 0) {
                 return "";
             }
             int minLength = Integer.MAX_VALUE;
-            for (int i = 0; i<strs.length; i++) {
-                minLength = Math.min(minLength,strs[i].length());
+            for (int i = 0; i < strs.length; i++) {
+                minLength = Math.min(minLength, strs[i].length());
             }
             int low = 0, high = minLength;
             while (low < high) {
                 // 这里向上取整，否则会陷入死循环 ['a']
-                int mid = low + (high-low+1)/2;
+                int mid = low + (high - low + 1) / 2;
                 if (isCommonPrefix(strs, mid)) {
                     // 搜索区间 [mid, right]
                     low = mid;
                 }
                 else {
                     // [left, mid-1]
-                    high = mid-1;
+                    high = mid - 1;
                 }
             }
             return strs[0].substring(0, low);
@@ -114,9 +134,9 @@ public class _14_最长公共前缀{
         private boolean isCommonPrefix(String[] strs, int mid) {
             String str0 = strs[0].substring(0, mid);
             int count = strs.length;
-            for (int i =1; i<count; i++) {
+            for (int i = 1; i < count; i++) {
                 String str = strs[i];
-                for (int j = 0; j<mid; j++) {
+                for (int j = 0; j < mid; j++) {
                     if (str0.charAt(j) != str.charAt(j)) {
                         return false;
                     }

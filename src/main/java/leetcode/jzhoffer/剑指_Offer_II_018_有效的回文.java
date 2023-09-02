@@ -35,9 +35,18 @@ package leetcode.jzhoffer;
 //
 // Related Topics 双指针 字符串 👍 34 👎 0
 
+import leetcode.dp._1312_让字符串成为回文串的最少插入次数;
+import leetcode.dp._516_最长回文子序列;
+import leetcode.string._5_最长回文串;
+import leetcode.string._647_回文子串;
+
 /**
  * @author mayanwei
  * @date 2022-10-19.
+ * @see _1312_让字符串成为回文串的最少插入次数
+ * @see _516_最长回文子序列
+ * @see _647_回文子串
+ * @see _5_最长回文串
  */
 public class 剑指_Offer_II_018_有效的回文{
     class Solution{
